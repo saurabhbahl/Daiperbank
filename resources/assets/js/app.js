@@ -98,6 +98,8 @@ Vue.component('admin-exported-pickups', require('./components/Orders/Admin/Fulfi
 
 // reporting component(s)
 Vue.component('admin-reports', require('./components/Admin/Reports.vue'));
+// agent menstruator managementcomponents
+Vue.component('menstruator-detail-pane', require('./components/Menstruator/MenstruatorDetail.vue'));
 
 window.app = new Vue({
 	el: '#app',

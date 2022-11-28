@@ -10,3 +10,9 @@
 		Children
 	</a>
 </div>
+<div class="nav-item">
+	<a href="<?= route('menstruator.index'); ?>">
+		<i class="fa fa-person-dress"></i>
+		Menstruators
+	</a>
+</div>

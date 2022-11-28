@@ -35,7 +35,9 @@ Route::group(['middleware' => ['auth']], function () {
 		Route::group(['prefix' => 'family'], function () {
 			Route::name('family.index')->get('/')->uses('Family\IndexController@get');
 		});
-
+		Route::group(['prefix' => 'menstruator'], function () {
+			Route::name('menstruator.index')->get('/')->uses('Menstruator\IndexController@get');
+		});
 		Route::group(['prefix' => 'notifications'], function () {
 			Route::name('notifications.index')->get('/')->uses('Notification\IndexController@get');
 			Route::post('/')->uses('Notification\IndexController@post');
