@@ -12,7 +12,7 @@
 </div>
 <div class="nav-item">
 	<a href="<?= route('menstruator.index'); ?>">
-		<i class="fa fa-person-dress"></i>
+		<i class="fa fa-female"></i>
 		Menstruators
 	</a>
 </div>

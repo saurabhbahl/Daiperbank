@@ -115,7 +115,7 @@
 							{{ error('Child.ethnicity') }}
 						</p>
 					</div>
-
+<!--
 					<div class="mb">
 						<table class="table mb0">
 							<tr>
@@ -148,7 +148,7 @@
 						<p v-if="hasError('Child.status_wic')" class="validation-error">
 							{{ error('Child.status_wic') }}
 						</p>
-					</div>
+					</div>-->
 				</div>
 			</div>
 

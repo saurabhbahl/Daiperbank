@@ -37,7 +37,7 @@
 		</template>
 
 		<template slot="default-selection">
-			Choose a Child
+			Choose a {{Text}}
 		</template>
 
 		<template slot="empty-results" slot-scope="{ query }">
@@ -83,6 +83,11 @@ export default {
 			required: false,
 			type: Array,
 			default: [],
+		},
+		text: {
+			required: false,
+			type: String,
+			default: "Child",
 		}
 	},
 
@@ -94,6 +99,10 @@ export default {
 				});
 				return children;
 			})(this.children),
+			Text: (function(text) {
+				
+				return text;
+			})(this.text),
 			selected_child_id: null,
 		}
 	},
