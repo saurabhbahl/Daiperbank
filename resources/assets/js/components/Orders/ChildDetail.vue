@@ -10,7 +10,7 @@
               'fa-male': Child.gender === 'm',
             }"
           ></i>
-          {{ Child.name }}
+          {{ Child.name }}  
         </p>
 
         <div class="flex justify-between">
@@ -114,6 +114,7 @@
             v-if="hasError() && showErrors"
             class="dark-red bg-washed-red pa4 mt3 errorAlertBox"
           >
+            <ChildOrderModal :initialErrors="initialErrors" />
             <p v-for="(msg, field) in error()" :key="'error-' + field">
               {{ msg }}
             </p>
@@ -191,9 +192,10 @@
 <script>
 import ProductSelector from "../General/ProductSelector.vue";
 import validation from "../../mixins/validation";
+import ChildOrderModal from "../Modals/ChildOrderModal.vue";
 
 export default {
-  components: { ProductSelector },
+  components: { ProductSelector, ChildOrderModal },
   mixins: [validation],
 
   props: {
@@ -233,7 +235,6 @@ export default {
       },
       editing_reason: null,
       flag_editing_reason_share: false,
-
       allow_child_note: false,
     };
   },
@@ -276,7 +277,6 @@ export default {
     onProductChange(valid, selectedProduct) {
       this.product_selection_valid = valid;
       this.selectedProduct = selectedProduct;
-      debugger;
       let existingProduct = {
         product_id: this.EditedChild.product_id,
         quantity: this.EditedChild.quantity,

@@ -358,7 +358,8 @@ export default {
 				'status_potty_train',
 				'status_wic',
 				'guardian_id',
-				'guardian_relationship',
+				'guardian_relationship'
+				
 			],
 			newGuardian: {
 				name: null,
@@ -537,7 +538,8 @@ export default {
 
 		saveChild() {
 			this.clearErrors();
-			this.editedChild.gender='f'
+			this.editedChild.gender='f';
+			this.editedChild.is_menstruator=1;
 			let postData = {
 				Child: this.editedChild,
 			};

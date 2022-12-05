@@ -53,13 +53,12 @@
 
 					<div class="bb b--black-20 flex justify-start">
 						<div class="pa w-25">
-							<p class="b"  >
-								<b-button v-b-tooltip.hover title='<?= e($Agency->name ); ?>'>
+							<p class="b"  title='<?= e($Agency->name ); ?>'>
+								
 								<?= e($Agency->id_prefix . '-' . $Agency->id); ?>
-								</b-button>							
+													
 								
 							</p>
-
 							
 							<p class="wtn f4 muted">
 								<? if ($Agency->id_prefix): ?>

@@ -73,6 +73,7 @@ export default {
 		},
 
 		saveClicked() {
+			this.Child.is_menstruator=true;
 			this.$emit('save', this.Child, this.getSaveData());
 		},
 
@@ -82,6 +83,7 @@ export default {
 				quantity: this.editedChild.quantity,
 				weight: this.editedChild.weight,
 				status_potty_train: this.editedChild.status_potty_train,
+				is_menstruator:true,
 			};
 		},
 
