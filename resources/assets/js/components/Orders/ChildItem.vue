@@ -20,7 +20,7 @@
 						<th class="w-15">Size</th>
 						<th class="w-10">Qty</th>
 						<th class="w-15">Weight</th>
-						<th class="w-15">Oye</th>
+						
 						<th>Potty Training</th>
 					</tr>
 				</thead>
@@ -45,9 +45,7 @@
 						<td v-else>TBD</td>
 
 						<td>{{ Child.weight_str }}</td>
-						<td>{{ Child.is_menstruator }}</td>
-
-						
+												
 						<td>
 							<span v-if="Child.status_potty_train">
 								<i class="fa fa-check"

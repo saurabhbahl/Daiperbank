@@ -44,67 +44,26 @@
               <span class="b">Family ID:</span>
               <span>{{ Child.child.guardian.name }}</span>
             </p>
-          </div>
-          <div class="flex-auto w-50">
-            <p class="mb2">
-              <span class="b">Current Weight:</span>
-              <span>{{ Child.weight_str }}</span>
-            </p>
-
-            <p class="mb2">
-              <span class="b">Current Age:</span>
-              <span>{{ Child.age_str }}</span>
-            </p>
-
-            <p class="mb2">
-              <span class="b">Potty Training:</span>
-              <span>
-                <span v-if="Child.status_potty_train">
-                  <i class="fa fa-check dark-green"></i>
-                  Yes
-                </span>
-                <span v-else>
-                  <i class="fa fa-times dark-red"></i>
-                  No
-                </span>
-              </span>
-            </p>
-
-            <p class="mb2">
-              <span class="b">Receiving WIC:</span>
-              <span>
-                <span v-if="Child.status_wic">
-                  <i class="fa fa-check dark-green"></i>
-                  Yes
-                </span>
-                <span v-else>
-                  <i class="fa fa-times dark-red"></i>
-                  No
-                </span>
-              </span>
-            </p>
-          </div>
+          </div>          
         </div>
 
         <p class="b f2 bb bw2 b--black-20 mv3">Current Order</p>
         <table class="table table-condensed table-striped" v-if="!isEditing">
           <thead>
             <tr>
+             
               <th class="w-33">Type</th>
-              <th class="w-33">Size</th>
-              <th class="w-33">Quantity</th>
+             
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td v-if="Child.item">{{ Child.item.product.category.name }}</td>
-              <td v-else>--</td>
+             
 
               <td v-if="Child.item">{{ Child.item.product.name }}</td>
               <td v-else>--</td>
 
-              <td v-if="Child.item">{{ Child.item.quantity }}</td>
-              <td v-else>--</td>
+             
             </tr>
           </tbody>
         </table>
@@ -119,56 +78,12 @@
             </p>
           </div>
 
-          <ProductSelector
+          <MenstruatorProductSelector
             :product-categories="productCategories"
             :initial-selected-product="selectedProductId"
             :initial-quantity="selectedProductQuantity"
             @change="onProductChange"
-          ></ProductSelector>
-
-          <div class="flex justify-end pt3">
-            <div
-              class="w-60 mr fg-no"
-              v-if="
-                selectedProduct.category && selectedProduct.category.id == 2
-              "
-            >
-              <label for="weight"
-                >Weight:
-                <span class="required">*</span>
-              </label>
-              <div class="input-group">
-                <input
-                  type="tel"
-                  id="weight"
-                  name="weight"
-                  class="form-control"
-                  v-model="EditedChild.weight"
-                  @change="onChildChanged"
-                  @keyup="onChildChanged"
-                />
-                <span class="input-group-addon">lbs</span>
-              </div>
-            </div>
-
-            <div class="w-40">
-              <label for="status_potty_train_yes">Potty Training?</label>
-              <p>
-                <label for="status_potty_train_yes" class="ma0">
-                  <input
-                    type="checkbox"
-                    class="fwn"
-                    id="status_potty_train_yes"
-                    v-model="EditedChild.status_potty_train"
-                    value="1"
-                    @change="onChildChanged"
-                    @mouseup="onChildChanged"
-                  />
-                  Yes
-                </label>
-              </p>
-            </div>
-          </div>
+          ></MenstruatorProductSelector>
         </div>
       </div>
 
@@ -189,11 +104,11 @@
 </template>
 
 <script>
-import ProductSelector from "../General/ProductSelector.vue";
+import MenstruatorProductSelector from "../General/MenstruatorProductSelector.vue";
 import validation from "../../mixins/validation";
 
 export default {
-  components: { ProductSelector },
+  components: { MenstruatorProductSelector },
   mixins: [validation],
 
   props: {
@@ -248,6 +163,7 @@ export default {
     },
 
     selectedProductId() {
+      return "3";
       if (this.Child.item) {
         return this.Child.item.product_id;
       }

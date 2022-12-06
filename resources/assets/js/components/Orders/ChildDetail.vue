@@ -10,7 +10,7 @@
               'fa-male': Child.gender === 'm',
             }"
           ></i>
-          {{ Child.name }}  
+          {{ Child.name }}
         </p>
 
         <div class="flex justify-between">

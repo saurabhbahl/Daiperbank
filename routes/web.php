@@ -35,17 +35,29 @@ Route::group(['middleware' => ['auth']], function () {
 		Route::group(['prefix' => 'family'], function () {
 			Route::name('family.index')->get('/')->uses('Family\IndexController@get');
 		});
-		Route::group(['prefix' => 'menstruator'], function () {
-			Route::name('menstruator.index')->get('/')->uses('Menstruator\IndexController@get');
-		});
+
 		Route::group(['prefix' => 'notifications'], function () {
 			Route::name('notifications.index')->get('/')->uses('Notification\IndexController@get');
 			Route::post('/')->uses('Notification\IndexController@post');
+		});
+		//Menstruator
+        Route::group(['prefix' => 'menstruator'], function () {
+            Route::name('menstruator.index')->get('/')->uses('Menstruator\IndexController@get');
+        });
+		// Partner Handbook
+		Route::group(['prefix' => 'partner-handbook'], function () {
+			Route::name('partner-handbook.index')->get('/')->uses('PartnerHandbook\IndexController@get');
+		});
+
+		// Agency Profile
+		Route::group(['prefix' => 'profile'], function () {
+			Route::name('agency.profile.index')->get('/')->uses('Agency\ProfileController@index');
 		});
 	});
 
 	// administrator things
 	Route::group(['prefix' => 'admin', 'middleware' => ['admin']], function () {
+
 		Route::group(['prefix' => 'agency'], function () {
 			Route::name('admin.agency.index')->get('/')->uses('Admin\Agency\IndexController@get');
 			Route::post('/create')->uses('Admin\Agency\UpdateController@post');
@@ -57,6 +69,9 @@ Route::group(['middleware' => ['auth']], function () {
 
 			Route::name('admin.agency.status')->post('{agency_id}/status')->uses('Admin\Agency\StatusController@post');
 			Route::name('admin.agency.act_as')->post('{agency_id}/act-as')->uses('Admin\Agency\ActingAsController@post');
+            
+			// Agency Profile
+			Route::name('admin.agency.profile')->get('profile/{agency_id}')->uses('Admin\Agency\ProfileController@get');
 		});
 
 		Route::group(['prefix' => 'inventory'], function () {
@@ -90,5 +105,18 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::name('admin.reporting')->get('/')->uses('Admin\Reporting\ReportController@get');
 			Route::post('/')->uses('Admin\Reporting\ReportController@post');
 		});
+
+		Route::group(['prefix' => 'resource'], function () {
+			Route::name('admin.resource.create')->get('create')->uses('Admin\Resource\ResourceController@index');
+			Route::name('admin.resource.create')->post('create')->uses('Admin\Resource\ResourceController@create');
+			Route::name('admin.resource.create')->get('create')->uses('Admin\Resource\ResourceController@show');
+			Route::name('admin.resource.edit')->get('edit/{resource_id}')->uses('Admin\Resource\ResourceController@edit');
+			Route::name('admin.resource.update')->put('{resource_id}')->uses('Admin\Resource\ResourceController@update');
+			Route::name('admin.resource.destroy')->get('delete/{resource_id}')->uses('Admin\Resource\ResourceController@destroy');
+	    });
+
+		// Route::group(['prefix' => 'agreement'], function () {
+		// 	Route::name('admin.agreement.create')->get('create')->uses('Admin\Agreement\AgreementController@index');
+	    // });
 	});
 });

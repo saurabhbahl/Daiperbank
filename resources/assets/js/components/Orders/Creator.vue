@@ -112,7 +112,7 @@
 		</div>
 
 		<ChildDetail
-			v-if="CurrentOrderChild"
+			v-if="(CurrentOrderChild && CurrentOrderChild.is_menstruator==0)"
 			:key="'child-detail-' + CurrentOrderChild.id"
 
 			class="pxa pinr pint pinb w-33 bg-white shadow-2"
@@ -126,9 +126,10 @@
 			@close="closeChildDetail"
 			@remove="removeChild"
 			@save="saveChild"
+			
 		></ChildDetail>
 		<MenstruatorChildDetail
-			v-if="CurrentOrderChild"
+			v-if="(CurrentOrderChild && CurrentOrderChild.is_menstruator==1)"
 			:key="'child-detail-' + CurrentOrderChild.id"
 
 			class="pxa pinr pint pinb w-33 bg-white shadow-2"
