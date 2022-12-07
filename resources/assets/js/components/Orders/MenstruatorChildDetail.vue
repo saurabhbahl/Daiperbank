@@ -163,11 +163,9 @@ export default {
     },
 
     selectedProductId() {
-      return "3";
       if (this.Child.item) {
         return this.Child.item.product_id;
       }
-
       return null;
     },
 

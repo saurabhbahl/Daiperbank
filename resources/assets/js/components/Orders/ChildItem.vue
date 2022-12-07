@@ -27,7 +27,7 @@
 				<tbody v-if="(Child.is_menstruator>0)">
 					<tr>					
 
-						<td v-if="Child.item">{{ Child.item.product.category.name }}</td>
+						<td v-if="Child.item">{{ Child.item.product.name }}</td>
 						<td v-else>Coming Soon</td>
 					</tr>
 				</tbody>

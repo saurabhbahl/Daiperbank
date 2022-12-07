@@ -70,7 +70,7 @@ export default {
 		return {
 			selected_category_id: this.initialSelectedProduct? this.getCategoryForProduct(this.initialSelectedProduct) : 0,
 			selected_product_id: this.initialSelectedProduct,
-			selected_quantity: this.initialQuantity,
+			selected_quantity: 1,
 			ProductCategories: this.productCategories,
 		};
 	},
