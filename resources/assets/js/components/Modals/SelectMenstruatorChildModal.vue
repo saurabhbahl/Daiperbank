@@ -45,7 +45,7 @@ export default {
 
 	data() {
 		return {
-			Children: this.allChildren,
+			Children: this.allChildren.filter(x=>x.is_menstruator==1),
 			text: "Menstruator",
 			selected_child_id: null,
 		}
