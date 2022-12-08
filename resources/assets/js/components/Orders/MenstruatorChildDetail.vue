@@ -190,7 +190,7 @@ export default {
     onProductChange(valid, selectedProduct) {
       this.product_selection_valid = valid;
       this.selectedProduct = selectedProduct;
-      debugger;
+      
       let existingProduct = {
         product_id: this.EditedChild.product_id,
         quantity: this.EditedChild.quantity,

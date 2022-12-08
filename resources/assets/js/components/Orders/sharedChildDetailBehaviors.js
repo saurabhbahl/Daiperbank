@@ -91,7 +91,7 @@ export default {
 				this.isValid = false;
 				return this.isValid;
 			}
-			debugger;
+			
 			if(this.editedChild.is_menstruator==1)
 			{
 				if ( ! this.editedChild.product_id
