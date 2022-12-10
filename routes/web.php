@@ -41,9 +41,9 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::post('/')->uses('Notification\IndexController@post');
 		});
 		//Menstruator
-        Route::group(['prefix' => 'menstruator'], function () {
-            Route::name('menstruator.index')->get('/')->uses('Menstruator\IndexController@get');
-        });
+		Route::group(['prefix' => 'menstruator'], function () {
+			Route::name('menstruator.index')->get('/')->uses('Menstruator\IndexController@get');
+		});
 		// Partner Handbook
 		Route::group(['prefix' => 'partner-handbook'], function () {
 			Route::name('partner-handbook.index')->get('/')->uses('PartnerHandbook\IndexController@get');
@@ -52,6 +52,11 @@ Route::group(['middleware' => ['auth']], function () {
 		// Agency Profile
 		Route::group(['prefix' => 'profile'], function () {
 			Route::name('agency.profile.index')->get('/')->uses('Agency\ProfileController@index');
+		});
+
+		// Partner Agreement
+		Route::group(['prefix' => 'agreement'], function () {
+			Route::name('agreement.index')->get('/')->uses('Agreement\IndexController@get');
 		});
 	});
 
@@ -115,8 +120,14 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::name('admin.resource.destroy')->get('delete/{resource_id}')->uses('Admin\Resource\ResourceController@destroy');
 	    });
 
-		// Route::group(['prefix' => 'agreement'], function () {
-		// 	Route::name('admin.agreement.create')->get('create')->uses('Admin\Agreement\AgreementController@index');
-	    // });
+		Route::group(['prefix' => 'agreement'], function () {
+			Route::name('admin.agreement.create')->get('create')->uses('Admin\Agreement\AgreementController@index');
+			Route::name('admin.agreement.create')->post('create')->uses('Admin\Agreement\AgreementController@create');
+			Route::name('admin.agreement.create')->get('create')->uses('Admin\Agreement\AgreementController@show');
+			Route::name('admin.agreement.edit')->get('edit/{agreement_id}')->uses('Admin\Agreement\AgreementController@edit');
+			Route::name('admin.agreement.update')->put('{agreement_id}')->uses('Admin\Agreement\AgreementController@update');
+			Route::name('admin.agreement.destroy')->get('delete/{agreement_id}')->uses('Admin\Agreement\AgreementController@destroy');
+	    });
+
 	});
 });

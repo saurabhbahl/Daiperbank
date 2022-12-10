@@ -63,6 +63,7 @@ class Agency extends Model {
 	public function isSupperAdmin() {
 		return 111 === $this->flag_is_admin;
 	}
+
 	public function isActive() {
 		return $this->agency_status == static::STATUS_ACTIVE;
 	}
@@ -132,5 +133,9 @@ class Agency extends Model {
 			default:
 				return 'Unknown Status';
 		}
+	}
+
+	public function agreements() {
+		return $this->hasMany(Agreement::class, 'agency_id');
 	}
 }

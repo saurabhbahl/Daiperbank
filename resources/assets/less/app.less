@@ -548,8 +548,8 @@ nav {
 	z-index: 9999;
 }
 .errorAlertBox p {
-  font-size: 20px;
-  font-weight: bold;
+	font-size: 20px;
+	font-weight: bold;
 }
 .button:hover .tooltip{
 	display: block;
@@ -557,35 +557,55 @@ nav {
 	left: 40px;
   }
 .resourcesTable {
-	padding-top: 15px;
-  }
-  .resourcesTable,
-  .agencyProfile table,
-  .partnerHandbook table,
-  .tbl{
-	border-collapse: collapse;
+padding-top: 15px;
+}
+.resourcesTable,
+.agencyProfile table,
+.partnerHandbook table,
+.tbl{
+border-collapse: collapse;
+width: 100%;
+margin-top: 10px;
+}
+.resourcesTable td,
+.resourcesTable th,
+.agencyProfile table td,
+.agencyProfile table th,
+.tbl td,
+.tbl th{
+border: 1px solid #dddddd;
+text-align: left;
+padding: 8px;
+}
+.partnerHandbook table td,
+.partnerHandbook table th {
+border: 1px solid #dddddd;
+text-align: left;
+padding: 15px;
+}
+.agencyProfile,
+.partnerHandbook {
+padding-top: 15px;
+padding-left: 10px;
+padding-right: 10px;
+}
+.agencylist {
+	list-style-type: none;
+	background: #fff;
+	border: 1px solid #dedede;
+}
+.agencylist li {
+border-bottom: 1px solid #dedede;
+padding: 12px 10px;
+}
+#agency_list select {
 	width: 100%;
-	margin-top: 10px;
-  }
-  .resourcesTable td,
-  .resourcesTable th,
-  .agencyProfile table td,
-  .agencyProfile table th,
-  .tbl td,
-  .tbl th{
-	border: 1px solid #dddddd;
-	text-align: left;
-	padding: 8px;
-  }
-  .partnerHandbook table td,
-  .partnerHandbook table th {
-	border: 1px solid #dddddd;
-	text-align: left;
-	padding: 15px;
-  }
-  .agencyProfile,
-  .partnerHandbook {
-	padding-top: 15px;
-	padding-left: 10px;
-	padding-right: 10px;
-  }
+	border: 1px solid #ccd0d2;
+	border-radius: 2px;
+	padding: 6px 12px;
+	outline: none;
+	appearance: none;
+}
+.agreementAlert {
+    border-radius: 10px;
+}
