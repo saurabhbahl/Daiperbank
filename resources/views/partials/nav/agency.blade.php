@@ -22,4 +22,9 @@
         Partner Handbook
     </a>
 </div>
-
+<div class="nav-item">
+    <a href="<?= route('agreement.index') ?>">
+        <i class="fa fa-book"></i>
+        Partner Agreement
+    </a>
+</div>

@@ -12,7 +12,6 @@ class IndexController extends Controller
     public function get(){
         $userId = Auth::id();
         $agreements = Agreement::where("agency_id", $userId)->get();
-        // dd($agreements);
         return view('agreement.index',compact('agreements',$agreements));
     }
 }

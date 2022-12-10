@@ -71,13 +71,12 @@ class AgreementController extends Controller
      $agreements = DB::table('agency')
         ->join('agreements', 'agency.id', '=', 'agreements.agency_id')
         ->select('agency.name', 'agreements.id','agreements.file','agreements.created_at','agreements.updated_at')->get();
-     // dd($agreements);
         return view('admin.agreement.index',compact('agreements'));
     }
     public function edit($id)
     {
         $agreement = Agreement::find($id);
-        // dd($resource);
+     
         return view('admin.agreement.edit',compact('agreement'));
     }
     public function update(Request $request, $id)
@@ -108,7 +107,7 @@ class AgreementController extends Controller
         if(File::exists($destination)){
              File::delete($destination);
         }
-        $resource->delete();
+        $agreement->delete();
 
         return redirect()->back()->with('success','Resource deleted successfully');
     }
