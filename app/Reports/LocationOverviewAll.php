@@ -4,10 +4,10 @@ use DB;
 use Illuminate\Support\Str;
 use mikehaertl\pdftk\Pdf as PDF;
 
-class LocationOverview extends Report implements ReportContract {
+class LocationOverviewAll extends Report implements ReportContract {
 	use WritesToTempFiles;
 	protected $zips = [];
-
+	
 	public function zipCodes(array $zips) {
 		$this->zips = $zips;
 	}
@@ -39,16 +39,16 @@ WHERE o.order_status = 'fulfilled'
 AND oi.deleted_at IS NULL
 and oi.flag_approved = 1
 AND pud.pickup_date BETWEEN ? AND ?
-AND c.zip IN ({{ ZIP_CODE_PARAM_PLACEHOLDER }})
+
 
 GROUP BY c.zip, z.state_abbr, z.county, z.city
 ORDER BY c.zip, z.state_abbr, z.county, z.city ASC
 EOQUERY;
 
-		$aggregate_stats = DB::select($this->prepareQuery($query), array_merge([
+		$aggregate_stats = DB::select($query, array_merge([
 			$this->start->format('Y-m-d 00:00:00'),
 			$this->end->format('Y-m-d 23:59:59'),
-		], $this->zips));
+		]));
 
 		$children = $this->getChildrenServed();
 
@@ -105,15 +105,13 @@ JOIN child c ON c.id = oc.child_id
 
 WHERE o.order_status = 'fulfilled'
 AND pud.pickup_date BETWEEN ? AND ?
-AND c.zip IN ({{ ZIP_CODE_PARAM_PLACEHOLDER }})
-
 GROUP BY c.id
 EOQUERY;
 
-		return DB::select($this->prepareQuery($query), array_merge([
+		return DB::select($query, array_merge([
 			$this->start->format('Y-m-d 00:00:00'),
 			$this->end->format('Y-m-d 23:59:59'),
-		], $this->zips));
+		]));
 	}
 
 	public function getTempFilename() {
