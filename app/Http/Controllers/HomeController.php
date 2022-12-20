@@ -3,6 +3,7 @@
 use App\Order;
 use Auth;
 use Illuminate\Http\Request;
+use App\NotificationSetting;
 
 class HomeController extends Controller {
 	public function __construct() {
@@ -13,7 +14,6 @@ class HomeController extends Controller {
 		if (Auth::user()->isAdmin()) {
 			return $this->admin_home();
 		}
-
 		return $this->agency_home();
 	}
 
@@ -24,9 +24,12 @@ class HomeController extends Controller {
 
 	protected function agency_home() {
 		$Orders = Auth()->User()->Agency->Order()->orderBy('updated_at', 'DESC')->take(5)->get();
+		$notification = NotificationSetting::latest()->first();
+        // dd($notification);
 
 		return view('agency.home', [
 			'Orders' => $Orders,
+			'notification' => $notification
 		]);
 	}
 

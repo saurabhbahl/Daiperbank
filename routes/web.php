@@ -129,5 +129,10 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::name('admin.agreement.destroy')->get('delete/{agreement_id}')->uses('Admin\Agreement\AgreementController@destroy');
 	    });
 
+		Route::group(['prefix' => 'settings'], function () {
+			Route::name('admin.settings.index')->get('/')->uses('Admin\Settings\SettingController@index');
+			Route::name('admin.settings.index')->post('/')->uses('Admin\Settings\SettingController@store');
+	    });
+
 	});
 });

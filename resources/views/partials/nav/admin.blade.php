@@ -30,7 +30,7 @@
         <li>
             <a href="<?= route('admin.resource.create') ?>">
                 <i class="fa fa-file"></i>
-                 Partner Handbook
+                Partner Handbook
             </a>
         </li>
         <li>
@@ -51,6 +51,12 @@
     </a>
 
     <ul class="dropdown-menu nav-links" role="menu">
+        <li>
+            <a href="<?= route('admin.settings.index') ?>">
+                <i class="fa fa-cog"></i>
+                Settings
+            </a>
+        </li>
         <li>
             <a href="<?= route('admin.pickup.index') ?>">
                 <i class="fa fa-calendar"></i>
