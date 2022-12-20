@@ -8,7 +8,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <p>{{ $notification->notification_information }}</p>
+                <p>{!! $notification->notification_information !!}</p>
             </div>
         </div>
     </div>

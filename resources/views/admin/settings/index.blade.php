@@ -24,12 +24,13 @@
 
                 <!-- Modal -->
                 <div class="modal fade" id="notificationModal" tabindex="-1" aria-labelledby="notificationModalLabel"
-                    aria-hidden="true">
+                    aria-hidden="true" data-backdrop="static" data-keyboard="false">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="notificationModalLabel">Popup Notification Settings</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                                    id="closeIcon">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
@@ -51,12 +52,12 @@
                                         </div>
                                     </div>
 
-                                    <button type="submit"
-                                        class="btn btn-primary d-blockv saveNotificationBtn">Save</button>
+                                    <button type="submit" class="btn btn-primary saveNotificationBtn">Save</button>
                                 </form>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-secondary" data-dismiss="modal"
+                                    id="closeBtn">Close</button>
                             </div>
                         </div>
                     </div>
@@ -79,16 +80,37 @@
                 $(".saveNotificationBtn").removeAttr("disabled", true);
             }
 
-            $('.notificationCheckbox').change(function() {
+            function inputTyping() {
+                $('#notificationInput').keyup(function() {
+                    $(".saveNotificationBtn").removeAttr("disabled", true);
+                });
+            }
+
+            function checkboxUnchecked() {
+                if ($(".notificationCheckbox").is(":not(:checked)")) {
+                    $("#closeIcon").hide();
+                    $("#closeBtn").hide();
+                    $(".saveNotificationBtn").attr("disabled", true);
+                    inputTyping();
+                }
+            }
+
+            $(".notificationModalBtn").click(function() {
+                checkboxUnchecked();
+            });
+
+            $('.notificationCheckbox').change(function(e) {
                 if (this.checked) {
                     $("#notificationInput").attr("disabled", true);
                     $(".saveNotificationBtn").attr("disabled", true);
-                    $("#notificationModal").hide();
+                    $("#closeIcon").show();
+                    $("#closeBtn").show();
                 } else {
                     localStorage.removeItem("checked");
                     $("#notificationInput").removeAttr("disabled", true);
-                    $(".saveNotificationBtn").removeAttr("disabled", true);
-                    $("#notificationModal").show();
+                    $("#closeIcon").hide();
+                    $("#closeBtn").hide();
+                    inputTyping();
                 }
             });
 
