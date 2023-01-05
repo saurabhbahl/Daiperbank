@@ -80,18 +80,10 @@
                 $(".saveNotificationBtn").removeAttr("disabled", true);
             }
 
-            function inputTyping() {
-                $('#notificationInput').keyup(function() {
-                    $(".saveNotificationBtn").removeAttr("disabled", true);
-                });
-            }
-
             function checkboxUnchecked() {
                 if ($(".notificationCheckbox").is(":not(:checked)")) {
                     $("#closeIcon").hide();
                     $("#closeBtn").hide();
-                    $(".saveNotificationBtn").attr("disabled", true);
-                    inputTyping();
                 }
             }
 
@@ -108,9 +100,9 @@
                 } else {
                     localStorage.removeItem("checked");
                     $("#notificationInput").removeAttr("disabled", true);
+                    $(".saveNotificationBtn").removeAttr("disabled", true);
                     $("#closeIcon").hide();
                     $("#closeBtn").hide();
-                    inputTyping();
                 }
             });
 
