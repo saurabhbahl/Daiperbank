@@ -17,27 +17,26 @@ class PullUpUsageReport extends Report implements ReportContract {
 
 	public function getStats() {
 		$query = <<<EOQUERY
-SELECT
-	a.name agency,
-	COALESCE(SUM(CASE WHEN p.product_category_id = 1 THEN quantity ELSE 0 END), 0) diapers,
-	COALESCE(SUM(CASE WHEN p.product_category_id = 2 THEN quantity ELSE 0 END), 0) pull_ups,
-	COALESCE(COUNT(DISTINCT oc.child_id), 0) children,
-	COALESCE(COUNT(DISTINCT c.guardian_id), 0) families
+		SELECT
+		c.name as name,
+		o.Id as ordernumber,
+		p.name as productname,
+		pc.name as productcategory,
+		pud.pickup_date as pickupdate
+	FROM child c
+	LEFT JOIN order_child oc ON oc.child_id = c.id
+	LEFT JOIN `order` o ON o.id = oc.order_id
+	LEFT JOIN order_item oi ON (oi.order_child_id = oc.id AND oi.deleted_at IS NULL AND oi.flag_approved = 1)
+	LEFT JOIN pickup_date pud ON pud.id = o.pickup_date_id
+	LEFT JOIN product p ON p.id = oi.product_id
+	LEFT JOIN product_category pc on PC.id=p.product_category_id
+	LEFT JOIn agency a on a.id=o.agency_id
 
-FROM agency a
-LEFT JOIN `order` o ON a.id = o.agency_id
-LEFT JOIN pickup_date pud ON pud.id = o.pickup_date_id
-LEFT JOIN order_child oc ON oc.order_id = o.id
-LEFT JOIN order_item oi ON (oi.order_child_id = oc.id AND oi.deleted_at IS NULL AND oi.flag_approved = 1)
-LEFT JOIN child c ON c.id = oc.child_id
-LEFT JOIN product p ON p.id = oi.product_id
+	WHERE pc.id=2
+	AND pud.pickup_date BETWEEN ? AND ?
+	AND a.id = ?
 
-WHERE o.order_status = 'fulfilled'
-AND pud.pickup_date BETWEEN ? AND ?
-AND a.id = ?
-
-GROUP BY a.id
-ORDER BY a.name ASC
+	ORDER BY c.name ASC
 EOQUERY;
 
 		return DB::select($query, [ $this->start->format('Y-m-d 00:00:00'), $this->end->format('Y-m-d 23:59:59'), $this->agency_id ]);
@@ -60,18 +59,18 @@ EOQUERY;
 
 		$this->writeHeader($fp);
 
-		$headers = [ 'Report Start Date', 'Report End Date', 'Agency', 'Diapers Distributed', 'Pullups Distributed', 'Children Served', 'Families Served' ];
+		$headers = [ 'Report Start Date', 'Report End Date', 'Name', 'Order Number', 'Product Name', 'Product Category', 'Pickup Date' ];
 		fputcsv($fp, $headers);
 		foreach ($stats as $line) {
 			$line = (array) $line;
 			fputcsv($fp, [
 				$this->start->format('Y-m-d'),
 				$this->end->format('Y-m-d'),
-				$line['agency'],
-				$line['diapers'],
-				$line['pull_ups'],
-				$line['children'],
-				$line['families'],
+				$line['name'],
+				$line['ordernumber'],
+				$line['productname'],
+				$line['productcategory'],
+				$line['pickupdate'],
 			]);
 		}
 		fclose($fp);
@@ -81,7 +80,7 @@ EOQUERY;
 	public function writeheader($fp) {
 		fputcsv($fp, ['Report', 'Start Date', 'End Date', 'Generated Date']);
 		fputcsv($fp, [
-			'Agency Overview',
+			'Pull-up Usage',
 			$this->start->format('Y-m-d'),
 			$this->end->format('Y-m-d'),
 			carbon()->format('Y-m-d @ h:i a'),
@@ -93,7 +92,7 @@ EOQUERY;
 	}
 
 	protected function getViewName() {
-		return 'agency-overview';
+		return 'pull-up-usage-report';
 	}
 
 	protected function getViewData() {

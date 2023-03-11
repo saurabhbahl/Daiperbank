@@ -9,7 +9,6 @@ use Illuminate\Support\Collection;
 class InventoryRepository {
 	public function getAdjustments($page = 1, $limit = 25) {
 		return InventoryAdjustment::with(['Inventory', 'Inventory.Product'])
-
 			->orderBy('adjustment_datetime', 'DESC')
 			->paginate($limit);
 	}

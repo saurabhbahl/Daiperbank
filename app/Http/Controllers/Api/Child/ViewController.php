@@ -68,6 +68,7 @@ class ViewController extends BaseController {
 					'ethnicity',
 					'guardian_id',
 					'guardian_relationship',
+					'is_menstruator',
 				]);
 
 				// had to add this line because we were getting this error on save:

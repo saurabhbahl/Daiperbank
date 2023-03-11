@@ -91,33 +91,44 @@ export default {
 				this.isValid = false;
 				return this.isValid;
 			}
+			
+			if(this.editedChild.is_menstruator==1)
+			{
+				if ( ! this.editedChild.product_id
+					|| ! this.getProductCategory(this.editedChild.product_id)) {
+					this.setError('product_id', 'Please select a type.');
+				}
 
-			let weight = parseInt(this.editedChild.weight);
-			let productCategory = null;
+				return this.isValid = ! this.hasError();	
+			}
+			else{
+				let weight = parseInt(this.editedChild.weight);
+				let productCategory = null;
 
-			if ( ! this.editedChild.product_id
-				|| ! this.getProductCategory(this.editedChild.product_id)) {
-				this.setError('product_id', 'Please select a diaper type & size for this child.');
-			}
-			else if ( ! this.editedChild.quantity) {
-				this.setError('quantity', 'Please specify a quantity for the selected diapers');
-			}
-			else {
-				productCategory = this.getProductCategory(this.editedChild.product_id);
-				if (productCategory.id == 2) { // this is the pullup category
-					if ( ! weight ) {
-						// weight is required if the child is in pull ups
-						this.setError('weight', 'Please enter the child\'s weight.');
+				if ( ! this.editedChild.product_id
+					|| ! this.getProductCategory(this.editedChild.product_id)) {
+					this.setError('product_id', 'Please select a diaper type & size for this child.');
+				}
+				else if ( ! this.editedChild.quantity) {
+					this.setError('quantity', 'Please specify a quantity for the selected diapers');
+				}
+				else {
+					productCategory = this.getProductCategory(this.editedChild.product_id);
+					if (productCategory.id == 2) { // this is the pullup category
+						if ( ! weight ) {
+							// weight is required if the child is in pull ups
+							this.setError('weight', 'Please enter the child\'s weight.');
+						}
 					}
 				}
-			}
 
-			if (productCategory && productCategory.id == 2 && ( isNaN(Number(weight)) || weight == 0 || weight < 1)) {
-				this.setError('weight', 'Please enter the child\'s weight.');
-			}
+				if (productCategory && productCategory.id == 2 && ( isNaN(Number(weight)) || weight == 0 || weight < 1)) {
+					this.setError('weight', 'Please enter the child\'s weight.');
+				}
 
-			return this.isValid = ! this.hasError();
-		},
+				return this.isValid = ! this.hasError();
+			}
+	},
 
 		getProductCategory(product_id) {
 			return this.productCategories.filter( Category => {

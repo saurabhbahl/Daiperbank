@@ -16,7 +16,7 @@ class Agency extends Model {
 	const STATUS_INACTIVE = 'inactive';
 
 	protected $casts = [
-		'flag_is_admin' => 'bool',
+		'flag_is_admin' => 'int',
 	];
 
 	public function scopeVisible($query) {
@@ -58,7 +58,10 @@ class Agency extends Model {
 	}
 
 	public function isAdmin() {
-		return true === $this->flag_is_admin;
+		return  $this->flag_is_admin > 0;
+	}
+	public function isSupperAdmin() {
+		return 111 === $this->flag_is_admin;
 	}
 
 	public function isActive() {
@@ -130,5 +133,9 @@ class Agency extends Model {
 			default:
 				return 'Unknown Status';
 		}
+	}
+
+	public function agreements() {
+		return $this->hasMany(Agreement::class, 'agency_id');
 	}
 }

@@ -4,21 +4,34 @@
 			<span class="f2">
 				<i class="fa"
 				:class="childClasses"></i>
-				{{ Child.name }}
+				{{ Child.name }} 
 			</span>
 
 			<table class="table table-condensed ma0">
-				<thead>
+				<thead v-if="(Child.is_menstruator>0)">
+					<tr>						
+						<th class="w-15">Type</th>						
+					</tr>
+				</thead>
+				<thead v-else>
 					<tr>
 						<th class="w-15">Age</th>
 						<th class="w-15">Type</th>
 						<th class="w-15">Size</th>
 						<th class="w-10">Qty</th>
 						<th class="w-15">Weight</th>
+						
 						<th>Potty Training</th>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody v-if="(Child.is_menstruator>0)">
+					<tr>					
+
+						<td v-if="Child.item">{{ Child.item.product.name }}</td>
+						<td v-else>Coming Soon</td>
+					</tr>
+				</tbody>
+				<tbody v-else>
 					<tr>
 						<td>{{ Child.age_str }}</td>
 
@@ -32,6 +45,7 @@
 						<td v-else>TBD</td>
 
 						<td>{{ Child.weight_str }}</td>
+												
 						<td>
 							<span v-if="Child.status_potty_train">
 								<i class="fa fa-check"

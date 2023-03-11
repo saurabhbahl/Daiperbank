@@ -13,6 +13,7 @@ use App\Reports\PullUpUsageReport;
 use App\Reports\DiaperUsageReport;
 use App\Reports\PurchaseReport;
 use Illuminate\Http\Request;
+use App\Reports\LocationOverviewAll;
 
 
 class ReportController {
@@ -55,15 +56,17 @@ class ReportController {
 
 			case 'location-report':
 
-				$Report = new LocationOverview($start_date, $end_date);
+				
 				if( ! $Request->input('zip-codes') && !$Request->input('all-zips')){
 					flash('You must select zip code to run a report on.')->error();
 					return redirect()->back();
 				}
 				elseif( ! $Request->input('zip-codes') && $Request->input('all-zips')){
-					$Report->allZipCodes((int)$Request->input('all-zips'));
+					$Report = new LocationOverviewAll($start_date, $end_date);
+					
 				}
 				else if(  $Request->input('zip-codes') && ! $Request->input('all-zips')){
+					$Report = new LocationOverview($start_date, $end_date);
 					$Report->zipCodes(array_map('trim', explode(',', $Request->input('zip-codes'))));
 
 				}

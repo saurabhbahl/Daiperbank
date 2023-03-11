@@ -19,8 +19,11 @@
 
 					<div class="mlauto self-center">
 						<button class="btn btn-default" @click="addChildClicked"
-							:class="{ 'disabled': processing }">Add Child</button>
+							:class="{ 'disabled': processing }">Add Child</button>&nbsp;
+							<button class="btn btn-default" @click="addMenstruatorChildClicked"
+							:class="{ 'disabled': processing }">Add Menstruator</button>
 					</div>
+				
 				</div>
 
 				<div class="flex-auto oy-scroll">
@@ -42,6 +45,11 @@
 								:class="{ 'disabled': processing }"
 								@click="addChildClicked">
 								Add a Child
+							</button>
+							<button class="btn btn-primary"
+								:class="{ 'disabled': processing }"
+								@click="addMenstruatorChildClicked">
+								Add a Menstruator
 							</button>
 						</p>
 					</div>
@@ -104,7 +112,7 @@
 		</div>
 
 		<ChildDetail
-			v-if="CurrentOrderChild"
+			v-if="(CurrentOrderChild && CurrentOrderChild.is_menstruator==0)"
 			:key="'child-detail-' + CurrentOrderChild.id"
 
 			class="pxa pinr pint pinb w-33 bg-white shadow-2"
@@ -118,23 +126,41 @@
 			@close="closeChildDetail"
 			@remove="removeChild"
 			@save="saveChild"
+			
 		></ChildDetail>
+		<MenstruatorChildDetail
+			v-if="(CurrentOrderChild && CurrentOrderChild.is_menstruator==1)"
+			:key="'child-detail-' + CurrentOrderChild.id"
 
+			class="pxa pinr pint pinb w-33 bg-white shadow-2"
+
+			:initial-child="CurrentOrderChild"
+			:is-editable="true"
+			:initial-editing="true"
+			:product-categories="ProductCategories"
+			:processing="processing"
+
+			@close="closeChildDetail"
+			@remove="removeChild"
+			@save="saveChild"
+		></MenstruatorChildDetail>
 	</div>
 </template>
 
 <script>
 import ChildDetail from './AgentChildDetail.vue';
+import MenstruatorChildDetail from './AgentMenstruatorChildDetail.vue';
 import ChildItem from './AgentChildItem.vue';
 import OrderSummary from './OrderSummary.vue';
 import PickupDateSelector from './PickupDateSelector.vue';
 import SelectChildModal from '../Modals/SelectChildModal.vue';
+import SelectMenstruatorChildModal from '../Modals/SelectMenstruatorChildModal.vue';
 import DiscardOrderConfirmationModal from '../Modals/DiscardOrderConfirmation.vue';
 import moment from 'moment';
 
 export default {
 
-	components: { ChildDetail, ChildItem, OrderSummary, PickupDateSelector },
+	components: { ChildDetail, ChildItem, OrderSummary, PickupDateSelector,MenstruatorChildDetail },
 
 	props: {
 		initialOrder: {
@@ -254,6 +280,22 @@ export default {
 				this.$root.$off('child/create', this.createChild);
 			});
 		},
+		addMenstruatorChildClicked() {
+			this.$store.commit({
+				type: 'Modal/show',
+				modalComponent: SelectMenstruatorChildModal,
+				props: {
+					allChildren: this.AvailableChildren,
+				}
+			});
+
+			this.$root.$once('child/select', this.addMenstruatorChild);
+			this.$root.$once('child/create', this.createChild);
+			this.$root.$once('child/select/cancel', () => {
+				this.$root.$off('child/select', this.addMenstruatorChild);
+				this.$root.$off('child/create', this.createChild);
+			});
+		},
 
 		addChild(Child) {
 			if (this.processing) return;
@@ -295,7 +337,46 @@ export default {
 				this.processing = false;
 			});
 		},
+		addMenstruatorChild(Child) {
+			if (this.processing) return;
+			this.processing = true;
 
+			axios.post(`/api/orders/${this.Order.id}/child`, { child_id: Child.id })
+			.then(response => {
+				if (response.data.success) {
+					this.$toast.success({
+						title: "Success",
+						message: "Child added to order",
+					});
+					this.updateOrder(response.data.data.Order);
+					this.selectChild(response.data.data.Child.id);
+					return;
+				}
+
+				this.$toast.error({
+					title: "Error",
+					message: "Could not add child to order. " + (response.data.message || "An unexpected error occurred"),
+				});
+			})
+			.catch( err => {
+				let response = err.response;
+				if (err.status == 422) {
+					this.$toast.error({
+						title: "Error",
+						message: "Could not add child to order."
+					});
+					return;
+				}
+
+				this.$toast.error({
+					title: "Error",
+					message: "Could not add child to order. " + (response.data.message || "An unexpected error occurred"),
+				});
+			})
+			.then(() => {
+				this.processing = false;
+			});
+		},
 		saveChild(Child, data) {
 			if (this.processing) return;
 			this.clearErrors();

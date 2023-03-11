@@ -75,6 +75,14 @@
 						</a>
 
 						<ul class="dropdown-menu nav-links" role="menu">
+							@if (!Auth()->User()->isAdmin())
+                            <li>
+                                <a href="{{route('agency.profile.index')}}">
+									<i class="fa fa-user"></i>
+									Profile
+								</a>
+                            </li>
+							@endif
 							<li>
 								<a href="#"	id="logout-button">
 									<i class="fa fa-sign-out"></i>

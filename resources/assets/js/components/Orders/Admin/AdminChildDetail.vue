@@ -1,12 +1,14 @@
-<template>
-	<ChildDetail
+<template >
+	<ChildDetail 
 		:is-editable="isEditable"
 		:is-editing="isEditing"
 		:initial-child="Child"
 		:product-categories="productCategories"
 
 		@change="onChildChanged"
-		@close="close">
+		@close="close" 
+		v-if="this.Child.is_menstruator==0"
+		>
 
 		<template slot="buttons">
 			<div v-if=" ! isEditing && pending && isEditable">
@@ -79,14 +81,96 @@
 			</button>
 		</template>
 	</ChildDetail>
+	<MenstruatorChildDetail
+		:is-editable="isEditable"
+		:is-editing="isEditing"
+		:initial-child="Child"
+		:product-categories="productCategories"
+
+		@change="onChildChanged"
+		@close="close" v-else>
+
+		<template slot="buttons">
+			<div v-if=" ! isEditing && pending && isEditable">
+				<button
+					key="edit-btn"
+					class="btn btn-block btn-primary mb"
+					@click="editClicked">
+					<i class="fa fa-pencil"></i>
+					Edit
+				</button>
+			</div>
+
+			<div v-else-if="isEditing">
+				<button
+					key="remove-btn"
+					class="btn btn-block btn-danger btn-alt mb4"
+					:class="{'disabled': processing}"
+					@click="removeClicked">
+					<i class="fa fa-trash-o"></i>
+					Remove From Order
+				</button>
+
+				<button
+					key="save-btn"
+					class="btn btn-block btn-success mb"
+					:class="{'disabled': (! isValid) || processing }"
+					@click="saveClicked">
+					<i class="fa fa-check"></i>
+					Save & Approve
+				</button>
+			</div>
+
+			<div v-else-if="approved && isEditable">
+				<button
+					key="unapprove-btn"
+					class="btn btn-block btn-default mb"
+					:class="{'disabled': processing}"
+					@click="unapprovedClicked">
+					<i class="fa fa-times"></i>
+					Move to Pending
+				</button>
+			</div>
+
+			<div v-else-if="removed && isEditable">
+				<button
+					key="restore-btn"
+					class="btn btn-block btn-default mb"
+					:class="{'disabled': processing}"
+					@click="restoreClicked">
+					<i class="fa fa-check"></i>
+					Restore
+				</button>
+			</div>
+
+			<button class="btn btn-block btn-default btn-ghost"
+				:class="{'disabled': processing}"
+				v-if="isEditable"
+				key="cancel-btn"
+				@click="cancelClicked">
+				<i class="fa fa-times"></i>
+				Cancel
+			</button>
+
+			<button class="btn btn-block btn-default btn-ghost"
+				v-else
+				key="cancel-btn"
+				@click="cancelClicked">
+				<i class="fa fa-times"></i>
+				Close
+			</button>
+		</template>
+	</MenstruatorChildDetail>
 </template>
 
 <script>
 import ChildDetail from '../ChildDetail.vue';
+import MenstruatorChildDetail from '../MenstruatorChildDetail.vue';
+
 import ChildDetailBehavior from '../sharedChildDetailBehaviors';
 
 export default {
-	components: { ChildDetail },
+	components: { ChildDetail ,MenstruatorChildDetail},
 	mixins: [ ChildDetailBehavior ],
 
 	computed: {

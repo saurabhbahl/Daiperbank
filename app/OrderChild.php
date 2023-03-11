@@ -26,6 +26,7 @@ class OrderChild extends Model {
 		'created_by_user_id',
 		'weight_str',
 		'weight_lbs',
+		'is_menstruator',
 	];
 
 	protected $casts = [
@@ -65,7 +66,10 @@ class OrderChild extends Model {
 	public function getGenderAttribute() {
 		return $this->Child->gender;
 	}
-
+	public function getIsMenstruatorAttribute() {
+		return $this->Child->is_menstruator;
+	}
+	
 	public function getWeightStrAttribute() {
 		$weight = $this->weight_oz;
 

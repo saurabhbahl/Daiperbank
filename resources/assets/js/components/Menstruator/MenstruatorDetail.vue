@@ -115,7 +115,7 @@
 							{{ error('Child.ethnicity') }}
 						</p>
 					</div>
-
+<!--
 					<div class="mb">
 						<table class="table mb0">
 							<tr>
@@ -148,7 +148,7 @@
 						<p v-if="hasError('Child.status_wic')" class="validation-error">
 							{{ error('Child.status_wic') }}
 						</p>
-					</div>
+					</div>-->
 				</div>
 			</div>
 
@@ -358,7 +358,8 @@ export default {
 				'status_potty_train',
 				'status_wic',
 				'guardian_id',
-				'guardian_relationship',
+				'guardian_relationship'
+				
 			],
 			newGuardian: {
 				name: null,
@@ -537,7 +538,8 @@ export default {
 
 		saveChild() {
 			this.clearErrors();
-			this.editedChild.gender='f'
+			this.editedChild.gender='f';
+			this.editedChild.is_menstruator=1;
 			let postData = {
 				Child: this.editedChild,
 			};

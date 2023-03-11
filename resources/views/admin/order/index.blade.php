@@ -83,7 +83,7 @@
 								<div class="w-20 fg-no mr4 nowrap">
 									<table>
 										<tr>
-											<th class="tr" scope="row">Submitted on:</th>
+											<th class="tr" scope="row">Order created:</th>
 											<td class="ph3 pv1">
 												<?= $Order->created_at->format('M j, Y'); ?>
 											</th>
