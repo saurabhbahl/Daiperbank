@@ -13,7 +13,7 @@ body, html { background: #FFF; }
 	@top {
 		content: element(header);
 	}
-
+	
 	@bottom-right {
 		content: counter(page) " of " counter(pages);
 	}
@@ -32,7 +32,7 @@ tr { page-break-inside: avoid }
 
 	<header class="flex justify-between mb">
 		<div class="w-25">
-			<img src="http://localhost/hs/public/img/logo.png" style="max-height: 50px;">
+			<img src="<? echo public_path('img/logo.png'); ?>" style="max-height: 50px;">
 		</div>
 
 		<div class="w-75 tr f4">

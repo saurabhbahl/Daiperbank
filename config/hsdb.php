@@ -11,7 +11,7 @@ return [
 	],
 
 	'wkhtmltopdf' => [
-		'bin' => env('WKHTMLTOPDF_BIN', 'C:\Users\Public\wkhtmlpdf\wkhtmltopdf\bin\wkhtmltopdf.exe'),
+		'bin' => env('WKHTMLTOPDF_BIN', '/usr/bin/wkhtmltopdf'),
 	],
 
 	'storage_folder' => 'pdf',
