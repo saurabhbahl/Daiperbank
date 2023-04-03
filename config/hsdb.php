@@ -11,7 +11,11 @@ return [
 	],
 
 	'wkhtmltopdf' => [
+<<<<<<< HEAD
 		'bin' => env('WKHTMLTOPDF_BIN', '/usr/bin/wkhtmltopdf'),
+=======
+		'bin' => env('WKHTMLTOPDF_BIN', '/usr/bin/wkhtmltopdf'),
+>>>>>>> ff38e5aedbc011884b0de241685dc02cd2f2d2c9
 	],
 
 	'storage_folder' => 'pdf',
