@@ -3,8 +3,8 @@
 <head>
 <title></title>
 <!-- <base href="{{ url('/') }}"> -->
-<!-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> -->
-<link href="http://localhost/hs/public/css/app.css" rel="stylesheet">
+<link href="{{ asset('css/app.css') }}" rel="stylesheet">
+<!-- <link href="http://localhost/hs/public/css/app.css" rel="stylesheet"> -->
 <style type="text/css">
 body, html { background: #FFF; }
 @page {
