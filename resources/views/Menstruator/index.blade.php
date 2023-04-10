@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+ 
 @section('content')
 	<div class="breadcrumbs">
 		<p class="crumb">
