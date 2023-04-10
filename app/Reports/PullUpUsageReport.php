@@ -29,8 +29,8 @@ class PullUpUsageReport extends Report implements ReportContract {
 	LEFT JOIN order_item oi ON (oi.order_child_id = oc.id AND oi.deleted_at IS NULL AND oi.flag_approved = 1)
 	LEFT JOIN pickup_date pud ON pud.id = o.pickup_date_id
 	LEFT JOIN product p ON p.id = oi.product_id
-	LEFT JOIN product_category pc on PC.id=p.product_category_id
-	LEFT JOIn agency a on a.id=o.agency_id
+	LEFT JOIN product_category pc on pc.id=p.product_category_id
+	LEFT JOIN agency a on a.id=o.agency_id
 
 	WHERE pc.id=2
 	AND pud.pickup_date BETWEEN ? AND ?
