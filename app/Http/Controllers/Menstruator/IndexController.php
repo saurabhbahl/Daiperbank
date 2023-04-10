@@ -20,7 +20,7 @@ class IndexController extends BaseController {
 			$ChildSearch->page($Request->input('page'));
 		}
 
-		return view('menstruator.index', [
+		return view('Menstruator.index', [
 			'Children' => $ChildSearch->getMenstruator(),
 			'DraftOrders' => Auth()->User()->Agency->OrderDraft,
 			'Guardians' => Auth()->User()->Agency->Guardian()->orderBy('name', 'ASC')->get(),
