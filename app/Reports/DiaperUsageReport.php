@@ -103,6 +103,6 @@ EOQUERY;
 	}
 
 	protected function isValid() {
-		return $this->data && count($this->data) == 1;
+		return $this->data && count($this->data) >= 1;
 	}
 }

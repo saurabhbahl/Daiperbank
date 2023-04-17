@@ -5,11 +5,11 @@ Donation Report
 @stop
 
 @section('content')
-	<h3 class="f3 mt0 pa0">Donations Overview</h3>
+<h3 class="f3 mt0 pa0">Purchase Overview</h3>
 	<table class="table table-bordered table-striped">
 		<tr>
-			<th scope="row" class="w-50 tr">Donations</th>
-			<td><?= number_format($stats['Aggregate'][0]->donations, 0); ?></td>
+			<th scope="row" class="w-50 tr">Purchase</th>
+			<td><?= number_format($stats['Aggregate'][0]->purchase, 0); ?></td>
 		</tr>
 		<tr>
 			<th scope="row" class="tr">Total Diapers</th>
@@ -23,7 +23,7 @@ Donation Report
 
 	<div class="flex justify-between">
 		<div class="w-50 fs-no fg-no pr">
-			<h3 class="f3 pa0">Diaper Donations</h3>
+			<h3 class="f3 pa0">Diaper Purchase</h3>
 			<table class="table table-bordered table-striped">
 				<thead>
 					<tr>
@@ -42,7 +42,7 @@ Donation Report
 		</div>
 
 		<div class="w-50 fs-no fg-no pl">
-			<h3 class="f3 pa0">Pull-up Donations</h3>
+			<h3 class="f3 pa0">Pull-up Purchase</h3>
 			<? foreach($genders as $gender): ?>
 				<table class="table table-bordered table-striped">
 					<thead>
@@ -70,16 +70,16 @@ Donation Report
 		</div>
 	</div>
 
-	<h3 class="f3 pa0">Donation Details</h3>
+	<h3 class="f3 pa0">Purchase Details</h3>
 	<table class="table table-bordered table-striped">
 		<thead>
 			<tr>
 				<th>
 					Donor Details
 				</th>
-				<th>Diapers Donated</th>
-				<th>Pull-ups Donated</th>
-				<th>Total Donations</th>
+				<th>Diapers Purchase</th>
+				<th>Pull-ups Purchase</th>
+				<th>Total Purchase</th>
 			</tr>
 		</thead>
 
