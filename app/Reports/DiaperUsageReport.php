@@ -97,7 +97,7 @@ EOQUERY;
 
 	protected function getViewData() {
 		return array_merge(parent::getViewData(), [
-			'stats' => $this->data[0],
+			'stats' => $this->data,
 			'Agency' => $this->getAgency(),
 		]);
 	}
