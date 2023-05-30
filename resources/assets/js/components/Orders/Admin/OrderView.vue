@@ -343,7 +343,34 @@
 					</div>
 				</div>
 
-				<div v-if="isCancelled || isRejected">
+				<div v-if="isCancelled">
+					<form action="" method="post" ref="clone-form">
+						<input type="hidden" name="_token" v-model="csrfToken">
+						<input type="hidden" name="action" value="clone">
+
+						<button
+							name="action"
+							value="clone"
+							ref="clone-order-btn"
+							class="btn btn-block btn-default"
+							:class="{'disabled': processing}">
+							<i class="fa fa-lg fa-clone"></i>
+							Clone Order
+						</button>
+					</form>
+					<form action="" method="post" ref="cancel-to-approve-form">
+						<input type="hidden" name="_token" v-model="csrfToken">
+						<input type="hidden" name="pickup_date_id" v-model="pickup_date_id">
+						<input type="hidden" name="action" value="canceltoapprove"> 
+						<button
+							ref="approve-order-btn"
+							class="btn btn-block btn-success"
+							>
+							<i class="fa fa-lg fa-check"></i> FulFill
+						</button>
+					</form>
+				</div>
+				<div v-if="isRejected">
 					<form action="" method="post" ref="clone-form">
 						<input type="hidden" name="_token" v-model="csrfToken">
 						<input type="hidden" name="action" value="clone">

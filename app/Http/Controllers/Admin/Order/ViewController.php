@@ -198,6 +198,10 @@ class ViewController extends Controller {
 				flash('An error occurred while trying to approve this order.')->error();
 				return redirect()->route('admin.order.view', [ $Order ]);
 			}
+		} elseif($Request->get('action') == 'canceltoapprove'){
+			$Order->fulfill();
+			flash('Order Status Changed')->success();
+			return redirect()->route('admin.order.view', [ $Order ]);
 		}
 	}
 
