@@ -48,8 +48,9 @@
 					<i class="fa fa-exclamation fa-2x"></i>
 				</div>
 				<div>
-					<p class="f2 wtl">Could not find a child matching '{{ query }}'</p>
-					<p class="muted f4"><a href="/family">Click here to create a new child</a></p>
+					<p class="f2 wtl">Could not find a {{Text}} matching '{{ query }}'</p>
+					<p class="muted f4"><a href="/family" v-if="Text != 'Menstruator' ">Click here to create a new child</a>
+						<a href="/menstruator" v-else>Click here to create a new menstruator</a></p>
 				</div>
 			</div>
 		</template>
