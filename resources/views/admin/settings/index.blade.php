@@ -47,7 +47,7 @@
                                         <div class="checkboxField">
                                             <label>
                                                 <input type="checkbox" class="notificationCheckbox" />
-                                                Enable/Disable
+                                                Disable
                                             </label>
                                         </div>
                                     </div>

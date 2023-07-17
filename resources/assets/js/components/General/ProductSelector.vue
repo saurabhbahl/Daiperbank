@@ -21,6 +21,7 @@
 						@change="onCategoryChange">
 						<option disabled>Select one</option>
 						<option v-for="Category in ProductCategories"
+								v-if="Category.id != 3"
 								:value="Category.id">
 								{{ Category.name }}
 						</option>
