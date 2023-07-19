@@ -28,7 +28,7 @@ Donation Report
 				<thead>
 					<tr>
 						<th class="w-25 tr">Size</th>
-						<th>Qty Donated</th>
+						<th>Qty Purchased</th>
 					</tr>
 				</thead>
 
@@ -55,7 +55,7 @@ Donation Report
 
 						<tr>
 							<th class="w-25 tr">Size</th>
-							<th>Qty Donated</th>
+							<th>Qty Purchased</th>
 						</tr>
 					</thead>
 
@@ -75,7 +75,7 @@ Donation Report
 		<thead>
 			<tr>
 				<th>
-					Donor Details
+					Details
 				</th>
 				<th>Diapers Purchase</th>
 				<th>Pull-ups Purchase</th>
