@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class additionalresources extends Model
+class additionalrs extends Model
 {
     protected $fillable = [
         'file'
