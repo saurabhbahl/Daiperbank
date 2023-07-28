@@ -120,6 +120,15 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::name('admin.resource.destroy')->get('delete/{resource_id}')->uses('Admin\Resource\ResourceController@destroy');
 	    });
 
+		Route::group(['prefix' => 'additionalresource'], function () {
+			Route::name('admin.additionalresource.create')->get('create')->uses('Admin\AdditionalResources\additionalresources@index');
+			Route::name('admin.additionalresource.create')->post('create')->uses('Admin\AdditionalResources\additionalresources@create');
+			Route::name('admin.additionalresource.create')->get('create')->uses('Admin\AdditionalResources\additionalresources@show');
+			Route::name('admin.additionalresource.edit')->get('edit/{resource_id}')->uses('Admin\AdditionalResources\additionalresources@edit');
+			Route::name('admin.additionalresource.update')->put('{resource_id}')->uses('Admin\AdditionalResources\additionalresources@update');
+			Route::name('admin.additionalresource.destroy')->get('delete/{resource_id}')->uses('Admin\AdditionalResources\additionalresources@destroy');
+	    });
+		
 		Route::group(['prefix' => 'agreement'], function () {
 			Route::name('admin.agreement.create')->get('create')->uses('Admin\Agreement\AgreementController@index');
 			Route::name('admin.agreement.create')->post('create')->uses('Admin\Agreement\AgreementController@create');

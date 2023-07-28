@@ -39,6 +39,12 @@
                 Partner Agreement
             </a>
         </li>
+        <li>
+            <a href="<?= route('admin.additionalresource.create') ?>">
+                <i class="fa fa-file"></i>
+                Addiotional Resources
+            </a>
+        </li>
     </ul>
 </div>
 <div class="nav-item dropdown">
