@@ -13,7 +13,7 @@ class AddiotionalResources extends Migration
      */
     public function up()
     {
-        Schema::create('additionalresources', function (Blueprint $table) {
+        Schema::create('additionalres', function (Blueprint $table) {
             $table->increments('id');
             $table->string('file');
             $table->timestamps();
