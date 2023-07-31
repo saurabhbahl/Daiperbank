@@ -16,7 +16,7 @@ class AddiotionalResources extends Migration
         Schema::create('additionalrs', function (Blueprint $table) {
             $table->increments('id');
             $table->string('file');
-            $table->timestamps();
+            $table->timestamps(); 
         });
     }
 
