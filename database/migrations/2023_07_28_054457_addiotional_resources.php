@@ -24,7 +24,7 @@ class AddiotionalResources extends Migration
 >>>>>>> Development
             $table->increments('id');
             $table->string('file');
-            $table->timestamps();
+            $table->timestamps(); 
         });
     }
 
