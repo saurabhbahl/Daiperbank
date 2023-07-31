@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin\AdditionalResources;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
-use App\additionalresources as ar;
+use App\additionalrs as ar;
  
 class additionalresources extends Controller
 {
