@@ -30,7 +30,7 @@ tr { page-break-inside: avoid }
 </head>
 <body class="m0 p0">
 
-	<header class="flex justify-between mb" style="border: 1px solid black">
+	<header class="flex justify-between mb">
 		<div class="">
 			<img src="<? echo public_path('img/logo.png'); ?>" style="max-height: 50px;">
 		</div>
