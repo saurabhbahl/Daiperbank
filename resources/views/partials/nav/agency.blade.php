@@ -38,5 +38,11 @@
                 Partner Agreement
             </a>
         </li>
+        <li>
+            <a href="<?= route('additional-resources.index') ?>">
+                <i class="fa fa-file"></i>
+                Additional Resources
+            </a>
+        </li>
     </ul>
 </div>

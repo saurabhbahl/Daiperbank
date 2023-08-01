@@ -49,6 +49,11 @@ Route::group(['middleware' => ['auth']], function () {
 			Route::name('partner-handbook.index')->get('/')->uses('PartnerHandbook\IndexController@get');
 		});
 
+		// Additional Resources
+		Route::group(['prefix' => 'additional-resources'], function () {
+			Route::name('additional-resources.index')->get('/')->uses('AdditionalResources\IndexController@get');
+		});
+
 		// Agency Profile
 		Route::group(['prefix' => 'profile'], function () {
 			Route::name('agency.profile.index')->get('/')->uses('Agency\ProfileController@index');

@@ -127,7 +127,7 @@ class ReportController {
 
 		try {
 			$Report->run();
-			// return $Report->view();
+			return $Report->view();
 			$fn = $Report->toPdf();
 			return response()->download($fn, $Report->getName('pdf'))->deleteFileAfterSend(true);
 		} catch (InsufficientDataException $e) {
