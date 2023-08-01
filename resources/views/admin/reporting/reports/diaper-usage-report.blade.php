@@ -23,7 +23,7 @@ Diaper Usage Report
 								<thead>
 									<tr>
 										<th style="width:25%">Name</th>
-										<th style="width:25%"><? echo $data->name; ?></th>
+										<th style="width:25%" colspan="3"><? echo $data->name; ?></th>
 									</tr>
 									<tr>
 										<th style="width:25%">Order Number</th>
