@@ -30,12 +30,12 @@ tr { page-break-inside: avoid }
 </head>
 <body class="m0 p0">
 
-	<header class="flex justify-between mb">
-		<div class="w-25">
+	<header class="flex justify-between mb" style="border: 1px solid black">
+		<div class="">
 			<img src="<? echo public_path('img/logo.png'); ?>" style="max-height: 50px;">
 		</div>
 
-		<div class="w-75 tr f4">
+		<div class="tr f4">
 			<p class="b">@yield('report-title')</p>
 			<p>
 				<span class="b">Report Range:</span>
