@@ -18,9 +18,11 @@ class DiaperUsageReport extends Report implements ReportContract {
 	public function getStats() {
 		$query = <<<EOQUERY
 	SELECT
+		c.id as id,
 		c.name as name,
 		o.Id as ordernumber,
 		p.name as productname,
+		oi.quantity as qty,
 		pc.name as productcategory,
 		pud.pickup_date as pickupdate
 	FROM child c
