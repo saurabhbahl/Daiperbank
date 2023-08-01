@@ -5,7 +5,7 @@
 @section('content')
 
     <div class="breadcrumbs">
-        <p class="crumb">Additional Resources</p>
+        <p class="crumb">Resources</p>
     </div>
 
     <div class="flex-auto flex justify-start content-stretch o-hidden">
@@ -28,8 +28,8 @@
                         <td>{{ $resource->created_at }}</td>
                         <td>{{ $resource->updated_at }}</td>
                         <td>
-                            <form action="{{ route('admin.additionalresource.destroy', $resource->id) }}" method="GET">
-                                <a class="btn btn-primary" href="{{ route('admin.additionalresource.edit', $resource->id) }}">Edit</a>
+                            <form action="{{ route('admin.resource.destroy', $resource->id) }}" method="GET">
+                                <a class="btn btn-primary" href="{{ route('admin.resource.edit', $resource->id) }}">Edit</a>
                                 {{ csrf_field() }}
                                 {{ method_field('DELETE') }}
                                 <button type="submit" class="btn btn-danger">Delete</button>
