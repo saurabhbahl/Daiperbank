@@ -49,6 +49,7 @@ class additionalresources extends Controller
     public function update(Request $request, $id)
     {
         $resource=ar::find($id);
+        
         $this->validate($request, [
             'file' => 'required'  
          ]);
@@ -65,7 +66,7 @@ class additionalresources extends Controller
          );
 
         $resource->update($form_data);
-        return redirect()->route('admin.additionalresources.create')->with('success','Resource updated successfully');
+        return redirect()->route('admin.additionalresource.create')->with('success','Resource updated successfully');
     }
 
     public function destroy(Request $request, $id)
