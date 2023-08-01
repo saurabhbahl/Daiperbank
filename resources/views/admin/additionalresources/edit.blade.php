@@ -20,7 +20,7 @@
                     </ul>
                 </div>
             @endif
-            <form action="{{ route('admin.resource.update', $resource->id) }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('admin.additionalresource.update', $resource->id) }}" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 {{ method_field('PUT') }}
                 <div class="col-xs-12 pa0 bg-white br b--black-20 flex-auto flex flex-column justify-stretch o-hidden">
