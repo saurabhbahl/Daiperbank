@@ -6,7 +6,7 @@
 				:class="tabClasses(id)"
 				@click="!tab.link? selectTab($event, id) : true">
 
-				<a :href="getTabLink(tab, id)" :target="getTabTarget(tab)">
+				<a :href="getTabLink(tab, id)">
 					<span v-html="tab.label"></span>
 
 					<span v-if="hasBadge(tab)"
