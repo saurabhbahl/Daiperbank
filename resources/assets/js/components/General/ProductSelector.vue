@@ -128,7 +128,12 @@ export default {
 
 		onCategoryChange() {
 			this.selected_product_id = null;
-
+			if(this.selected_category_id == 1){
+				this.selected_quantity = '50';
+			}
+			else{
+				this.selected_quantity = '40';
+			}
 			this.selectionChanged();
 		},
 
