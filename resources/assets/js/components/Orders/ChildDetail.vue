@@ -124,6 +124,7 @@
             :product-categories="productCategories"
             :initial-selected-product="selectedProductId"
             :initial-quantity="selectedProductQuantity"
+            :initial-child="Child"
             @change="onProductChange"
           ></ProductSelector>
 

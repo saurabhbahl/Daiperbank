@@ -18,10 +18,19 @@
 			<tr>
 				<td>
 					<select v-model="selected_category_id" class="form-control"
-						@change="onCategoryChange">
+						@change="onCategoryChange" v-if="Child.age_mo >=24">
 						<option disabled>Select one</option>
 						<option v-for="Category in ProductCategories"
 								v-if="Category.id != 3"
+								:value="Category.id">
+								{{ Category.name }}
+						</option>
+					</select>
+					<select v-model="selected_category_id" class="form-control"
+						@change="onCategoryChange" v-if="Child.age_mo < 24">
+						<option disabled>Select one</option>
+						<option v-for="Category in ProductCategories"
+								v-if="Category.id == 1"
 								:value="Category.id">
 								{{ Category.name }}
 						</option>
@@ -85,6 +94,10 @@ export default {
 			validator: function(value) {
 				return value == parseInt(value);
 			},
+		},
+		initialChild: {
+			type: Object,
+			required: true,
 		},
 	},
 

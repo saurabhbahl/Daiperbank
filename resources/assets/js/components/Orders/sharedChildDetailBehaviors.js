@@ -104,10 +104,15 @@ export default {
 			else{
 				let weight = parseInt(this.editedChild.weight);
 				let productCategory = null;
+				let potty_training = this.editedChild.status_potty_train;
 
-				if ( ! this.editedChild.product_id
-					|| ! this.getProductCategory(this.editedChild.product_id)) {
+				if ( (! this.editedChild.product_id
+					|| ! this.getProductCategory(this.editedChild.product_id)) && this.editedChild.child.age_mo >= 24) {
 					this.setError('product_id', 'Please select a diaper type & size for this child.');
+				}
+				else if( (! this.editedChild.product_id
+					|| ! this.getProductCategory(this.editedChild.product_id)) && this.editedChild.child.age_mo < 24 ){
+					this.setError('age', 'Sorry! Pull ups are not available for children aged below 2 years');
 				}
 				else if ( ! this.editedChild.quantity) {
 					this.setError('quantity', 'Please specify a quantity for the selected diapers');
@@ -124,6 +129,10 @@ export default {
 
 				if (productCategory && productCategory.id == 2 && ( isNaN(Number(weight)) || weight == 0 || weight < 1)) {
 					this.setError('weight', 'Please enter the child\'s weight.');
+				}
+
+				if(productCategory && productCategory.id == 2 && potty_training ==false ){
+					return this.isValid =  this.hasError();
 				}
 
 				return this.isValid = ! this.hasError();
