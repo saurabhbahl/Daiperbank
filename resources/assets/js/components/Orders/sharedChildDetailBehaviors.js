@@ -132,7 +132,7 @@ export default {
 				}
 
 				if(productCategory && productCategory.id == 2 && potty_training ==false ){
-					return this.isValid =  this.hasError();
+					this.setError('potty training', 'Please select potty training');
 				}
 
 				return this.isValid = ! this.hasError();
