@@ -103,6 +103,7 @@ export default {
 
 	data() {
 		return {
+			Child: this.initialChild,
 			selected_category_id: this.initialSelectedProduct? this.getCategoryForProduct(this.initialSelectedProduct) : 0,
 			selected_product_id: this.initialSelectedProduct,
 			selected_quantity: this.initialQuantity,
