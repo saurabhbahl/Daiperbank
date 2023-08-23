@@ -42,7 +42,7 @@
 						@change="onProductChange">
 						<option disabled>Select one</option>
 						<option v-for="Product in CategoryProducts"
-								:value="Product.id" v-if="Product.id != 17 && Product.id != 18 && Product.id != 19 && Product.id != 20">
+								:value="Product.id" >
 								{{ Product.name }}
 						</option>
 					</select>
