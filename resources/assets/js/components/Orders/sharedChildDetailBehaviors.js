@@ -131,7 +131,7 @@ export default {
 					this.setError('weight', 'Please enter the child\'s weight.');
 				}
 
-				if(productCategory && productCategory.id == 2 && potty_training ==false ){
+				if(productCategory && productCategory.id == 2 && (potty_training ==false || potty_training == null) ){
 					this.setError('potty training', 'Please select potty training');
 				}
 
