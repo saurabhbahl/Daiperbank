@@ -30,10 +30,7 @@
               <span>
                 <i
                   class="fa"
-                  :class="{
-                    'fa-female': Child.gender === 'f',
-                    'fa-male': Child.gender === 'm',
-                  }"
+                  :class="childClasses"
                 ></i>
                 <span v-if="Child.gender === 'f'">Female</span>
                 <span v-else-if="Child.gender === 'm'">Male</span>
@@ -176,6 +173,22 @@ export default {
 
       return null;
     },
+
+    Child() {
+			return this.child;
+		},
+
+		childClasses() {
+			if(this.Child.is_menstruator == 1){
+				return 'fa-female purple-female'
+			}
+			else{
+				return {
+					'fa-female': this.Child.gender === 'f',
+					'fa-male': this.Child.gender === 'm',
+				};
+			}
+		},
   },
 
   methods: {
