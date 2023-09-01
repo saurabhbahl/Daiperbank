@@ -5,10 +5,7 @@
         <p class="b f2">
           <i
             class="fa"
-            :class="{
-              'fa-female': Child.gender === 'f',
-              'fa-male': Child.gender === 'm',
-            }"
+            :class="childClasses"
           ></i>
           {{ Child.name }}
         </p>
