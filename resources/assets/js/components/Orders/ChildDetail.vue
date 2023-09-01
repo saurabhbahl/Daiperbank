@@ -258,9 +258,6 @@ export default {
 
       return null;
     },
-    Child() {
-			return this.child;
-		},
 
 		childClasses() {
 			if(this.Child.is_menstruator == 1){
