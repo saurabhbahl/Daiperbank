@@ -98,10 +98,15 @@ export default {
 		},
 
 		childClasses() {
-			return {
-				'fa-female': this.Child.gender === 'f',
-				'fa-male': this.Child.gender === 'm',
-			};
+			if(this.Child.is_menstruator == 1){
+				return 'fa-female purple-female'
+			}
+			else{
+				return {
+					'fa-female': this.Child.gender === 'f',
+					'fa-male': this.Child.gender === 'm',
+				};
+			}
 		},
 
 		pottyTrainClasses() {
