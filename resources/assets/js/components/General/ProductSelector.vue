@@ -1,5 +1,6 @@
 <template>
 	<table class="table table-condensed table-striped ma0">
+		{{ordercount}}
 		<thead>
 			<tr>
 				<th class="w-33">Type
