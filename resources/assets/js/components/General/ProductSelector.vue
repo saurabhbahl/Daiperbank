@@ -1,6 +1,5 @@
 <template>
 	<table class="table table-condensed table-striped ma0">
-		{{ordercount}}
 		<thead>
 			<tr>
 				<th class="w-33">Type
@@ -21,7 +20,9 @@
 					<select v-model="selected_category_id" class="form-control"
 						@change="onCategoryChange" v-if="Child.age_mo >=24">
 						<option disabled>Select one</option>
-						<option v-for="Category in ProductCategories" :value="Category.id" :disabled="Category.id === 2 && ordercount >= 6" v-if="Category.id != 3">
+						<option v-for="Category in ProductCategories"
+								v-if="Category.id != 3"
+								:value="Category.id">
 								{{ Category.name }}
 						</option>
 					</select>
