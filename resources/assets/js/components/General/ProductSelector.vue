@@ -20,9 +20,7 @@
 					<select v-model="selected_category_id" class="form-control"
 						@change="onCategoryChange" v-if="Child.age_mo >=24">
 						<option disabled>Select one</option>
-						<option v-for="Category in ProductCategories"
-								v-if="Category.id != 3"
-								:value="Category.id">
+						<option v-for="Category in ProductCategories" :value="Category.id" :disabled="Category.id === 2 && ordercount >= 6" v-if="Category.id != 3">
 								{{ Category.name }}
 						</option>
 					</select>
@@ -99,6 +97,10 @@ export default {
 			type: Object,
 			required: true,
 		},
+		allChildren: {
+			required: true,
+			type: Array,
+		},
 	},
 
 	data() {
@@ -127,6 +129,41 @@ export default {
 
 			return Object.values(this.SelectedCategory.product).filter( Product => Product.id == this.selected_product_id )[0];
 		},
+		
+		childs(){ 
+			return this.allChildren.filter(	
+				obj => obj.id === this.initialChild.child_id
+			);
+		},
+
+		ordercount() {
+			var childs = this.childs;
+			var relatedData = [];
+			var order_count = 0;
+			childs.forEach((item) => {
+				item.order_item.forEach((childitem) =>{
+					var orderid = childitem.order.id;
+					var productId = childitem.product.product_category_id;
+					var orderstatus = childitem.order.order_status;
+					// Relate the order and product data
+					if(productId == 2){
+						var key = orderid+'-'+orderstatus;
+						relatedData[orderid] = orderstatus;
+						
+					}
+				});
+			});
+			// order count for pull ups
+			if(relatedData.length > 0){		
+				relatedData.forEach((item,index) => {
+					if(item !== 'cancelled' || item !== 'rejected'){
+						return order_count++;
+					}
+				});
+			}
+			return order_count;
+		}
+
 	},
 
 	methods: {
@@ -172,6 +209,7 @@ export default {
 				...(this.SelectedProduct? this.SelectedProduct : {}),
 				quantity: this.selected_quantity,
 				category: this.SelectedCategory,
+				order_count: this.ordercount,
 			};
 
 			this.$emit('change', this.isValid(), selectedProduct);

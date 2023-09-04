@@ -81,6 +81,7 @@
         </div>
 
         <p class="b f2 bb bw2 b--black-20 mv3">Current Order</p>
+        <p class="b f2 bb bw2 b--black-20 mv3" v-if="Child.child.order_count >= 6">You can place only 6 orders for pull ups.</p>
         <table class="table table-condensed table-striped" v-if="!isEditing">
           <thead>
             <tr>
@@ -119,6 +120,7 @@
             :initial-selected-product="selectedProductId"
             :initial-quantity="selectedProductQuantity"
             :initial-child="Child"
+            :all-children="AllChildren"
             @change="onProductChange"
           ></ProductSelector>
 
@@ -215,10 +217,15 @@ export default {
       required: false,
       default: false,
     },
+    allChildren: {
+			required: true,
+			type: Array,
+		},
   },
 
   data() {
     return {
+      AllChildren: this.allChildren,
       Child: this.initialChild,
       EditedChild: this.clone(this.initialChild),
       product_selection_valid: true,
@@ -282,6 +289,16 @@ export default {
     },
 
     onProductChange(valid, selectedProduct) {
+      // update order count in database
+      let child_id = this.Child.child_id; 
+      axios.post(`/api/child/updateorder/count`,{selectedProduct,child_id})
+      .then( response => {
+        console.log(response);
+      })
+      .catch( error => {
+        
+      });
+
       this.product_selection_valid = valid;
       this.selectedProduct = selectedProduct;
       let existingProduct = {
@@ -291,6 +308,7 @@ export default {
 
       this.EditedChild.product_id = selectedProduct.id;
       this.EditedChild.quantity = selectedProduct.quantity;
+      this.EditedChild.order_count = selectedProduct.order_count;
 
       if (
         existingProduct.product_id != this.EditedChild.product_id ||

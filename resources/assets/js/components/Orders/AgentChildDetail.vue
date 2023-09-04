@@ -5,7 +5,7 @@
 		:initial-child="Child"
 		:product-categories="productCategories"
 		:initial-errors="errors"
-
+		:all-children="AllChildren"
 		@change="onChildChanged"
 		@close="close">
 
@@ -50,8 +50,16 @@ export default {
 	components: { ChildDetail },
 	mixins: [ ChildDetailBehavior ],
 
+	props: {
+		allChildren: {
+			required: true,
+			type: Array,
+		},
+	},
+
 	data() {
 		return {
+			AllChildren: this.allChildren,
 			// selectedProduct: (this.initialChild.item? this.initialChild.item : null),
 		};
 	},

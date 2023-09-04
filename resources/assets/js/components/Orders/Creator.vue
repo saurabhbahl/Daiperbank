@@ -121,6 +121,7 @@
 			:is-editable="true"
 			:initial-editing="true"
 			:product-categories="ProductCategories"
+			:all-children="AllChildren"
 			:processing="processing"
 
 			@close="closeChildDetail"

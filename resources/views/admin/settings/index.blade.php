@@ -49,6 +49,7 @@
                                                 <input type="checkbox" class="notificationCheckbox" />
                                                 Disable
                                             </label>
+                                            <p>If the above button is checked then users will not get information.</p>
                                         </div>
                                     </div>
 
