@@ -127,7 +127,7 @@
 			@close="closeChildDetail"
 			@remove="removeChild"
 			@save="saveChild"
-			
+			 
 		></ChildDetail>
 		<MenstruatorChildDetail
 			v-if="(CurrentOrderChild && CurrentOrderChild.is_menstruator==1)"
@@ -380,7 +380,7 @@ export default {
 		},
 		saveChild(Child, data) {
 			if (this.processing) return;
-			this.clearErrors();
+			this.clearErrors(); 
 			this.processing = true;
 
 			axios.post(`/api/orders/${this.Order.id}/child/${Child.id}`, data)

@@ -56,7 +56,6 @@ export default {
 			type: Array,
 		},
 	},
-
 	data() {
 		return {
 			AllChildren: this.allChildren,
@@ -88,6 +87,7 @@ export default {
 				quantity: this.editedChild.quantity,
 				weight: this.editedChild.weight,
 				status_potty_train: this.editedChild.status_potty_train,
+				order_count: this.editedChild.order_count,
 			};
 		},
 
