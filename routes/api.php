@@ -47,6 +47,7 @@ Route::group(['prefix' => 'child'], function () {
 	Route::get('{child_id}')->uses('Api\Child\ViewController@get');
 	Route::post('{child_id?}')->uses('Api\Child\ViewController@post');
 	Route::delete('{child_id}')->uses('Api\Child\ViewController@delete');
+	Route::post('/updateorder/count')->uses('Api\Child\ViewController@updateordercount');
 });
 
 Route::group(['prefix' => 'guardian'], function () {

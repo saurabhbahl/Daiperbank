@@ -211,4 +211,15 @@ class ViewController extends BaseController {
 			'Guardian.military_status.required_if' => 'This field is required.',
 		];
 	}
+
+	protected function updateordercount(Request $request){
+		$data = $request->all();
+		$child = Child::find($data['child_id']);
+		$child->order_count = $data['selectedProduct']['order_count'];
+		$child->save();
+		return response()->json([
+			'success' => true,
+			'order'	=> $data['selectedProduct']['order_count'],
+		]);
+	}
 }
