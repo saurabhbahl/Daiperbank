@@ -4,6 +4,7 @@ use App\Http\Controllers\Controller as BaseController;
 use App\Order;
 use App\PickupDate;
 use App\ProductCategory;
+use App\Child;
 use Gate;
 use Illuminate\Http\Request;
 
@@ -24,7 +25,7 @@ class CreateController extends BaseController {
 
 		$PickupDates = PickupDate::getAvailableDates();
 		$Children = auth()->user()->Agency->Children;
-		$Children->load(['OrderItem', 'OrderItem.Product', 'OrderItem.Product.Category']);
+		$Children->load(['OrderItem', 'OrderItem.Product', 'OrderItem.Product.Category','OrderItem.Order']);
 		$ProductCategories = ProductCategory::with('Product')->orderBy('name', 'ASC')->get();
 		$Order->load(['Agency',
 				'Child',

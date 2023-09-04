@@ -1,6 +1,5 @@
 <template>
 	<table class="table table-condensed table-striped ma0">
-		{{ ordercount }}
 		<thead>
 			<tr>
 				<th class="w-33">Type
@@ -21,9 +20,7 @@
 					<select v-model="selected_category_id" class="form-control"
 						@change="onCategoryChange" v-if="Child.age_mo >=24">
 						<option disabled>Select one</option>
-						<option v-for="Category in ProductCategories"
-								v-if="Category.id != 3"
-								:value="Category.id">
+						<option v-for="Category in ProductCategories" :value="Category.id" :disabled="Category.id === 2 && ordercount >= 6" v-if="Category.id != 3">
 								{{ Category.name }}
 						</option>
 					</select>
@@ -43,7 +40,7 @@
 						@change="onProductChange">
 						<option disabled>Select one</option>
 						<option v-for="Product in CategoryProducts"
-								:value="Product.id" >
+								:value="Product.id">
 								{{ Product.name }}
 						</option>
 					</select>
@@ -107,7 +104,7 @@ export default {
 	},
 
 	data() {
-		return {
+		return { 
 			Child: this.initialChild,
 			selected_category_id: this.initialSelectedProduct? this.getCategoryForProduct(this.initialSelectedProduct) : 0,
 			selected_product_id: this.initialSelectedProduct,
@@ -132,7 +129,7 @@ export default {
 
 			return Object.values(this.SelectedCategory.product).filter( Product => Product.id == this.selected_product_id )[0];
 		},
-		
+
 		childs(){ 
 			return this.allChildren.filter(	
 				obj => obj.id === this.initialChild.child_id
@@ -210,6 +207,7 @@ export default {
 		selectionChanged() {
 			let selectedProduct = {
 				...(this.SelectedProduct? this.SelectedProduct : {}),
+				// ...(this.SelectedProduct? quantity),
 				quantity: this.selected_quantity,
 				category: this.SelectedCategory,
 				order_count: this.ordercount,
