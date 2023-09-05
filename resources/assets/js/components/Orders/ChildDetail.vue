@@ -81,7 +81,6 @@
         </div>
 
         <p class="b f2 bb bw2 b--black-20 mv3">Current Order</p>
-        <p class="b f2 bb bw2 b--black-20 mv3" v-if="Child.child.order_count >= 6">You can place only 6 orders for pull ups.</p>
         <table class="table table-condensed table-striped" v-if="!isEditing">
           <thead>
             <tr>
@@ -114,7 +113,7 @@
               {{ msg }}
             </p>
           </div>
-
+          <p class="b f2 bb bw2 b--black-20 mv3" v-if="Child.child.order_count >= 6">You can place only 6 orders for pull ups.</p>
           <ProductSelector
             :product-categories="productCategories"
             :initial-selected-product="selectedProductId"
