@@ -288,14 +288,7 @@ export default {
     },
 
     onProductChange(valid, selectedProduct) {
-      let child_id = this.Child.child_id; 
-      axios.post(`/api/child/updateorder/count`,{selectedProduct,child_id})
-        .then( response => {
-          console.log(response);
-        })
-        .catch( error => {
-          
-        });
+    
       this.product_selection_valid = valid;
       this.selectedProduct = selectedProduct;
       let existingProduct = {
@@ -319,5 +312,15 @@ export default {
       return JSON.parse(JSON.stringify(object));
     },
   },
+  created() {
+  let child_id = this.Child.child_id; 
+      axios.post(`/api/child/updateorder/count`,{selectedProduct,child_id})
+        .then( response => {
+          console.log(response);
+        })
+        .catch( error => {
+          
+        });
+  }
 };
 </script>
