@@ -222,4 +222,38 @@ class ViewController extends BaseController {
 			'order'	=> $data['selectedProduct']['order_count'],
 		]);
 	}
+
+	// move child to archive
+	public function unarchive(Request $request){
+		$data = $request->all();
+		$Child = Child::withTrashed()->find($data['cid']);
+
+		$Child->load(['Guardian', 'Sibling', 'NewestData', 'Location', 'OrderItem', 'OrderItem.Order', 'OrderItem.Product']);
+		
+		return response()->json([
+			'success' => true,
+			'data' => [
+				'Child' => $Child->toArray(),
+				'BenefitSummary' => $Child->getBenefitSummary(),
+			],
+		]);
+	}
+
+	// update child archive to unarchive
+	public function update(Request $request){
+		$data = $request->all();
+		// Retrieve the child record
+		$child = Child::withTrashed()->find($data['cid']);
+		$child->restore();
+
+		$child->load(['Guardian', 'Sibling', 'NewestData', 'Location', 'OrderItem', 'OrderItem.Order', 'OrderItem.Product']);
+
+		return response()->json([
+			'success' => true,
+			'data' => [
+				'Child' => $child->toArray(),
+				'BenefitSummary' => $child->getBenefitSummary(),
+			],
+		]);
+	}
 }

@@ -91,6 +91,7 @@ Vue.component('agency-notes', require('./components/Agency/Notes.vue'));
 // agent child management components
 Vue.component('child-list', require('./components/Children/ChildList.vue'));
 Vue.component('child-detail-pane', require('./components/Children/ChildDetail.vue'));
+Vue.component('unarchive-child', require('./components/Children/unarchivechild.vue'));
 Vue.component('guardian-select', require('./components/Children/GuardianSelect.vue'));
 
 // fulfillment admin components
@@ -100,6 +101,7 @@ Vue.component('admin-exported-pickups', require('./components/Orders/Admin/Fulfi
 Vue.component('admin-reports', require('./components/Admin/Reports.vue'));
 // agent menstruator managementcomponents
 Vue.component('menstruator-detail-pane', require('./components/Menstruator/MenstruatorDetail.vue'));
+Vue.component('menstruator-unarchive-pane', require('./components/Menstruator/unarchivemenstruator.vue'));
 
 window.app = new Vue({
 	el: '#app',

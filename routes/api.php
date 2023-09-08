@@ -45,8 +45,10 @@ Route::group(['prefix' => 'pickup-dates', 'middleware' => ['admin']], function (
 
 Route::group(['prefix' => 'child'], function () {
 	Route::get('{child_id}')->uses('Api\Child\ViewController@get');
+	Route::post('/unarchive')->uses('Api\Child\ViewController@unarchive');
 	Route::post('{child_id?}')->uses('Api\Child\ViewController@post');
 	Route::delete('{child_id}')->uses('Api\Child\ViewController@delete');
+	Route::put('/update')->uses('Api\Child\ViewController@update');
 	Route::post('/updateorder/count')->uses('Api\Child\ViewController@updateordercount');
 });
 

@@ -1,9 +1,9 @@
 @extends('layouts.app')
- 
+
 @section('content')
 	<div class="breadcrumbs">
 		<p class="crumb">
-			<a href="<?=route('home');?>">Menstruator Management</a>
+			<a href="<?=route('home');?>">Children Management</a>
 		</p>
 	</div>
 
@@ -12,12 +12,12 @@
 			<div class="fg-no bg-washed-blue">
 				<ul class="nav nav-tabs ph3 pt3">
 					<li class="dropdown bg-white active clickable:important"><a href="#" data-toggle="dropdown" class="dropdown-toggle clickable:important" aria-expanded="false">
-							Archive <span class="caret"></span></a>
+							Unarchive <span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="{{route('menstruator.index')}}">
+							<li><a href="{{route('family.index')}}">
 									Archive </a></li>
 							<li>
-								<a href="{{ route('menstruator.unarchive') }}">
+								<a href="{{ route('family.unarchive') }}">
 									Unarchive
 								</a>
 							</li>
@@ -37,20 +37,20 @@
 						:key="Child.id">
 
 						<p class="w-25">
-							<i class="fa purple-female" :class="{ 'fa-female': Child.gender === 'f', 'fa-male': Child.gender === 'm'}"></i>
+							<i class="fa" :class="{ 'fa-female': Child.gender === 'f', 'fa-male': Child.gender === 'm'}"></i>
 							<span class="b">@{{ Child.name }}</span>
 							<br>
 							<span v-show="Child.uniq_id" class="f4 i muted">#@{{ Child.uniq_id }}</span>
 						</p>
 
-					<!--	<p class="w-25">
+						<p class="w-25">
 							<span class="b">DOB:</span>
 							@{{ Child.dob | formatDate("MM/DD/YYYY") }}
 							<br>
-							<span class="b">Age:</span>
-							@{{ Child.age_str }}
+							<!--<span class="b">Age:</span>
+							@{{ Child.age_str }}-->
 						</p>
--->
+
 						<p class="w-25">
 							<span class="b">Zip Code:</span>
 							@{{ Child.zip }}
@@ -92,7 +92,7 @@
 		<div class="col-xs-5 ">
 
 			<div class="fs-no fg-no pv4 bb b--black-20">
-				<a href="#" class="add-child-btn btn btn-block btn-default">Add Menstruator</a>
+				<a href="#" class="add-child-btn btn btn-block btn-default">Add Child</a>
 			</div>
 
 			<div class="mv4 bg-white br3 py4 px4">
@@ -102,14 +102,14 @@
 						<input name="filter[search]"
 							type="search"
 							class="form-control"
-							placeholder="Search for menstruator..."
+							placeholder="Search for children..."
 							value="<?= e(request()->input('filter.search')); ?>"
 						/>
 						<p class="tr"><small><a href="#">Search tips</a></small></p>
 					</div>
 
 					<div class="mb">
-						<p class="b">Family Id</p>
+						<p class="b">Parent/Guardian</p>
 						<guardian-select
 							ref="guardian-select"
 							:guardians='<?= e($Guardians->toJson()); ?>'
@@ -141,10 +141,10 @@
 
 		</div>
 
-		<menstruator-detail-pane ref="menstruator-detail-pane"
+		<unarchive-child ref="unarchive-child"
 			class="pxa pint pinr pinb w-40 bg-white shadow-2 flex flex-column justify-between"
 			:orders="<?= e($DraftOrders->toJson()); ?>"
-		></menstruator-detail-pane>
+		></unarchive-child>
 
 	</div>
 
@@ -178,10 +178,10 @@
 			}
 		});
 
-		window.app.$refs['menstruator-detail-pane'].$on('closed', detailsHidden);
-		window.app.$refs['menstruator-detail-pane'].$on('loaded', childLoaded);
-		window.app.$refs['menstruator-detail-pane'].$on('save', childSaved);
-		window.app.$refs['menstruator-detail-pane'].$on('delete', childDeleted);
+		window.app.$refs['unarchive-child'].$on('closed', detailsHidden);
+		window.app.$refs['unarchive-child'].$on('loaded', childLoaded);
+		window.app.$refs['unarchive-child'].$on('save', childSaved);
+		window.app.$refs['unarchive-child'].$on('delete', childDeleted);
 		window.app.$refs['guardian-select'].$on('selected', guardianSelected)
 	});
 
@@ -189,16 +189,16 @@
 		deselectChildren();
 		toggleSelected($targetRow);
 		current_child_id = child_id;
-		window.app.$refs['menstruator-detail-pane'].$emit('view', child_id);
+		window.app.$refs['unarchive-child'].$emit('view', child_id);
 	}
 
 	function createNewChild() {
 		deselectChildren();
-		window.app.$refs['menstruator-detail-pane'].$emit('create');
+		window.app.$refs['unarchive-child'].$emit('create');
 	}
 
 	function hideChildDetail() {
-		window.app.$refs['menstruator-detail-pane'].$emit('hide');
+		window.app.$refs['unarchive-child'].$emit('hide');
 	}
 
 	function childLoaded(id) {
@@ -214,7 +214,7 @@
 		window.app.$refs['child-list'].$emit('saved', Child);
 		setTimeout(function() {
 			childLoaded(Child.id);
-			window.app.$refs['menstruator-detail-pane'].$emit('view', Child.id);
+			window.app.$refs['unarchive-child'].$emit('view', Child.id);
 		}, 1);
 	}
 

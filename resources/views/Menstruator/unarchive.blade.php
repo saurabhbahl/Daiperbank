@@ -12,11 +12,11 @@
 			<div class="fg-no bg-washed-blue">
 				<ul class="nav nav-tabs ph3 pt3">
 					<li class="dropdown bg-white active clickable:important"><a href="#" data-toggle="dropdown" class="dropdown-toggle clickable:important" aria-expanded="false">
-							Archive <span class="caret"></span></a>
+							Unarchive <span class="caret"></span></a>
 						<ul class="dropdown-menu">
 							<li><a href="{{route('menstruator.index')}}">
 									Archive </a></li>
-							<li>
+							<li>    
 								<a href="{{ route('menstruator.unarchive') }}">
 									Unarchive
 								</a>
@@ -141,10 +141,10 @@
 
 		</div>
 
-		<menstruator-detail-pane ref="menstruator-detail-pane"
+		<menstruator-unarchive-pane ref="menstruator-unarchive-pane"
 			class="pxa pint pinr pinb w-40 bg-white shadow-2 flex flex-column justify-between"
 			:orders="<?= e($DraftOrders->toJson()); ?>"
-		></menstruator-detail-pane>
+		></menstruator-unarchive-pane>
 
 	</div>
 
@@ -178,10 +178,10 @@
 			}
 		});
 
-		window.app.$refs['menstruator-detail-pane'].$on('closed', detailsHidden);
-		window.app.$refs['menstruator-detail-pane'].$on('loaded', childLoaded);
-		window.app.$refs['menstruator-detail-pane'].$on('save', childSaved);
-		window.app.$refs['menstruator-detail-pane'].$on('delete', childDeleted);
+		window.app.$refs['menstruator-unarchive-pane'].$on('closed', detailsHidden);
+		window.app.$refs['menstruator-unarchive-pane'].$on('loaded', childLoaded);
+		window.app.$refs['menstruator-unarchive-pane'].$on('save', childSaved);
+		window.app.$refs['menstruator-unarchive-pane'].$on('delete', childDeleted);
 		window.app.$refs['guardian-select'].$on('selected', guardianSelected)
 	});
 
@@ -189,16 +189,16 @@
 		deselectChildren();
 		toggleSelected($targetRow);
 		current_child_id = child_id;
-		window.app.$refs['menstruator-detail-pane'].$emit('view', child_id);
+		window.app.$refs['menstruator-unarchive-pane'].$emit('view', child_id);
 	}
 
 	function createNewChild() {
 		deselectChildren();
-		window.app.$refs['menstruator-detail-pane'].$emit('create');
+		window.app.$refs['menstruator-unarchive-pane'].$emit('create');
 	}
 
 	function hideChildDetail() {
-		window.app.$refs['menstruator-detail-pane'].$emit('hide');
+		window.app.$refs['menstruator-unarchive-pane'].$emit('hide');
 	}
 
 	function childLoaded(id) {
@@ -214,7 +214,7 @@
 		window.app.$refs['child-list'].$emit('saved', Child);
 		setTimeout(function() {
 			childLoaded(Child.id);
-			window.app.$refs['menstruator-detail-pane'].$emit('view', Child.id);
+			window.app.$refs['menstruator-unarchive-pane'].$emit('view', Child.id);
 		}, 1);
 	}
 

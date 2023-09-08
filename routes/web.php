@@ -33,7 +33,9 @@ Route::group(['middleware' => ['auth']], function () {
 		});
 
 		Route::group(['prefix' => 'family'], function () {
-			Route::name('family.index')->get('/')->uses('Family\IndexController@get');
+			// Route::name('family.index')->get('/')->uses('Family\IndexController@get');
+			Route::name('family.index')->get('/archive')->uses('Family\IndexController@archive');
+			Route::name('family.unarchive')->get('/unarchive')->uses('Family\IndexController@unarchive');
 		});
 
 		Route::group(['prefix' => 'notifications'], function () {
@@ -43,6 +45,7 @@ Route::group(['middleware' => ['auth']], function () {
 		//Menstruator
 		Route::group(['prefix' => 'menstruator'], function () {
 			Route::name('menstruator.index')->get('/')->uses('Menstruator\IndexController@get');
+			Route::name('menstruator.unarchive')->get('/unarchive')->uses('Menstruator\IndexController@unarchive');
 		});
 		// Partner Handbook
 		Route::group(['prefix' => 'partner-handbook'], function () {
