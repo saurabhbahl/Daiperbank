@@ -154,7 +154,4 @@ EOQUERY;
 		return 'diaper-drive-report';
 	}
 
-	protected function getOrientation() {
-		return 'Potrait';
-	}
 }
