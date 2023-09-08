@@ -12,6 +12,9 @@ class DiaperDriveReport extends Report implements ReportContract {
 SELECT
 	adjustment_datetime,
 	adjustment_note,
+	COALESCE(SUM(CASE WHEN (i.product_id < 10 OR i.product_id = 16) THEN i.amount ELSE 0 END), 0) total_diapers,
+	COALESCE(SUM(CASE WHEN i.product_id BETWEEN 10 AND 15 THEN i.amount ELSE 0 END), 0) total_pullups,
+	COALESCE(SUM(i.amount), 0) total_donated,
 	COALESCE(SUM(CASE WHEN i.product_id = 1 THEN i.amount ELSE 0 END), 0) preemie_diapers,
 	COALESCE(SUM(CASE WHEN i.product_id = 2 THEN i.amount ELSE 0 END), 0) newborn_diapers,
 	COALESCE(SUM(CASE WHEN i.product_id = 3 THEN i.amount ELSE 0 END), 0) size1_diapers,
