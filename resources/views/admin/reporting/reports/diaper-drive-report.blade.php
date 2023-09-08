@@ -13,7 +13,7 @@ Diaper Drive Report
 	<table class="table table-bordered table-striped">
 		<thead>
 			<tr>
-				<th>
+				<th colspan="1">
 					Diaper Drive Details
 				</th>
 				<th colspan="1" class="tc">Diapers</th>
