@@ -155,6 +155,6 @@ EOQUERY;
 	}
 
 	protected function getOrientation() {
-		return 'Landscape';
+		return 'Potrait';
 	}
 }
