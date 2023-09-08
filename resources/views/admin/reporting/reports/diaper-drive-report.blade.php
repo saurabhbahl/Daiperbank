@@ -28,7 +28,7 @@ Diaper Drive Report
 					<p><?= carbon($drive->adjustment_datetime)->format('M j, Y'); ?></p>
 					<p class="wtl"><?= nl2br(e($drive->adjustment_note)); ?></p>
 				</th>
-				<td colspan="4"><?= number_format($drive->total_diapers, 0); ?></td>
+				<td colspan="1"><?= number_format($drive->total_diapers, 0); ?></td>
 						<td colspan="4">
 							<?= number_format($drive->total_pullups, 0); ?>
 						</td>
