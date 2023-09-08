@@ -22,7 +22,7 @@ class ExportedController extends BaseController {
 			'Fulfillment.Order.ApprovedChild'
 		);
 
-		$ExportedFulfillments = new ExportedFulfillments;
+		$ExportedFulfillments = new ExportedFulfillments; 
 		$PickupDates = $ExportedFulfillments->prepareList($PickupDates);
 
 		return view('admin.fulfillment.exported', [

@@ -85,7 +85,7 @@
 
 						<option :value="null" disabled>Select one</option>
 
-						<option v-for="category in productCategories"
+						<option v-for="category in sortedCategories"
 								:value="category.id">
 								{{ category.name }}
 						</option>
@@ -192,7 +192,17 @@ export default {
 			});
 
 			return valid && !! valid_products.filter((valid) => valid === true).length;
-		}
+		},
+		sortedCategories: function () {
+			// Define the desired order of category names
+			const desiredOrder = ['Diaper', 'Pull-up', 'Period Products'];
+
+			// Sort the productCategories array based on the desired order
+			return this.productCategories.sort((a, b) => {
+			// return desiredOrder.indexOf(a.name) - desiredOrder.indexOf(b.name);
+			return a.id - b.id;
+			});
+		},
 	},
 
 	methods: {
