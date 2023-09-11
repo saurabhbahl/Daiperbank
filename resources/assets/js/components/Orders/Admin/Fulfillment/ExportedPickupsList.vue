@@ -41,7 +41,7 @@
 								</div>
 
 								<div>
-									<p>{{ PickupDate.child_count }}</p>
+									<p>{{ PickupDate.children_count }}</p>
 									<p class="muted wtl">Children</p>
 								</div>
 
@@ -53,7 +53,14 @@
 									<p>{{ PickupDate.pullup_count }}</p>
 									<p class="muted wtl">Pull-ups</p>
 								</div>
-
+								<div>
+									<p>{{ PickupDate.menstruator_count }}</p>
+									<p class="muted wtl">Menstruators</p>
+								</div>
+								<div>
+									<p>{{ PickupDate.period_count }}</p>
+									<p class="muted wtl">Period Packets</p>
+								</div>
 								<div>
 									<i class="fa fa-chevron-right"></i>
 								</div>

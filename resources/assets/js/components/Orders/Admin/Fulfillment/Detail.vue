@@ -13,7 +13,7 @@
 						<span class="wtl f3">Orders</span>
 					</p>
 					<p>
-						<span class="f2">{{ PickupDate.child_count }}</span>
+						<span class="f2">{{ PickupDate.children_count }}</span>
 						<br>
 						<span class="wtl f3">Children</span>
 					</p>
@@ -27,6 +27,18 @@
 						<br>
 						<span class="wtl f3">Pull-ups</span>
 					</p>
+					<div class="flex justify-around items-center pb bb b--black-20 tc">
+						<p>
+							<span class="f2">{{ PickupDate.menstruator_count }}</span>
+							<br>
+							<span class="wtl f3">Menstruators</span>
+						</p>
+						<p>
+							<span class="f2">{{ PickupDate.period_count }}</span>
+							<br>
+							<span class="wtl f3">Period Packets</span>
+						</p>			
+					</div>
 				</div>
 
 				<p class="f2 b pt4">Item Summary</p>

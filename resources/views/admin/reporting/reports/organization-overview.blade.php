@@ -18,6 +18,10 @@ Organization Overview
 					<td><?= number_format($stats->pull_ups, 0); ?></td>
 				</tr>
 				<tr>
+					<th scope="row" class="tr">Period Products Distributed</th>
+					<td><?= number_format($stats->period_products, 0); ?></td>
+				</tr>
+				<tr>
 					<th scope="row" class="tr">Orders Processed</th>
 					<td><?= number_format($stats->orders, 0); ?></td>
 				</tr>
@@ -33,7 +37,11 @@ Organization Overview
 			<table class="table table-bordered table-striped">
 				<tr>
 					<th scope="row" class="w-50 tr">Children Served</th>
-					<td><?= number_format($stats->children, 0); ?></td>
+					<td><?= number_format($stats->child, 0); ?></td>
+				</tr>
+				<tr>
+					<th scope="row" class="w-50 tr">Menstruators Served</th>
+					<td><?= number_format($stats->menstruators, 0); ?></td>
 				</tr>
 				<tr>
 					<th scope="row" class="tr">Families Served</th>
@@ -98,5 +106,39 @@ Organization Overview
 				</table>
 			<? endforeach; ?>
 		</div>
+	</div>
+
+	<div class="w-50 fs-no fg-no pr">
+		<h3 class="f3 mt0 pa0">Period Products</h3>
+		<table class="table table-bordered table-striped">
+			<tr>
+				<th scope="row" class="w-50 tr">Regular Pads</th>
+				<td><?= number_format($stats->regular_Pads, 0); ?></td>
+			</tr>
+			<tr>
+				<th scope="row" class="tr">Overnight Pads</th>
+				<td><?= number_format($stats->overnight_pads, 0); ?></td>
+			</tr>
+			<tr>
+				<th scope="row" class="tr">Tampons</th>
+				<td><?= number_format($stats->tampons, 0); ?></td>
+			</tr>
+			<tr>
+				<th scope="row" class="tr">Teen Regular Pads</th>
+				<td><?= number_format($stats->teen_regular_pads, 0); ?></td>
+			</tr>
+			<tr>
+				<th scope="row" class="tr">Teen Overnight Pads</th>
+				<td><?= number_format($stats->teen_overnight_pads, 0); ?></td>
+			</tr>
+			<tr>
+				<th scope="row" class="tr">Post-Partum Pads</th>
+				<td><?= number_format($stats->post_partum_pads, 0); ?></td>
+			</tr>
+			<tr>
+				<th scope="row" class="tr">Perineal Cold Packs</th>
+				<td><?= number_format($stats->perineal_cold_packs, 0); ?></td>
+			</tr>
+		</table>
 	</div>
 @stop

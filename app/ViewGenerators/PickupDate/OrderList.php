@@ -12,7 +12,8 @@ class OrderList {
 			$product_count = $this->countProducts($Order);
 			$Order->diaper_count = $product_count->get(ProductCategory::CATEGORY_ID_DIAPERS, 0);
 			$Order->pullup_count = $product_count->get(ProductCategory::CATEGORY_ID_PULLUPS, 0);
-
+			$Order->period_count = $product_count->get(ProductCategory::CATEGORY_ID_PERIOD, 0);
+			
 			return $Order;
 		});
 	}

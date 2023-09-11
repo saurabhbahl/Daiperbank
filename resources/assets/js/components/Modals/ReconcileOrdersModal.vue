@@ -13,7 +13,7 @@
 					<tr>
 						<th>Order #</th>
 						<th>Agency</th>
-						<th class="tc">Diapers / Pullups</th>
+						<th class="tc">Diapers / Pullups / Period Packets</th>
 						<th></th>
 					</tr>
 				</thead>
@@ -28,6 +28,8 @@
 							{{ Order.diaper_count }}
 							/
 							{{ Order.pullup_count }}
+							/
+							{{ Order.period_count }}
 						</td>
 						<td class="tr">
 							<i class="fa fa-check" :class="{'black-025': ! orderSelected(Order), 'dark-red': orderSelected(Order) }"></i>

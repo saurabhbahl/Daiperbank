@@ -17,10 +17,12 @@ class ExportedFulfillments {
 			$PUD->orders_pending = $PickupDate->orders_pending;
 			$PUD->orders_pending_export = $PickupDate->orders_pending_export;
 
-			$PUD->child_count = $this->countChildren($PickupDate);
+			$PUD->children_count = $this->countChild($PickupDate);
+			$PUD->menstruator_count = $this->countmenstruator($PickupDate);
 			$product_count = $this->countProducts($PickupDate);
 			$PUD->diaper_count = $product_count->get(ProductCategory::CATEGORY_ID_DIAPERS, 0);
 			$PUD->pullup_count = $product_count->get(ProductCategory::CATEGORY_ID_PULLUPS, 0);
+			$PUD->period_count = $product_count->get(ProductCategory::CATEGORY_ID_PERIOD, 0);
 			$PUD->ProductSummary = $this->summarizeProducts($PickupDate);
 			$PUD->Fulfillment = collect($PickupDate->Fulfillment->map(function($F) {
 				$Fulfillment = new Fluent($F->getAttributes());
@@ -43,6 +45,22 @@ class ExportedFulfillments {
 		return $PickupDate->Fulfillment->reduce(function($aggregate, $Fulfillment) {
 			return $Fulfillment->Order->reduce(function($aggregate, $Order) {
 				return $aggregate + $Order->ApprovedChild()->count();
+			}, $aggregate);
+		}, 0);
+	}
+
+	protected function countChild(PickupDate $PickupDate) {
+		return $PickupDate->Fulfillment->reduce(function($aggregate, $Fulfillment) {
+			return $Fulfillment->Order->reduce(function($aggregate, $Order) {
+				return $aggregate + $Order->ApprovedChildren()->count();
+			}, $aggregate);
+		}, 0);
+	}
+
+	protected function countmenstruator(PickupDate $PickupDate) {
+		return $PickupDate->Fulfillment->reduce(function($aggregate, $Fulfillment) {
+			return $Fulfillment->Order->reduce(function($aggregate, $Order) {
+				return $aggregate + $Order->Approvedmenstruator()->count();
 			}, $aggregate);
 		}, 0);
 	}

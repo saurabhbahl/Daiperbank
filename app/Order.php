@@ -75,6 +75,24 @@ class Order extends Model {
 				->where('order_item.flag_approved', 1);
 	}
 
+	public function ApprovedChildren() {
+		return $this->hasMany(OrderChild::class, 'order_id', 'id', 'Child')
+				->select('order_child.*')
+				->join('order_item', 'order_item.order_child_id', '=', 'order_child.id')
+				->join('child','child.id','=','order_child.child_id')
+				->where('order_item.flag_approved', 1)
+				->where('child.is_menstruator',0);
+	}
+
+	public function Approvedmenstruator() {
+		return $this->hasMany(OrderChild::class, 'order_id', 'id', 'Child')
+				->select('order_child.*')
+				->join('order_item', 'order_item.order_child_id', '=', 'order_child.id')
+				->join('child','child.id','=','order_child.child_id')
+				->where('order_item.flag_approved', 1)
+				->where('child.is_menstruator',1);
+	}
+
 	public function PickupDate() {
 		return $this->belongsTo(PickupDate::class, 'pickup_date_id', 'id', 'PickupDate')->withTrashed();
 	}
