@@ -18,7 +18,7 @@ class Admin
 		if (auth()->check() && auth()->user()->isAdmin()) {
 			return $next($request);
 		}
-		dd(auth()->user());
+		// dd(auth()->user());
 
 		$message = "You are not authorized to do that";
 		if ( ! auth()->check()) {
