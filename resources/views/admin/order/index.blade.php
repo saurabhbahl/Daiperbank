@@ -72,7 +72,7 @@
 									</p>
 								</div>
 
-								<div class="mr4 w-30 fs-no">
+								<div class="mr4 w-20 fs-no">
 									<p class="muted bb b--black-20">Agency</p>
 									<p class="wtl f2 pr5">
 										<?= e($Order->Agency->name); ?>
@@ -101,12 +101,32 @@
 									</table>
 								</div>
 
-
+								<? $child = 0; $menstruator = 0; $period_product = 0;
+									foreach($Order->Child as $order_child){
+										if($order_child->child->is_menstruator == 0){
+											$child++;
+										}
+										else{
+											$menstruator++;
+										}
+									}
+									if($Order->Item->isNotEmpty()){
+										foreach($Order->Item as $item){
+											if($item->Product->Category->id == 3){
+												$period_product	= $item->quantity;
+											}
+										}
+									}
+								?>
 								<div class="fg-no fs-no w-10 mr4">
 									<table>
 										<tr>
-											<td class="tr ph3 pv1"><?= $Order->summary->children; ?></td>
+											<td class="tr ph3 pv1"><?= $child; ?></td>
 											<th scope="row">Children</th>
+										</tr>
+										<tr>
+											<td class="tr ph3 pv1"><?= $menstruator; ?></td>
+											<th scope="row">Menstruator</th>
 										</tr>
 										<tr>
 											<td class="tr ph3 pv1"><?= $Order->summary->diapers; ?></td>
@@ -115,6 +135,10 @@
 										<tr>
 											<td class="tr ph3 pv1"><?= $Order->summary->pullups; ?></td>
 											<th scope="row">Pull-ups</th>
+										</tr>
+										<tr>
+											<td class="tr ph3 pv1"><?= $period_product; ?></td>
+											<th scope="row">Period Products</th>
 										</tr>
 									</table>
 								</div>
