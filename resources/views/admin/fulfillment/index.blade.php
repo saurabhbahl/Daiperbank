@@ -67,7 +67,7 @@
 									</p>
 								</div>
 
-								<div class="mr4 w-30 fs-no">
+								<div class="mr4 w-20 fs-no">
 									<p class="muted bb b--black-20">Agency</p>
 									<p class="wtl f2 pr5">
 										<?= e($Order->Agency->name); ?>
