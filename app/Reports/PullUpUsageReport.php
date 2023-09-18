@@ -6,8 +6,9 @@ use DB;
 class PullUpUsageReport extends Report implements ReportContract {
 	use WritesToTempFiles;
 	protected $agency_id;
-
+	
 	public function agency($id) {
+		// dd($this->agency_id);
 		$this->agency_id = $id;
 	}
 
@@ -18,9 +19,11 @@ class PullUpUsageReport extends Report implements ReportContract {
 	public function getStats() {
 		$query = <<<EOQUERY
 		SELECT
+		c.id as id,
 		c.name as name,
 		o.Id as ordernumber,
 		p.name as productname,
+		oi.quantity as qty,
 		pc.name as productcategory,
 		pud.pickup_date as pickupdate
 	FROM child c
@@ -97,12 +100,12 @@ EOQUERY;
 
 	protected function getViewData() {
 		return array_merge(parent::getViewData(), [
-			'stats' => $this->data[0],
+			'stats' => $this->data,
 			'Agency' => $this->getAgency(),
 		]);
 	}
 
 	protected function isValid() {
-		return $this->data && count($this->data) == 1;
+		return $this->data && count($this->data) >= 1;
 	}
 }

@@ -28,7 +28,14 @@ SELECT * FROM (
 		COALESCE(SUM( IF(product_id = 12, CASE WHEN i.txn_type = 'CREDIT' THEN amount ELSE (-1 * CAST(amount AS SIGNED)) END, 0) ), 0) `4t-5t_pullups_boy`,
 		COALESCE(SUM( IF(product_id = 13, CASE WHEN i.txn_type = 'CREDIT' THEN amount ELSE (-1 * CAST(amount AS SIGNED)) END, 0) ), 0) `2t-3t_pullups_girl`,
 		COALESCE(SUM( IF(product_id = 14, CASE WHEN i.txn_type = 'CREDIT' THEN amount ELSE (-1 * CAST(amount AS SIGNED)) END, 0) ), 0) `3t-4t_pullups_girl`,
-		COALESCE(SUM( IF(product_id = 15, CASE WHEN i.txn_type = 'CREDIT' THEN amount ELSE (-1 * CAST(amount AS SIGNED)) END, 0) ), 0) `4t-5t_pullups_girl`
+		COALESCE(SUM( IF(product_id = 15, CASE WHEN i.txn_type = 'CREDIT' THEN amount ELSE (-1 * CAST(amount AS SIGNED)) END, 0) ), 0) `4t-5t_pullups_girl`,
+		COALESCE(SUM( IF(product_id = 25, CASE WHEN i.txn_type = 'CREDIT' THEN amount ELSE (-1 * CAST(amount AS SIGNED)) END, 0) ), 0) `regular_Pads`,
+		COALESCE(SUM( IF(product_id = 26, CASE WHEN i.txn_type = 'CREDIT' THEN amount ELSE (-1 * CAST(amount AS SIGNED)) END, 0) ), 0) `overnight_pads`,
+		COALESCE(SUM( IF(product_id = 27, CASE WHEN i.txn_type = 'CREDIT' THEN amount ELSE (-1 * CAST(amount AS SIGNED)) END, 0) ), 0) `tampons`,
+		COALESCE(SUM( IF(product_id = 28, CASE WHEN i.txn_type = 'CREDIT' THEN amount ELSE (-1 * CAST(amount AS SIGNED)) END, 0) ), 0) `teen_regular_pads`,
+		COALESCE(SUM( IF(product_id = 29, CASE WHEN i.txn_type = 'CREDIT' THEN amount ELSE (-1 * CAST(amount AS SIGNED)) END, 0) ), 0) `teen_overnight_pads`,
+		COALESCE(SUM( IF(product_id = 30, CASE WHEN i.txn_type = 'CREDIT' THEN amount ELSE (-1 * CAST(amount AS SIGNED)) END, 0) ), 0) `post_partum_pads`,
+		COALESCE(SUM( IF(product_id = 31, CASE WHEN i.txn_type = 'CREDIT' THEN amount ELSE (-1 * CAST(amount AS SIGNED)) END, 0) ), 0) `perineal_cold_packs`
 	FROM inventory_adjustment a
 	JOIN inventory i ON i.inventory_adjustment_id = a.id
 	JOIN product p on p.id = i.product_id
@@ -56,7 +63,14 @@ SELECT * FROM (
 		COALESCE(SUM( IF(product_id = 12, CASE WHEN i.txn_type = 'CREDIT' THEN amount ELSE (-1 * CAST(amount AS SIGNED)) END, 0) ), 0) `4t-5t_pullups_boy`,
 		COALESCE(SUM( IF(product_id = 13, CASE WHEN i.txn_type = 'CREDIT' THEN amount ELSE (-1 * CAST(amount AS SIGNED)) END, 0) ), 0) `2t-3t_pullups_girl`,
 		COALESCE(SUM( IF(product_id = 14, CASE WHEN i.txn_type = 'CREDIT' THEN amount ELSE (-1 * CAST(amount AS SIGNED)) END, 0) ), 0) `3t-4t_pullups_girl`,
-		COALESCE(SUM( IF(product_id = 15, CASE WHEN i.txn_type = 'CREDIT' THEN amount ELSE (-1 * CAST(amount AS SIGNED)) END, 0) ), 0) `4t-5t_pullups_girl`
+		COALESCE(SUM( IF(product_id = 15, CASE WHEN i.txn_type = 'CREDIT' THEN amount ELSE (-1 * CAST(amount AS SIGNED)) END, 0) ), 0) `4t-5t_pullups_girl`,
+		COALESCE(SUM( IF(product_id = 25, CASE WHEN i.txn_type = 'CREDIT' THEN amount ELSE (-1 * CAST(amount AS SIGNED)) END, 0) ), 0) `regular_Pads`,
+		COALESCE(SUM( IF(product_id = 26, CASE WHEN i.txn_type = 'CREDIT' THEN amount ELSE (-1 * CAST(amount AS SIGNED)) END, 0) ), 0) `overnight_pads`,
+		COALESCE(SUM( IF(product_id = 27, CASE WHEN i.txn_type = 'CREDIT' THEN amount ELSE (-1 * CAST(amount AS SIGNED)) END, 0) ), 0) `tampons`,
+		COALESCE(SUM( IF(product_id = 28, CASE WHEN i.txn_type = 'CREDIT' THEN amount ELSE (-1 * CAST(amount AS SIGNED)) END, 0) ), 0) `teen_regular_pads`,
+		COALESCE(SUM( IF(product_id = 29, CASE WHEN i.txn_type = 'CREDIT' THEN amount ELSE (-1 * CAST(amount AS SIGNED)) END, 0) ), 0) `teen_overnight_pads`,
+		COALESCE(SUM( IF(product_id = 30, CASE WHEN i.txn_type = 'CREDIT' THEN amount ELSE (-1 * CAST(amount AS SIGNED)) END, 0) ), 0) `post_partum_pads`,
+		COALESCE(SUM( IF(product_id = 31, CASE WHEN i.txn_type = 'CREDIT' THEN amount ELSE (-1 * CAST(amount AS SIGNED)) END, 0) ), 0) `perineal_cold_packs`
 	FROM inventory_adjustment a
 	JOIN inventory i ON i.inventory_adjustment_id = a.id
 	JOIN product p on p.id = i.product_id

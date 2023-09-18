@@ -19,6 +19,10 @@ Donation Report
 			<th scope="row" class="tr">Total Pull-ups</th>
 			<td><?= number_format($stats['Aggregate'][0]->total_pullups, 0); ?></td>
 		</tr>
+		<tr>
+			<th scope="row" class="tr">Total Period Product</th>
+			<td><?= number_format($stats['Aggregate'][0]->total_periods, 0); ?></td>
+		</tr>
 	</table>
 
 	<div class="flex justify-between">
@@ -69,6 +73,50 @@ Donation Report
 			<? endforeach; ?>
 		</div>
 	</div>
+	
+	<div class="flex justify-between">
+		<div class="w-50 fs-no fg-no pr">
+			<h3 class="f3 pa0">Period Products Donations</h3>
+			<table class="table table-bordered table-striped">
+				<thead>
+					<tr>
+						<th class="w-25 tr">Size</th>
+						<th>Qty Donated</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th scope="row" class="tr">Regular Pads</th>
+						<td><?= number_format($stats['Aggregate'][0]->regular_Pads, 0); ?></td>
+					</tr>
+					<tr>
+						<th scope="row" class="tr">Overnight Pads</th>
+						<td><?= number_format($stats['Aggregate'][0]->overnight_pads, 0); ?></td>
+					</tr>
+					<tr>
+						<th scope="row" class="tr">Tampons</th>
+						<td><?= number_format($stats['Aggregate'][0]->tampons, 0); ?></td>
+					</tr>
+					<tr>
+						<th scope="row" class="tr">Teen Regular Pads</th>
+						<td><?= number_format($stats['Aggregate'][0]->teen_regular_pads, 0); ?></td>
+					</tr>
+					<tr>
+						<th scope="row" class="tr">Teen Overnight Pads</th>
+						<td><?= number_format($stats['Aggregate'][0]->teen_overnight_pads, 0); ?></td>
+					</tr>
+					<tr>
+						<th scope="row" class="tr">Post Partum Pads</th>
+						<td><?= number_format($stats['Aggregate'][0]->post_partum_pads, 0); ?></td>
+					</tr>
+					<tr>
+						<th scope="row" class="tr">Perineal Cold Packs</th>
+						<td><?= number_format($stats['Aggregate'][0]->perineal_cold_packs, 0); ?></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
 
 	<h3 class="f3 pa0">Purchase Details</h3>
 	<table class="table table-bordered table-striped">
@@ -79,6 +127,7 @@ Donation Report
 				</th>
 				<th>Diapers Purchase</th>
 				<th>Pull-ups Purchase</th>
+				<th>Period Product Purchase</th>
 				<th>Total Purchase</th>
 			</tr>
 		</thead>
@@ -91,6 +140,7 @@ Donation Report
 				</th>
 				<td><?= number_format($detail->total_diapers, 0); ?></td>
 				<td><?= number_format($detail->total_pullups, 0); ?></td>
+				<td><?= number_format($detail->total_periods, 0); ?></td>
 				<td><?= number_format($detail->total_donated, 0); ?></td>
 			</tr>
 		<? endforeach; ?>

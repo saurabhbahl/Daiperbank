@@ -51,6 +51,46 @@ Inventory Overview
 					<? endforeach; ?>
 				</table>
 			<? endforeach; ?>
+
+			<h4 class="f4 mt0">Period Product Inventory</h4>
+			<table class="table table-bordered table-striped">
+				<thead>
+					<tr>
+						<th class="w-25 tr">Size</th>
+						<th>Qty On-hand</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th scope="row" class="tr">Regular Pads</th>
+						<td><?= number_format($stats->start->regular_Pads, 0); ?></td>
+					</tr>
+					<tr>
+						<th scope="row" class="tr">Overnight Pads</th>
+						<td><?= number_format($stats->start->overnight_pads, 0); ?></td>
+					</tr>
+					<tr>
+						<th scope="row" class="tr">Tampons</th>
+						<td><?= number_format($stats->start->tampons, 0); ?></td>
+					</tr>
+					<tr>
+						<th scope="row" class="tr">Teen Regular Pads</th>
+						<td><?= number_format($stats->start->teen_regular_pads, 0); ?></td>
+					</tr>
+					<tr>
+						<th scope="row" class="tr">Teen Overnight Pads</th>
+						<td><?= number_format($stats->start->teen_overnight_pads, 0); ?></td>
+					</tr>
+					<tr>
+						<th scope="row" class="tr">Post Partum Pads</th>
+						<td><?= number_format($stats->start->post_partum_pads, 0); ?></td>
+					</tr>
+					<tr>
+						<th scope="row" class="tr">Perineal Cold Packs</th>
+						<td><?= number_format($stats->start->perineal_cold_packs, 0); ?></td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
 
 		<div class="w-50 fs-no fg-no pr">
@@ -98,6 +138,46 @@ Inventory Overview
 					<? endforeach; ?>
 				</table>
 			<? endforeach; ?>
+
+			<h4 class="f4 mt0">Period Product Details</h4>
+			<table class="table table-bordered table-striped">
+				<thead>
+					<tr>
+						<th class="w-25 tr">Size</th>
+						<th>Qty On-hand</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th scope="row" class="tr">Regular Pads</th>
+						<td><?= number_format($stats->start->regular_Pads, 0); ?></td>
+					</tr>
+					<tr>
+						<th scope="row" class="tr">Overnight Pads</th>
+						<td><?= number_format($stats->start->overnight_pads, 0); ?></td>
+					</tr>
+					<tr>
+						<th scope="row" class="tr">Tampons</th>
+						<td><?= number_format($stats->start->tampons, 0); ?></td>
+					</tr>
+					<tr>
+						<th scope="row" class="tr">Teen Regular Pads</th>
+						<td><?= number_format($stats->start->teen_regular_pads, 0); ?></td>
+					</tr>
+					<tr>
+						<th scope="row" class="tr">Teen Overnight Pads</th>
+						<td><?= number_format($stats->start->teen_overnight_pads, 0); ?></td>
+					</tr>
+					<tr>
+						<th scope="row" class="tr">Post Partum Pads</th>
+						<td><?= number_format($stats->start->post_partum_pads, 0); ?></td>
+					</tr>
+					<tr>
+						<th scope="row" class="tr">Perineal Cold Packs</th>
+						<td><?= number_format($stats->start->perineal_cold_packs, 0); ?></td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
 	</div>
 @stop

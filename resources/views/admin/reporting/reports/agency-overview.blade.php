@@ -17,8 +17,16 @@ Agency Report: <span class="wtl"><?= e($Agency->name); ?></span>
 			<td><?= number_format($stats->pull_ups, 0); ?></td>
 		</tr>
 		<tr>
+			<th scope="row" class="tr">Period Products Distributed</th>
+			<td><?= number_format($stats->period_products, 0); ?></td>
+		</tr>
+		<tr>
 			<th scope="row" class="tr">Children Served</th>
 			<td><?= number_format($stats->children, 0); ?></td>
+		</tr>
+		<tr>
+			<th scope="row" class="tr">Menstruators Served</th>
+			<td><?= number_format($stats->menstruators, 0); ?></td>
 		</tr>
 		<tr>
 			<th scope="row" class="tr">Families Served</th>

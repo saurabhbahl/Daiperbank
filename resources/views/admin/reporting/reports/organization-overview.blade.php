@@ -52,6 +52,10 @@ Organization Overview
 					<td><?= number_format($stats->military_children, 0); ?></td>
 				</tr>
 				<tr>
+					<th scope="row" class="tr">Military Menstruators Served</th>
+					<td><?= number_format($stats->military_mens, 0); ?></td>
+				</tr>
+				<tr>
 					<th scope="row" class="w-25 tr">Military Families Served</th>
 					<td><?= number_format($stats->military_families, 0); ?></td>
 				</tr>
@@ -106,10 +110,10 @@ Organization Overview
 				</table>
 			<? endforeach; ?>
 		</div>
+		
 	</div>
-
 	<div class="w-50 fs-no fg-no pr">
-		<h3 class="f3 mt0 pa0">Period Products</h3>
+		<h3 class="f3 mt0 pa0">Period Products Distributed</h3>
 		<table class="table table-bordered table-striped">
 			<tr>
 				<th scope="row" class="w-50 tr">Regular Pads</th>

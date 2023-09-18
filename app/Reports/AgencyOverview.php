@@ -21,7 +21,10 @@ SELECT
 	a.name agency,
 	COALESCE(SUM(CASE WHEN p.product_category_id = 1 THEN quantity ELSE 0 END), 0) diapers,
 	COALESCE(SUM(CASE WHEN p.product_category_id = 2 THEN quantity ELSE 0 END), 0) pull_ups,
-	COALESCE(COUNT(DISTINCT oc.child_id), 0) children,
+	COALESCE(SUM(CASE WHEN p.product_category_id = 3 THEN quantity ELSE 0 END), 0) period_products,
+	COALESCE(COUNT(DISTINCT oc.child_id), 0) child,
+	COUNT(DISTINCT CASE WHEN c.is_menstruator = 0 THEN c.id END) children,
+    COUNT(DISTINCT CASE WHEN c.is_menstruator = 1 THEN c.id END) menstruators,
 	COALESCE(COUNT(DISTINCT c.guardian_id), 0) families
 
 FROM agency a

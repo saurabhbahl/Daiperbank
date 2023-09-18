@@ -10,7 +10,9 @@ class MilitaryOverview extends Report implements ReportContract {
 SELECT
 	SUM(CASE WHEN LOWER(g.military_status) NOT LIKE 'non-military%' AND p.product_category_id = 1 THEN quantity ELSE 0 END) military_diapers,
 	SUM(CASE WHEN LOWER(g.military_status) NOT LIKE 'non-military%' AND p.product_category_id = 2 THEN quantity ELSE 0 END) military_pull_ups,
-	COUNT(DISTINCT CASE WHEN LOWER(g.military_status) NOT LIKE 'non-military%' THEN c.id END) military_children,
+	SUM(CASE WHEN LOWER(g.military_status) NOT LIKE 'non-military%' AND p.product_category_id = 3 THEN quantity ELSE 0 END) military_period_products,
+	COUNT(DISTINCT CASE WHEN LOWER(g.military_status) NOT LIKE 'non-military%' AND c.is_menstruator = 0 THEN c.id END) military_children,
+	COUNT(DISTINCT CASE WHEN LOWER(g.military_status) NOT LIKE 'non-military%' AND c.is_menstruator = 1 THEN c.id END) military_mens,
 	COUNT(DISTINCT CASE WHEN LOWER(g.military_status) NOT LIKE 'non-military%' THEN g.id END) military_families
 
 FROM `order` o
