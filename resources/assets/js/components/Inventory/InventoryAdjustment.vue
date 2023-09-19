@@ -14,9 +14,9 @@
 					<a v-if="adjustment.order_id" :href="'/admin/order/' + adjustment.order_id">
 						{{ adjustment.detail_string }}
 					</a>
-					<span v-else>
+					<a v-else :href="'/admin/inventory/update/' + adjustment.id"> 
 						{{ adjustment.detail_string }}
-					</span>
+					</a>
 				</p>
 				<p class="f4 muted">
 					{{ adjustment.adjustment_note }}
