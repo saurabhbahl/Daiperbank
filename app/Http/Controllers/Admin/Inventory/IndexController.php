@@ -11,7 +11,12 @@ class IndexController extends Controller {
 	}
 
 	public function get(Request $Request) {
-		$Adjustments = $this->InventoryRepository->getAdjustments($Request->get('page', 1), 10);
+		if ($Request->input("search")) {
+			$Adjustments = $this->InventoryRepository->getAdjustmentsSearch($Request->get('page', 1), 10,$Request->get("search"));
+		}
+		else{
+			$Adjustments = $this->InventoryRepository->getAdjustments($Request->get('page', 1), 10);
+		}
 		$InventorySummary = $this->InventoryRepository->getSummary();
 
 		return view('admin.inventory.index', [

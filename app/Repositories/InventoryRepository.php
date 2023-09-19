@@ -13,6 +13,20 @@ class InventoryRepository {
 			->paginate($limit);
 	}
 
+	public function getAdjustmentsSearch($page = 1, $limit = 25, $search) {
+		$inventory =  InventoryAdjustment::with(['Inventory', 'Inventory.Product'])
+		->whereHas('Inventory.Product', function($query) use ($search) {
+			$query->Where('name', 'LIKE', "%{$search}%");
+		})
+		->orWhere('order_id','LIKE',"%{$search}%")
+		->orderBy('adjustment_datetime', 'DESC')
+		->paginate($limit);
+
+		return $inventory->appends ( array (
+			'search' => $search
+		  ) );
+	}
+	
 	public function getSummary() {
 		$onHand = $this->getOnHand();
 		$pendingApproval = $this->getPendingApproval();

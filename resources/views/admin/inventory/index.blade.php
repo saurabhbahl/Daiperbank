@@ -51,6 +51,30 @@
 		</div>
 
 		<div class="col-xs-4 pb flex flex-column justify-start oy-auto bg-white">
+			<div class="mv4 bg-white br3 py4 px4">
+				<form method="get">
+					<div class="mb">
+						<p class="b">Search</p>
+						<input name="search" type="search" class="form-control"
+							placeholder="Search for Inventory..."
+							value="<?= e(request()->input('search')) ?>" />
+						<p class="tr"><small><a href="#">Search tips</a></small></p>
+					</div>
+
+					<div class="pt">
+						<input type="hidden" name="page" value="">
+						<button class="btn btn-primary btn-block">
+							Search <i class="fa fa-filter"></i>
+						</button>
+
+						<? if (request()->exists('filter.search') && request()->input('filter.search')): ?>
+						<p class="tr f4">
+							<a href="?">Clear search</a>
+						</p>
+						<? endif; ?>
+					</div>
+				</form>
+			</div>
 			<div class="mv4 bb b--light-gray pb4">
 				<a href="<?= route('admin.inventory.create_adjustment'); ?>"
 					class="btn btn-block btn-lg btn-default">
