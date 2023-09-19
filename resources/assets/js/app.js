@@ -84,6 +84,7 @@ Vue.component('pickup-date-detail-pane', require('./components/PickupDates/DateD
 // inventory admin components
 Vue.component('inventory-adjustment-table', require('./components/Inventory/InventoryAdjustment.vue'));
 Vue.component('inventory-adjustment-form', require('./components/Inventory/AdjustmentForm.vue'));
+Vue.component('inventory-adjustment-update-form', require('./components/Inventory/AdjustmentUpdateForm.vue'));
 
 // agent components
 Vue.component('agency-notes', require('./components/Agency/Notes.vue'));

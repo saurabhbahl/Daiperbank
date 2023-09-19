@@ -15,6 +15,17 @@ class CreateController extends BaseController {
 		]);
 	}
 
+	public function update($id) {
+
+		$data = InventoryAdjustment::with('Inventory.Product')->where('id','=',$id)->get();
+
+		return view('admin.inventory.update', [
+			'typeMap' => InventoryAdjustment::getTypeMap(),
+			'ProductCategories' => ProductCategory::with('Product')->orderBy('name', 'ASC')->get(),
+			'Data' => $data
+		]);
+	}
+	
 	public function post(Request $Request) {
 		$this->validate($Request, $this->rules(), $this->messages());
 
