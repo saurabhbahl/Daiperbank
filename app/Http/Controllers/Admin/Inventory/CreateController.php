@@ -26,6 +26,42 @@ class CreateController extends BaseController {
 		]);
 	}
 	
+	public function updatedata($id,Request $request) {
+		$this->validate($request, $this->rules(), $this->messages());
+		// Find the existing InventoryAdjustment record by its ID
+		$adjustment = InventoryAdjustment::find($id);
+
+		if (!$adjustment) {
+			// Handle the case where the adjustment with the given ID doesn't exist
+			return redirect()->back()->with('error', 'Inventory adjustment not found');
+		}
+
+		// Update the attributes of the existing adjustment with the new data
+		$adjustment->adjustment_type = $request->get('type');
+		$adjustment->adjustment_note = $request->get('note');
+		$adjustment->adjustment_datetime = carbon($request->get('adjustment_datetime'));
+	
+		// Save the changes to the adjustment record
+		$adjustment->save();
+	
+		 // Update the related inventory records (assuming they exist in the request)
+		 if ($request->has('product')) {
+			foreach ($request->get('product') as $product) {
+				// Update or create the related inventory record
+				$adjustment->inventory()->updateOrCreate(
+					['product_id' => $product['product_id']],
+					[
+						'txn_type' => $request->get('debit_credit'),
+						'amount' => $product['quantity'],
+					]
+				);
+			}
+		}
+	
+		return redirect()->route('admin.inventory.index')
+        ->with('success', 'Inventory adjustment updated successfully');
+	}
+
 	public function post(Request $Request) {
 		$this->validate($Request, $this->rules(), $this->messages());
 

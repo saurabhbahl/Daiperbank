@@ -90,8 +90,8 @@ Route::group(['middleware' => ['auth']], function () {
 		Route::group(['prefix' => 'inventory'], function () {
 			Route::name('admin.inventory.index')->get('/')->uses('Admin\Inventory\IndexController@get');
 			Route::name('admin.inventory.create_adjustment')->get('/create')->uses('Admin\Inventory\CreateController@get');
-			Route::name('admin.inventory.update_adjustment')->get('/update/{id}')->uses('Admin\Inventory\CreateController@update');
-			Route::name('admin.inventory.update_adjustment')->post('/update/{id}')->uses('Admin\Inventory\CreateController@post');
+			Route::name('admin.inventory.get_adjustment')->get('/update/{id}')->uses('Admin\Inventory\CreateController@update');
+			Route::name('admin.inventory.update_adjustment')->post('/update/{id}')->uses('Admin\Inventory\CreateController@updatedata');
 			Route::post('/create')->uses('Admin\Inventory\CreateController@post');
 		});
 
