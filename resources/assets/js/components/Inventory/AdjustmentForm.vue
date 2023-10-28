@@ -100,9 +100,12 @@
 
 						<option :value="null" disabled>Select one</option>
 
-						<option v-for="diaper in getCategoryProducts(product.product_category_id)"
+						<!-- <option v-for="diaper in getCategoryProducts(product.product_category_id)"
 								:value="diaper.id">
 								{{ diaper.name }}
+						</option> -->
+						 <option v-for="diaper in getUniqueCategoryProducts(product.product_category_id)" :value="diaper.id">
+							{{ diaper.name.replace(/Boy|Girl/g, '') }}
 						</option>
 					</select>
 				</div>
@@ -239,7 +242,32 @@ export default {
 			this.adjustment.products.splice(index, 1);
 
 			this.addProductIfNeeded();
-		}
+		},
+		getUniqueCategoryProducts(category_id) {
+			let products = this.getCategoryProducts(category_id);
+
+			// Create a Set to store unique names
+			let uniqueNames = new Set();
+
+			// Create a mapping object to store unique names with their corresponding IDs
+			let uniqueProducts = {};
+
+			// Filter duplicates and add unique names to the Set and uniqueProducts object
+			products.forEach(product => {
+			let cleanedName = product.name.replace(/Boy|Girl/g, '');
+			uniqueNames.add(cleanedName);
+			if (!uniqueProducts[cleanedName]) {
+				uniqueProducts[cleanedName] = product.id;
+			}
+			});
+
+			// Convert Set of unique names to an array for rendering
+			let uniqueProductsArray = Array.from(uniqueNames).map(name => {
+			return { id: uniqueProducts[name], name: name };
+			});
+
+			return uniqueProductsArray;
+		},
 	},
 
 	created() {
