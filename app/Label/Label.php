@@ -77,12 +77,13 @@ class Label {
 
 	public function toPdfArray($label_idx) {
 		$prefix = $this->labelPrefix($label_idx);
-
+		$p_name = explode(' Period',$this->product());
 		$fields = [
 			"{$prefix}order_number" => $this->orderNumber(),
 			"{$prefix}agency_name" => $this->agency(),
 			"{$prefix}child_name" => $this->child(),
-			"{$prefix}item_name" => $this->product(),
+			// "{$prefix}item_name" => $this->product(),
+			"{$prefix}item_name" => $p_name[0],
 			"{$prefix}item_qty" => number_format($this->quantity(), 0),
 		];
 

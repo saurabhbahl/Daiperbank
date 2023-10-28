@@ -1,5 +1,6 @@
 /node_modules
 /public/hot
+/yarn.lock
 /public/storage
 /storage/*.key
 /public/js/app.js
