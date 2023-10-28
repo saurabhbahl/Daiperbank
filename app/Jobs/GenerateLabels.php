@@ -100,8 +100,7 @@ class GenerateLabels implements ShouldQueue {
 	protected function addLabelsForOrder($Order) {
 		$Order->ApprovedChild->map(function ($Child) use ($Order) {
 			$order_number = "{$Order->id}";
-			// $Label = new Label($order_number, $Order->Agency->name);
-			$Label = new Label($order_number, $Order->Agency->id_prefix);
+			$Label = new Label($order_number, $Order->Agency->name);
 			$Label->addChild($Child);
 
 			$this->addLabel($Label);
