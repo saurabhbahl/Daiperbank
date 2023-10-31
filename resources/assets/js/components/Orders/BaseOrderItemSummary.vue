@@ -14,7 +14,8 @@
 				:class="getProductRowClasses(Product)">
 
 				<th scope="row">
-					<p class="ma0 pa0 wtn">{{ Product.name }}</p>
+					<!-- <p class="ma0 pa0 wtn">{{ Product.name }}</p> -->
+					{{ Product.name.replace(/Boy|Girl/g, '') }}
 					<p class="f4 ma0 pa0 black-50">{{ Product.category.name }}</p>
 				</th>
 				<td class="tc br b--black-10 bl inventory-on-hand"
