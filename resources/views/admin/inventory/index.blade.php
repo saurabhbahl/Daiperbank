@@ -141,33 +141,50 @@
 						</tr>
 					</thead>
 					<tbody>
-						<? foreach ($ProductInventory as $Product): ?>
-							<?
+					<?php
+						$uniqueProducts = [];
+						foreach ($ProductInventory as $Product) {
+							$productName = str_replace(['Boy', 'Girl'], '', $Product->name);
+
+							// Check if the product name is already in the uniqueProducts array
+							if (isset($uniqueProducts[$productName])) {
+								// If it exists, add the "on-hand" quantity to the existing total
+								$uniqueProducts[$productName]['on_hand'] += $Product->Inventory ? $Product->Inventory->on_hand : 0;
+							} else {
+								// If it doesn't exist, create a new entry
+								$uniqueProducts[$productName] = [
+									'name' => $productName,
+									'category' => $Product->Category->name,
+									'on_hand' => $Product->Inventory ? $Product->Inventory->on_hand : 0,
+								];
+							}
+
+							// Determine the class name based on inventory warnings
 							$classname = null;
-							if ($Product->Inventory && inventoryWarning($Product, $Product->Inventory->on_hand)) $classname = 'inventory-warning';
-							if ($Product->Inventory && inventoryCritical($Product, $Product->Inventory->on_hand)) $classname = 'inventory-critical';
-							?>
-							<tr class="<?= $classname; ?>">
-								<th scope="row">
-									<p class="wtn"><?= e($Product->name); ?></p>
-									<p class="f4 light-muted"><?= e($Product->Category->name); ?></p>
-								</th>
-								<td class="tc br bl b--black-10 inventory-on-hand">
-									<? if ($Product->Inventory): ?>
-										<p><?= number_format($Product->Inventory->on_hand, 0); ?></p>
-									<? else: ?>
-										<p class="light-muted">&mdash;</p>
-									<? endif; ?>
-								</td>
-								<td class="tc">
-									<? if ($Product->Inventory && $Product->Inventory->pending_approval): ?>
-										<p><?= number_format($Product->Inventory->pending_approval, 0) ?: '&mdash;'; ?></p>
-									<? else: ?>
-										<p class="light-muted">&mdash;</p>
-									<? endif; ?>
-								</td>
-							</tr>
-						<? endforeach; ?>
+							if ($Product->Inventory && inventoryWarning($Product, $Product->Inventory->on_hand)) {
+								$classname = 'inventory-warning';
+							}
+							if ($Product->Inventory && inventoryCritical($Product, $Product->Inventory->on_hand)) {
+								$classname = 'inventory-critical';
+							}
+						}
+
+						// Output unique product rows with the total "on-hand" quantity
+						foreach ($uniqueProducts as $uniqueProduct) {
+							echo '<tr class="' . $classname . '">';
+							echo '<th scope="row">';
+							echo '<p class="wtn">' . e($uniqueProduct['name']) . '</p>';
+							echo '<p class="f4 light-muted">' . e($uniqueProduct['category']) . '</p>';
+							echo '</th>';
+							echo '<td class="tc br bl b--black-10 inventory-on-hand">';
+							echo '<p>' . number_format($uniqueProduct['on_hand'], 0) . '</p>';
+							echo '</td>';
+							echo '<td class="tc">';
+							echo '<p class="light-muted">—</p>';
+							echo '</td>';
+							echo '</tr>';
+						}
+					?>
 					</tbody>
 				</table>
 			</div>

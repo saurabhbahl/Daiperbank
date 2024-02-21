@@ -4,8 +4,9 @@
 
 @section('content')
 
-    <div class="breadcrumbs">
+    <div class="breadcrumbs breadcrumbs-items">
         <p class="crumb">Agencies</p>
+        <p class="crumb"><a href="<? echo route('admin.getmail.index'); ?>">Send Mail</a></p>
     </div>
 
     <div class="flex-auto flex justify-start content-stretch o-hidden">
