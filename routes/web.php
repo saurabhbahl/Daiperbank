@@ -86,11 +86,6 @@ Route::group(['middleware' => ['auth']], function () {
 			// Agency Profile
 			Route::name('admin.agency.profile')->get('profile/{agency_id}')->uses('Admin\Agency\ProfileController@get');
 		});
-		
-		Route::group(['prefix' => 'get-mail'], function () {
-			Route::name('admin.getmail.index')->get('/')->uses('Admin\SendMail\IndexController@get');
-			Route::name('admin.agencymail')->post('/send-mail')->uses('Admin\SendMail\IndexController@send_mail');
-		});
 
 		Route::group(['prefix' => 'inventory'], function () {
 			Route::name('admin.inventory.index')->get('/')->uses('Admin\Inventory\IndexController@get');
