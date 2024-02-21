@@ -114,13 +114,12 @@ Inventory Overview
 			</table>
 
 			<h3 class="f4 mt0">Pull-up Details</h3>
-			<? foreach($genders as $gender): ?>
+			<? //foreach($genders as $gender): ?>
 				<table class="table table-bordered table-striped">
 					<thead>
 						<tr>
 							<th colspan="2">
-								<i class="fa fa-<?= $gender == 'boy'? 'male' : 'female'; ?>"></i>
-								<?= ucwords($gender); ?> Pull-ups
+								Pull-ups
 							</th>
 						</tr>
 
@@ -133,11 +132,16 @@ Inventory Overview
 					<? foreach ($pullup_sizes as $sz_key => $sz_label): ?>
 						<tr>
 							<th scope="row" class="tr"><?= $sz_label; ?></th>
-							<td><?= number_format($stats->end->{"{$sz_key}_pullups_{$gender}"}, 0); ?></td>
+							<td><?php
+								$pullups_boy = isset($stats->end->{"{$sz_key}_pullups_boy"}) ? $stats->end->{"{$sz_key}_pullups_boy"} : 0;
+								$pullups_girl = isset($stats->end->{"{$sz_key}_pullups_girl"}) ? $stats->end->{"{$sz_key}_pullups_girl"} : 0;
+								echo $pullups_boy+$pullups_girl;
+								?>
+							</td>
 						</tr>
 					<? endforeach; ?>
 				</table>
-			<? endforeach; ?>
+			<? //endforeach; ?>
 
 			<h4 class="f4 mt0">Period Product Details</h4>
 			<table class="table table-bordered table-striped">
