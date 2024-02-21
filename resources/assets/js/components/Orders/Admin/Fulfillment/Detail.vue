@@ -50,7 +50,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr v-for="(mergedItem, index) in mergedProductSummary" :key="index">
+						<tr v-for="mergedItem in mergedProductSummary">
 							<td>
 							{{ mergedItem.name }}
 							<br>
@@ -76,7 +76,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr v-for="Batch in PickupDate.Fulfillment" :key="Batch.id">
+						<tr v-for="Batch in PickupDate.Fulfillment">
 							<td>{{ Batch.created_at | formatDate("MMM D, YYYY") }}</td>
 							<td class="tc br bl b--black-10">{{ Batch.order_count }}</td>
 							<td class="tr">
