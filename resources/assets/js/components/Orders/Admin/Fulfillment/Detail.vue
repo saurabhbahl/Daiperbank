@@ -50,17 +50,17 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr v-for="mergedItem in mergedProductSummary">
+						<tr v-for="Item in PickupDate.ProductSummary">
 							<td>
-							{{ mergedItem.name }}
-							<br>
-							<span class="f4 muted">{{ mergedItem.category_name }}</span>
+								{{ Item.name }}
+								<br>
+								<span class="f4 muted">{{ Item.category_name }}</span>
 							</td>
 							<td class="tc br bl b--black-10">
-							{{ mergedItem.order_count }}
+								{{ Item.order_count }}
 							</td>
 							<td class="tc ph4">
-							{{ mergedItem.quantity }}
+								{{ Item.quantity }}
 							</td>
 						</tr>
 					</tbody>
