@@ -184,7 +184,26 @@ export default {
 
 		canReconcile() {
 			return this.PickupDate.orders_pending == 0 && this.PickupDate.orders_pending_export == 0;
-		}
+		},
+		mergedProductSummary() {
+			const mergedItems = {};
+
+			// Merge items with the same name
+			this.PickupDate.ProductSummary.forEach((item) => {
+				const key = item.name;
+				if (mergedItems[key]) {
+				// If the item already exists, update order_count and quantity
+				mergedItems[key].order_count += item.order_count;
+				mergedItems[key].quantity += item.quantity;
+				} else {
+				// If the item doesn't exist, add it to mergedItems
+				mergedItems[key] = { ...item };
+				}
+			});
+
+			// Convert the mergedItems object back to an array
+			return Object.values(mergedItems);
+		},
 	},
 
 	methods: {
