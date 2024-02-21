@@ -47,12 +47,13 @@ Donation Report
 
 		<div class="w-50 fs-no fg-no pl">
 			<h3 class="f3 pa0">Pull-up Donations</h3>
-			<? //foreach($genders as $gender): ?>
+			<? foreach($genders as $gender): ?>
 				<table class="table table-bordered table-striped">
 					<thead>
 						<tr>
 							<th colspan="2">
-								Pull-ups
+								<i class="fa fa-<?= $gender == 'boy'? 'male' : 'female'; ?>"></i>
+								<?= ucwords($gender); ?> Pull-ups
 							</th>
 						</tr>
 
@@ -65,16 +66,11 @@ Donation Report
 					<? foreach ($pullup_sizes as $sz_key => $sz_label): ?>
 						<tr>
 							<th scope="row" class="tr"><?= $sz_label; ?></th>
-							<td><?php
-								$pullups_boy = isset($stats['Aggregate'][0]->{"{$sz_key}_pullups_boy"}) ? $stats['Aggregate'][0]->{"{$sz_key}_pullups_boy"} : 0;
-								$pullups_girl = isset($stats['Aggregate'][0]->{"{$sz_key}_pullups_girl"}) ? $stats['Aggregate'][0]->{"{$sz_key}_pullups_girl"} : 0;
-								echo $pullups_boy+$pullups_girl;
-								?>
-							</td>
+							<td><?= number_format($stats['Aggregate'][0]->{"{$sz_key}_pullups_{$gender}"}, 0); ?></td>
 						</tr>
 					<? endforeach; ?>
 				</table>
-			<? //endforeach; ?>
+			<? endforeach; ?>
 		</div>
 	</div>
 	
