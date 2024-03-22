@@ -50,8 +50,9 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr v-for="Item in PickupDate.ProductSummary">
+						<tr v-for="Item in MergeData">
 							<td>
+								<!-- {{ Item.name }} -->
 								{{ Item.name }}
 								<br>
 								<span class="f4 muted">{{ Item.category_name }}</span>
@@ -185,24 +186,41 @@ export default {
 		canReconcile() {
 			return this.PickupDate.orders_pending == 0 && this.PickupDate.orders_pending_export == 0;
 		},
-		mergedProductSummary() {
-			const mergedItems = {};
+		MergeData() {
+			let mergedData = [];
 
-			// Merge items with the same name
-			this.PickupDate.ProductSummary.forEach((item) => {
-				const key = item.name;
-				if (mergedItems[key]) {
-				// If the item already exists, update order_count and quantity
-				mergedItems[key].order_count += item.order_count;
-				mergedItems[key].quantity += item.quantity;
-				} else {
-				// If the item doesn't exist, add it to mergedItems
-				mergedItems[key] = { ...item };
+			for (const property in this.PickupDate.ProductSummary) {
+				let item = {};
+				for (const propertyy in this.PickupDate.ProductSummary[property]) {
+					let key = propertyy;
+					let value = this.PickupDate.ProductSummary[property][propertyy];
+
+					// Check if value contains 'boy' or 'girl' and remove it
+					if (typeof value === 'string' && (value.includes('Boy') || value.includes('Girl'))) {
+						console.log(value);
+						value = value.replace(/Boy|Girl/g, '').trim();
+					}
+
+					item[key] = value;
 				}
-			});
 
-			// Convert the mergedItems object back to an array
-			return Object.values(mergedItems);
+				// Check if the item's name already exists in mergedData
+				const existingItemIndex = mergedData.findIndex(
+					existingItem => existingItem.name === item.name
+				);
+
+				if (existingItemIndex !== -1) {
+					// If item already exists, merge order_count and quantity
+					mergedData[existingItemIndex].order_count += item.order_count;
+					mergedData[existingItemIndex].quantity += item.quantity; // Assuming quantity exists in your data
+				} else {
+					// Otherwise, add the item to mergedData
+					mergedData.push(item);
+				}
+			}
+
+			// console.log(mergedData);
+			return mergedData;
 		},
 	},
 
