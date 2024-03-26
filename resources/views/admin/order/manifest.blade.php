@@ -36,7 +36,6 @@ tr { page-break-inside: avoid }
 		<thead>
 			<tr>
 				<th width="20%">Order Number</th>
-				<th width="20%">Agency</th>
 				<th width="10%">Children</th>
 				<th width="10%">Packed On</th>
 				<th width="15%">Packed By</th>
@@ -49,7 +48,6 @@ tr { page-break-inside: avoid }
 			<? foreach ($Orders as $Order): ?>
 				<tr>
 					<td>#<?= e($Order->full_id); ?></td>
-					<td><?= e($Order->Agency->name); ?></td>
 					<td><?= number_format($Order->ApprovedChild->count(), 0); ?></td>
 					<td class="nowrap tc b">&nbsp;&nbsp;&nbsp; / &nbsp;&nbsp;&nbsp; / <span class="wtn">20</span>&nbsp;&nbsp;</td>
 					<td></td>

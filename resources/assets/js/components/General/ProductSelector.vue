@@ -39,9 +39,12 @@
 					<select v-model="selected_product_id" class="form-control"
 						@change="onProductChange">
 						<option disabled>Select one</option>
-						<option v-for="Product in CategoryProducts"
+						<!-- <option v-for="Product in CategoryProducts"
 								:value="Product.id">
 								{{ Product.name }}
+						</option> -->
+						<option v-for="Product in uniqueCategoryProducts" :value="Product.id" >
+							{{ Product.name.replace(/Boy|Girl/g, '') }}
 						</option>
 					</select>
 				</td>
@@ -117,7 +120,17 @@ export default {
 		CategoryProducts() {
 			return this.SelectedCategory? this.SelectedCategory.product : [];
 		},
-
+		uniqueCategoryProducts() {
+			const seen = new Set();
+			return this.CategoryProducts.filter((product) => {
+				const strippedName = product.name.replace(/Boy|Girl/g, '');
+				if (!seen.has(strippedName)) {
+				seen.add(strippedName);
+				return true;
+				}
+				return false;
+			});
+    	},
 		SelectedCategory() {
 			return this.ProductCategories.filter( Category => Category.id == this.selected_category_id )[0] || null;
 		},
