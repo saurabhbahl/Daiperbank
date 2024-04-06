@@ -109,7 +109,10 @@
 							<td v-if="Child.item">{{ Child.item.product.category.name }}</td>
 							<td v-else>--</td>
 
-							<td v-if="Child.item">{{ Child.item.product.name }}</td>
+							<td v-if="Child.item">
+								<!-- {{ Child.item.product.name }} -->
+								{{ Child.item.product.name.replace(/Boy|Girl/g, '') }}
+							</td>
 							<td v-else>--</td>
 
 							<td v-if="Child.item">{{ Child.item.quantity }}</td>
