@@ -16,9 +16,10 @@ class AgencyMail extends Mailable
      *
      * @return void
      */
-    public function __construct($message)
+    public function __construct($message, $subject)
     {
-        $this->Message = $message;
+        $this->message = $message;
+        $this->subject = $subject; // Set the subject
     }
 
     /**
@@ -26,10 +27,12 @@ class AgencyMail extends Mailable
      *
      * @return $this
      */
-    public function build()
+     public function build()
     {
-        return $this->markdown('emails.sendagency')->with([
-            'Message' => $this->Message,
-        ]);
+        return $this->subject($this->subject) // Set the subject here
+                    ->markdown('emails.sendagency')
+                    ->with([
+                        'Message' => $this->message,
+                    ]);
     }
 }

@@ -43,13 +43,18 @@
 							<span v-show="Child.uniq_id" class="f4 i muted">#@{{ Child.uniq_id }}</span>
 						</p>
 
-						<p class="w-25">
-							<span class="b">DOB:</span>
+						<p class="w-25" v-if="Child.dob">
+						<span class="b">DOB:</span>
+						
 							@{{ Child.dob | formatDate("MM/DD/YYYY") }}
-							<br>
-							<!--<span class="b">Age:</span>
+						
+						<br>
+						<!--<span class="b">Age:</span>
 							@{{ Child.age_str }}-->
-						</p>
+					</p>
+					<p class="w-25" v-else="Child.dob">
+						<span class="b">DOB:</span>
+					</p>
 
 						<p class="w-25">
 							<span class="b">Zip Code:</span>
