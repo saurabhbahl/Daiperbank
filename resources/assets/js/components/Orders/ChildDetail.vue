@@ -19,7 +19,7 @@
 
             <p class="mb2">
               <span class="b">DOB:</span>
-              <span>{{ Child.dob | formatDate("MM/DD/YYYY") }}</span>
+              <span v-if="Child.dob">{{ Child.dob | formatDate("MM/DD/YYYY") }}</span>
             </p>
 
             <p class="mb2">
