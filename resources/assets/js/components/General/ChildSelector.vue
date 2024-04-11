@@ -16,7 +16,7 @@
 				</div>
 				<div>
 					<p class="f2 wtl">{{ Child.name }}</p>
-					<p class="muted f4">DOB {{ Child.dob | formatDate("MM/DD/YYYY") }}</p>
+					<p class="muted f4"  v-if="Child.dob">DOB {{ Child.dob | formatDate("MM/DD/YYYY") }}</p>
 				</div>
 			</div>
 		</template>

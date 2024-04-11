@@ -28,7 +28,7 @@
 							</i>
 						</td>
 						<td>#{{ Order.full_id }}</td>
-						<td>{{ Order.created_at | formatDate("MM/DD/YYYY @ h:mm a") }}</td>
+						<td v-if="Order.created_at">{{ Order.created_at | formatDate("MM/DD/YYYY @ h:mm a") }}</td>
 					</tr>
 
 					<tr class="clickable"
