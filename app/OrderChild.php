@@ -105,11 +105,22 @@ class OrderChild extends Model {
 	}
 
 	public function getAgeAttribute() {
-		return $this->dob->diffInYears($this->Order->created_at);
+		if($this->dob){
+			return $this->dob->diffInYears($this->Order->created_at);
+		}
+		else {
+			return null;
+		}
+		
 	}
 
 	public function getAgeMoAttribute() {
-		return $this->dob->diffInMonths($this->Order->created_at);
+		if($this->dob){
+			return $this->dob->diffInMonths($this->Order->created_at);
+		}
+		else {
+			return null;
+		}
 	}
 
 	public function getAgeStrAttribute() {
@@ -134,9 +145,15 @@ class OrderChild extends Model {
 		}
 
 		if (!$age_yr && !$age_mo) {
-			$age_wk = max(1, $this->dob->diffInWeeks($this->Order->created_at));
+			if($this->dob){
+				$age_wk = max(1, $this->dob->diffInWeeks($this->Order->created_at));
 
-			$str_parts []= "{$age_wk}wk";
+				$str_parts []= "{$age_wk}wk";
+			}
+			else {
+				$str_parts[]=null;
+			}
+			
 		}
 
 		return implode(" ", $str_parts);
