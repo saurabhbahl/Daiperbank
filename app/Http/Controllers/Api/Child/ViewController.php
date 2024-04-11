@@ -48,6 +48,7 @@ class ViewController extends BaseController {
 		}
 
 		try {
+			// dd($Request);
 			$this->validate($Request, $this->rules($Child), $this->messages());
 
 			$saved = DB::transaction(function () use ($Request, $Child) {
@@ -78,7 +79,7 @@ class ViewController extends BaseController {
 	             */
 				// Some not so helpful details: https://stackoverflow.com/questions/34968061/laravel-carbon-data-missing
 				// So, to fix: generate actual carbon object instead of relying on eloquent do to it for us.
-
+				
 				$child_data['dob'] = ! empty($child_data['dob']) ? carbon($child_data['dob']) : null;
 
 				if ($Request->get('update_guardian', false)) {
@@ -168,18 +169,18 @@ class ViewController extends BaseController {
 	protected function rules(Child $Child) {
 		return [
 			'Child.name' => ['required', 'string', 'min:3', 'unique_child_identifier:' . ($Child->exists ? $Child->id : null) . ',' . Auth()->User()->Agency->id, ],
-			'Child.gender' => ['required', 'in:m,f'],
-			'Child.zip' => ['required', 'numeric', 'regex:#^\d{5}(-\d{4})?$#', 'zip'],
-			'Child.dob' => ['required', 'date'],
-			'Child.race' => ['required', 'string'],
-			'Child.ethnicity' => ['required', 'string'],
+			'Child.gender' => ['nullable', 'in:m,f'],
+			'Child.zip' => ['nullable', 'numeric', 'regex:#^\d{5}(-\d{4})?$#', 'zip'],
+			'Child.dob' => ['nullable', 'date'],
+			'Child.race' => ['nullable', 'string'],
+			'Child.ethnicity' => ['nullable', 'string'],
 			'Child.status_potty_train' => ['boolean', 'nullable'],
 			'Child.status_wic' => ['boolean', 'nullable'],
 			'Child.guardian_id' => ['required_unless:update_guardian,true'],
 
 			'Guardian.name' => ['required_if:update_guardian,true', 'string', 'unique_family_identifier:' . ($Child->guardian_id) . ',' . Auth()->User()->Agency->id, ],
-			// 'Guardian.relationship' => ['required_if:update_guardian,true'],
-			'Guardian.military_status' => ['required_if:update_guardian,true', 'string'],
+			'Guardian.relationship' => ['nullable,true'],
+			'Guardian.military_status' => ['nullable', 'string'],
 		];
 	}
 
@@ -208,7 +209,7 @@ class ViewController extends BaseController {
 			'Guardian.name.required_if' => 'This field is required',
 			'Guardian.name.unique_family_identifier' => 'This unique family identifier has already been assigned to another family.',
 			// 'Guardian.relationship.required_if' => 'This field is required',
-			'Guardian.military_status.required_if' => 'This field is required.',
+			// 'Guardian.military_status.required_if' => 'This field is required.',
 		];
 	}
 

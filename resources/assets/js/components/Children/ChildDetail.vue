@@ -24,7 +24,7 @@
 							<tr>
 								<th scope="row" class="w-25">
 									<label class="b">Gender:
-										<span class="required" v-if="editing">*</span>
+										<!-- <span class="required" v-if="editing">*</span> -->
 									</label>
 								</th>
 								<td>
@@ -56,11 +56,11 @@
 							<tr>
 								<th scope="row" class="w-25">
 									<label for="dob" class="b">DOB:
-										<span class="required" v-if="editing">*</span>
+										<!-- <span class="required" v-if="editing">*</span> -->
 									</label>
 								</th>
 								<td>
-									<p v-if=" ! editing">{{ Child.dob | formatDate("M/D/YYYY") }} ({{ Child.age_str }})</p>
+									<p v-if=" ! editing && Child.dob">{{ Child.dob | formatDate("M/D/YYYY") }} ({{ Child.age_str }})</p>
 									<input v-else type="date" v-model="editedChild.dob" id="dob" class="form-control">
 								</td>
 							</tr>
@@ -75,7 +75,7 @@
 							<tr>
 								<th scope="row" class="w-25">
 									<label for="zip">Zip:
-										<span class="required" v-if="editing">*</span>
+										<!-- <span class="required" v-if="editing">*</span> -->
 									</label>
 								</th>
 								<td>
@@ -99,7 +99,7 @@
 							<tr>
 								<th scope="row" class="w-25">
 									<label for="race">Race:
-										<span class="required" v-if="editing">*</span>
+										<!-- <span class="required" v-if="editing">*</span> -->
 									</label>
 								</th>
 								<td>
@@ -126,7 +126,7 @@
 							<tr>
 								<th scope="row" class="w-25">
 									<label for="race">Ethnicity:
-										<span class="required" v-if="editing">*</span>
+										<!-- <span class="required" v-if="editing">*</span> -->
 									</label>
 								</th>
 								<td>
@@ -197,10 +197,9 @@
 
 				<p class="flex-auto tr">
 					<span class="b">Military Status:</span>
-					{{ Child.guardian.military_status }}
+					<!-- {{ Child.guardian.military_status }} -->
 				</p>
 			</div>
-
 			<GuardianEditor v-if="editing"
 				:initialGuardians="Guardians"
 				:selectedId="editedChild.guardian_id || Child.guardian_id"
@@ -280,12 +279,14 @@
 								{{ orderStatusString(Order.order.order_status) }}
 							</span>
 						</p>
-						<p class="fs-no fg tr" v-if="Order.order.order_status == 'fulfilled'">
-							{{ Order.order.updated_at | formatDate("MMM D, YYYY") }}
-						</p>
-						<p class="fs-no fg tr" v-else>
-							{{ Order.order.created_at | formatDate("MMM D, YYYY") }}
-						</p>
+						<div v-if="Order.order.updated_at">
+							<p class="fs-no fg tr" v-if="Order.order.order_status == 'fulfilled'">
+								{{ Order.order.updated_at | formatDate("MMM D, YYYY") }}
+							</p>
+							<p class="fs-no fg tr" v-else>
+								{{ Order.order.created_at | formatDate("MMM D, YYYY") }}
+							</p>
+						</div>
 					</div>
 				</div>
 				<div v-else-if="child_id">
@@ -368,7 +369,7 @@ export default {
 
 	props: {
 		orders: {
-			required: true,
+			// required: true,
 			type: Array,
 		},
 	},
@@ -572,7 +573,10 @@ export default {
 
 		saveChild() {
 			this.clearErrors();
-
+			if(this.editedChild.dob=='Invalid date'){
+				this.editedChild.dob=null;
+			}
+			console.log(this.editedChild.dob+' test');
 			let postData = {
 				Child: this.editedChild,
 			};
@@ -679,6 +683,7 @@ export default {
 				.catch(error => {
 					let response = error.response;
 					if (response.status == 422) {
+						console.log('testtt---'+response.data.data.errors);
 						return {
 							success: false,
 							message: response.data.message,
@@ -771,6 +776,7 @@ export default {
 
 			editedChild.weight_lb = Math.floor( this.Child.weight / 16 );
 			editedChild.weight_oz = this.Child.weight % 16;
+			console.log(editedChild.dob);
 			editedChild.dob = moment(this.Child.dob).format('YYYY-MM-DD');
 
 			this.$set(this, 'editedChild', editedChild);
