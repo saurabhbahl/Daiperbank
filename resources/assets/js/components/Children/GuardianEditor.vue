@@ -10,8 +10,8 @@
 			:value="selectedId"
 			@selected="updateSelectedGuardian"
 		></GuardianSelect>
-		<p v-if="hasError('guardian_id')" class="validation-error">
-			{{ error('guardian_id') }}
+		<p v-if="initialErrors && !editingGuardian && initialErrors['Child.guardian_id'][0]" class="validation-error">
+			{{ initialErrors['Child.guardian_id'][0] }} 
 		</p>
 
 		<label for="guardian_name" v-if="editingGuardian || creatingGuardian">
@@ -24,18 +24,19 @@
 			@change="updateGuardian"
 			@keyup="updateGuardian"
 		>
-		<p v-if="hasError('input.name')" class="validation-error">
-			{{ error('input.name') }}
+		<!-- {{initialErrors}} -->
+		<p v-if="initialErrors && editingGuardian &&  initialErrors['Child.guardian_id'][0]" class="validation-error">
+			{{initialErrors['Child.guardian_id'][0] }}
 		</p>
 		<p v-if="hasError('Guardian.name')" class="validation-error">
 			{{ error('Guardian.name') }}
 		</p>
 
-
+	<!-- {{initialErrors}} -->
 		<div class="flex justify-between mt3">
 			<div class="w-50 pr2">
 				<label for="guardian_relationship">Relationship to Child:
-					<span class="required" v-if="editingGuardian">*</span>
+					<!-- <span class="required" v-if="editingGuardian">*</span> -->
 				</label>
 				<select
 					id="guardian_relationship"
@@ -52,7 +53,7 @@
 			</div>
 			<div class="w-50 pl2">
 				<label for="guardian_military_status">Military Status:
-					<span class="required">*</span>
+					<!-- <span class="required">*</span> -->
 				</label>
 				<select
 					:disabled="!editingGuardian && !creatingGuardian"
@@ -147,6 +148,8 @@ export default {
 
 	watch: {
 		initialErrors(errors) {
+			// console.log(errors);
+			console.log(errors);
 			this.errors = errors;
 		}
 	},
