@@ -10,7 +10,7 @@
 		
 		@change="onChildChanged"
 		@close="close" 
-		v-if="this.Child.is_menstruator==0"
+		v-if="this.Child.is_menstruator==0" @edit-order="isEditing = true"
 		>
 
 		<template slot="buttons">
