@@ -81,6 +81,7 @@
         </div>
 
         <p class="b f2 bb bw2 b--black-20 mv3">Current Order</p>
+        <p class="b f2" v-if="isAdmin && !isFulfilled"><a href="#"  @click="editOrderAdmin">Edit Order</a></p>
         <table class="table table-condensed table-striped" v-if="!isEditing">
           <thead>
             <tr>
@@ -223,6 +224,16 @@ export default {
 			required: true,
 			type: Array,
 		},
+    isAdmin: {
+			type: Boolean,
+			required: false,
+			default: false,
+		},
+    isFulfilled: {
+			type: Boolean,
+			required: false,
+			default: false,
+		},
   },
 
   data() {
@@ -314,6 +325,10 @@ export default {
     clone(object) {
       return JSON.parse(JSON.stringify(object));
     },
+    editOrderAdmin(){
+      this.isEditing=true;
+      this.$emit('edit-order');
+    }
   },
   created() {
   let child_id = this.Child.child_id; 
