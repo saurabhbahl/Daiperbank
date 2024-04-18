@@ -4,7 +4,10 @@
 		:is-editing="isEditing"
 		:initial-child="Child"
 		:product-categories="productCategories"
-
+		:is-admin="isAdmin"
+		:isFulfilled="isFulfilled"
+		:all-children="AllChildren"
+		
 		@change="onChildChanged"
 		@close="close" 
 		v-if="this.Child.is_menstruator==0"
@@ -172,7 +175,29 @@ import ChildDetailBehavior from '../sharedChildDetailBehaviors';
 export default {
 	components: { ChildDetail ,MenstruatorChildDetail},
 	mixins: [ ChildDetailBehavior ],
+	props: {
+		allChildren: {
+			required: true,
+			type: Array,
+		},
+		isAdmin: {
+			type: Boolean,
+			required: false,
+			default: false,
+		},
+		isFulfilled: {
+			type: Boolean,
+			required: false,
+			default: false,
+		},
+	},
 
+	data() {
+		return {
+			AllChildren: this.allChildren,
+			// selectedProduct: (this.initialChild.item? this.initialChild.item : null),
+		};
+	},
 	computed: {
 		pending() {
 			return ! this.approved && ! this.removed;

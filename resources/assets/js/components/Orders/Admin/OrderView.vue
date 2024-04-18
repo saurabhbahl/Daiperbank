@@ -398,6 +398,9 @@
 			:is-editable="isOrderEditable"
 			:initial-child="CurrentOrderChild"
 			:product-categories="productCategories"
+			:all-children="AllChildren"
+			:isAdmin="isAdmin"
+			:isFulfilled="isFulfilled"
 
 			@close="closeChildDetail"
 			@save="saveChild"
@@ -459,6 +462,7 @@ export default {
 			current_tab: null,
 			PickupDates: this.pickupDates,
 			Order: this.initialOrder,
+			AllChildren: [],
 			OrderSummary: this.initialOrderSummary,
 			CurrentOrderChild: null,
 			reason: null, // reason for cancellation, rejection, whatever.
