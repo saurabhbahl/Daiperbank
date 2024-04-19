@@ -21,7 +21,8 @@
                     <br>
                     <label>Message</label><br>
                     <!-- <textarea rows="6" cols="60" name="message" class="mb4 form-control"></textarea> -->
-                    <agency-editor></agency-editor>
+                    <!-- <agency-editor></agency-editor> -->
+                    <textarea id="myeditorinstance" name="message"></textarea>
                     <label>Select Atleast one Agency</label>
                     @if($errors->has('a_mail'))
                         <span class="text-danger">({{ $errors->first('a_mail') }})</span>

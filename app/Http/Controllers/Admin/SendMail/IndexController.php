@@ -37,27 +37,9 @@ class IndexController extends Controller {
 			return redirect()->back()->withErrors($validator)->withInput($Request->all());
 		}
 
-		// Extract base64 image data from message
-		preg_match_all('/<img[^>]+src="data:image\/[^;]+;base64,([^"]+)"/', $Request->message, $matches);
-
-		// Save images locally or upload to server and get their URLs
-		$imageUrls = [];
-		foreach ($matches[1] as $base64Image) {
-			$imageName = Str::random(10) . '.png'; // Generate a unique filename
-			$imagePath = storage_path('agency_mail') .'\\' .$imageName; // Set the path to save the image
-			file_put_contents($imagePath, base64_decode($base64Image)); // Save the image
-			$imageUrl = asset($imagePath);
-			// dd($imageUrl); // Get the URL of the saved image
-			$imageUrls[] = $imageUrl; // Store the URL
-		}
-
-		// Replace base64 image data with image URLs
-		$updatedMessage = preg_replace('/<img[^>]+src="data:image\/[^;]+;base64,([^"]+)"/', '<img src="' . array_shift($imageUrls) . '"', $Request->message);
-
-
 
 		foreach ($Request->a_mail as $recipient) {
-			Mail::to($recipient)->send(new AgencyMail($updatedMessage, $Request->subject));
+			Mail::to($recipient)->send(new AgencyMail($Request->message, $Request->subject));
 		}
 		return redirect()->route('admin.getmail.index')->with('success', 'Mail sent successfully.');
         // dd($Request->all());
