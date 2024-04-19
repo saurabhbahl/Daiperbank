@@ -104,6 +104,10 @@ Vue.component('admin-reports', require('./components/Admin/Reports.vue'));
 Vue.component('menstruator-detail-pane', require('./components/Menstruator/MenstruatorDetail.vue'));
 Vue.component('menstruator-unarchive-pane', require('./components/Menstruator/unarchivemenstruator.vue'));
 
+// Agency Mail
+// Vue.component('agency-editor', require('./components/Admin/AgencyMail/MailEditor.vue'));
+
+
 window.app = new Vue({
 	el: '#app',
 	store: Store
