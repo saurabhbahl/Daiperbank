@@ -36,7 +36,7 @@ class IndexController extends Controller {
 		if ($validator->fails()) {
 			return redirect()->back()->withErrors($validator)->withInput($Request->all());
 		}
-		$path = base_path().'/img/logo.png';
+		$path = url('/').'/img/logo-new.webp';
 		$updatedMessage='<p><img style="    text-align: center;" src="'.$path.'" style="height: 100px; width:100px;"></p>'.$Request->message;
 
 
