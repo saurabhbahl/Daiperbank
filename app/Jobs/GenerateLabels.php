@@ -102,8 +102,12 @@ class GenerateLabels implements ShouldQueue {
 			$order_number = "{$Order->id}";
 			// $Label = new Label($order_number, $Order->Agency->name);
 			$Label = new Label($order_number, $Order->Agency->id_prefix);
-			$new_name=$Label->child().' (Menstruator)';
-			$Label->child($new_name);
+			$Label->addChild($Child);
+			if($Child->Child['attributes']['is_menstruator']){
+				$new_name=$Label->child().' (Menstruator)';
+				$Label->child($new_name);
+				// var_dump($Label->child());
+			}
 			// $Label->addChild($Child);
 
 			$this->addLabel($Label);
