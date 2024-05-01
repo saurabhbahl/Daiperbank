@@ -36,8 +36,8 @@ class IndexController extends Controller {
 		if ($validator->fails()) {
 			return redirect()->back()->withErrors($validator)->withInput($Request->all());
 		}
-
-		$updatedMessage='<p><img style="    text-align: center;" src="'.public_path('img/logo-new.png').'" style="height: 100px; width:100px;"></p>'.$Request->message;
+		$path = base_path().'/img/logo.png';
+		$updatedMessage='<p><img style="    text-align: center;" src="'.$path.'" style="height: 100px; width:100px;"></p>'.$Request->message;
 
 
 		foreach ($Request->a_mail as $recipient) {
