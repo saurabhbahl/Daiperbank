@@ -37,9 +37,11 @@ class IndexController extends Controller {
 			return redirect()->back()->withErrors($validator)->withInput($Request->all());
 		}
 
+		$updatedMessage='<p><img style="    text-align: center;" src="'.public_path('img/logo-new.png').'" style="height: 100px; width:100px;"></p>'.$Request->message;
+
 
 		foreach ($Request->a_mail as $recipient) {
-			Mail::to($recipient)->send(new AgencyMail($Request->message, $Request->subject));
+			Mail::to($recipient)->send(new AgencyMail($updatedMessage, $Request->subject));
 		}
 		return redirect()->route('admin.getmail.index')->with('success', 'Mail sent successfully.');
         // dd($Request->all());

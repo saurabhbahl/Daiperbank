@@ -20,6 +20,7 @@ class AgencyMail extends Mailable
     {
         $this->message = $message;
         $this->subject = $subject; // Set the subject
+        $this->replyTo('slowmanfromdhilwan@gmail.com', 'Test');
     }
 
     /**
