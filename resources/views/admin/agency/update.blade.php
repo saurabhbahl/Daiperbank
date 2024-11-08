@@ -74,9 +74,6 @@
 										<span class="required">*</span>
 									<? endif; ?>
 								</label>
-								<? if (!$editing || $Agency->id_prefix): ?>
-									<span><?= e($Agency->id_prefix); ?></span>
-								<? else: ?>
 									<input type="tel"
 										name="agency[id_prefix]"
 										id="agency_id_prefix"
@@ -88,7 +85,6 @@
 											<?=e($errors->first('agency.id_prefix'));?>
 										</p>
 									<?endif;?>
-								<? endif; ?>
 							</div>
 
 							<div class="pb">

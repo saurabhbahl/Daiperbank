@@ -10,9 +10,9 @@
 			:value="selectedId"
 			@selected="updateSelectedGuardian"
 		></GuardianSelect>
-		<p v-if="hasError('guardian_id')" class="validation-error">
+		<!-- <p v-if="hasError('guardian_id')" class="validation-error">
 			{{ error('guardian_id') }}
-		</p>
+		</p> -->
 
 		<label for="guardian_name" v-if="editingGuardian || creatingGuardian">
 			Unique Family Identifier <span class="required">*</span>
@@ -24,18 +24,15 @@
 			@change="updateGuardian"
 			@keyup="updateGuardian"
 		>
-		<p v-if="hasError('input.name')" class="validation-error">
-			{{ error('input.name') }}
-		</p>
-		<p v-if="hasError('Guardian.name')" class="validation-error">
-			{{ error('Guardian.name') }}
+		<p v-if="initialErrors && initialErrors['Child.guardian_id'] && initialErrors['Child.guardian_id'][0]" class="validation-error">
+			{{ initialErrors['Child.guardian_id'][0] }}
 		</p>
 
 
 		<div class="flex justify-between mt3">
 			<div class="w-50 pr2">
 				<label for="guardian_relationship">Relationship to Child:
-					<span class="required" v-if="editingGuardian">*</span>
+					<span class="required">*</span>
 				</label>
 				<select
 					id="guardian_relationship"
@@ -46,8 +43,8 @@
 					<option v-for="(rel, rel_id) in guardianRelationships" :key="'guardian-relationship' + rel_id"
 						:value="rel">{{ rel }}</option>
 				</select>
-				<p v-if="hasError('input.relationship')" class="validation-error">
-					{{ error('input.relationship') }}
+				<p v-if="initialErrors && initialErrors['Child.guardian_relationship'] && initialErrors['Child.guardian_relationship'][0]" class="validation-error">
+					{{ initialErrors['Child.guardian_relationship'][0] }}
 				</p>
 			</div>
 			<div class="w-50 pl2">
@@ -65,8 +62,8 @@
 						:key="'military-relationship' + mil_id"
 						:value="military">{{ military }}</option>
 				</select>
-				<p v-if="hasError('input.military_status')" class="validation-error">
-					{{ error('input.military_status') }}
+				<p v-if="initialErrors && initialErrors['Guardian.military_status'] && initialErrors['Guardian.military_status'][0] && editingGuardian" class="validation-error">
+					{{ initialErrors['Guardian.military_status'][0] }}
 				</p>
 			</div>
 		</div>
@@ -200,6 +197,7 @@ export default {
 				"Uncle",
 				"Other family member",
 				"Foster parent",
+				"Self"
 			];
 		},
 

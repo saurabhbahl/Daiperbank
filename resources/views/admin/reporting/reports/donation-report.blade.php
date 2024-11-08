@@ -89,33 +89,53 @@ Donation Report
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
+					<!-- <tr>
 						<th scope="row" class="tr">Regular Pads</th>
-						<td><?= number_format($stats['Aggregate'][0]->regular_Pads, 0); ?></td>
+						<td><//?= number_format($stats['Aggregate'][0]->regular_Pads, 0); ?></td>
 					</tr>
 					<tr>
 						<th scope="row" class="tr">Overnight Pads</th>
-						<td><?= number_format($stats['Aggregate'][0]->overnight_pads, 0); ?></td>
+						<td><//?= number_format($stats['Aggregate'][0]->overnight_pads, 0); ?></td>
 					</tr>
 					<tr>
 						<th scope="row" class="tr">Tampons</th>
-						<td><?= number_format($stats['Aggregate'][0]->tampons, 0); ?></td>
+						<td><//?= number_format($stats['Aggregate'][0]->tampons, 0); ?></td>
 					</tr>
 					<tr>
 						<th scope="row" class="tr">Teen Regular Pads</th>
-						<td><?= number_format($stats['Aggregate'][0]->teen_regular_pads, 0); ?></td>
+						<td><//?= number_format($stats['Aggregate'][0]->teen_regular_pads, 0); ?></td>
 					</tr>
 					<tr>
 						<th scope="row" class="tr">Teen Overnight Pads</th>
-						<td><?= number_format($stats['Aggregate'][0]->teen_overnight_pads, 0); ?></td>
+						<td><//?= number_format($stats['Aggregate'][0]->teen_overnight_pads, 0); ?></td>
 					</tr>
 					<tr>
 						<th scope="row" class="tr">Post Partum Pads</th>
-						<td><?= number_format($stats['Aggregate'][0]->post_partum_pads, 0); ?></td>
+						<td><//?= number_format($stats['Aggregate'][0]->post_partum_pads, 0); ?></td>
 					</tr>
 					<tr>
 						<th scope="row" class="tr">Perineal Cold Packs</th>
-						<td><?= number_format($stats['Aggregate'][0]->perineal_cold_packs, 0); ?></td>
+						<td><//?= number_format($stats['Aggregate'][0]->perineal_cold_packs, 0); ?></td>
+					</tr> -->
+					<tr>
+						<th scope="row" class="tr">Pads Only Packet</th>
+						<td><?= number_format($stats['Aggregate'][0]->pads_only_packet, 0); ?></td>
+					</tr>
+					<tr>
+						<th scope="row" class="tr">Tampons and Pads Packet</th>
+						<td><?= number_format($stats['Aggregate'][0]->tampons_and_pads_packet, 0); ?></td>
+					</tr>
+					<tr>
+						<th scope="row" class="tr">Postpartum Packet</th>
+						<td><?= number_format($stats['Aggregate'][0]->postpartum_packet, 0); ?></td>
+					</tr>
+					<tr>
+						<th scope="row" class="tr">Teen Packet</th>
+						<td><?= number_format($stats['Aggregate'][0]->teen_packet, 0); ?></td>
+					</tr>
+					<tr>
+						<th scope="row" class="tr">My First Period Packet</th>
+						<td><?= number_format($stats['Aggregate'][0]->my_first_period_packet, 0); ?></td>
 					</tr>
 				</tbody>
 			</table>

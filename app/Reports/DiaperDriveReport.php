@@ -8,13 +8,51 @@ class DiaperDriveReport extends Report implements ReportContract {
 
 	public function getStats() {
 		$adjustment_type = InventoryAdjustment::TYPE_DIAPER_DRIVE;
+		$aggregate_query = <<<EOQUERY
+SELECT
+	COUNT(DISTINCT a.id) donations,
+	COALESCE(SUM(CASE WHEN (i.product_id < 10 OR i.product_id = 16) THEN i.amount ELSE 0 END), 0) total_diapers,
+	COALESCE(SUM(CASE WHEN i.product_id BETWEEN 10 AND 15 THEN i.amount ELSE 0 END), 0) total_pullups,
+	COALESCE(SUM(CASE WHEN i.product_id BETWEEN 17 AND 32 THEN i.amount ELSE 0 END), 0) total_period_products,
+	COALESCE(SUM(i.amount), 0) total_donated,
+	COALESCE(SUM(CASE WHEN i.product_id = 1 THEN i.amount ELSE 0 END), 0) preemie_diapers,
+	COALESCE(SUM(CASE WHEN i.product_id = 2 THEN i.amount ELSE 0 END), 0) newborn_diapers,
+	COALESCE(SUM(CASE WHEN i.product_id = 3 THEN i.amount ELSE 0 END), 0) size1_diapers,
+	COALESCE(SUM(CASE WHEN i.product_id = 4 THEN i.amount ELSE 0 END), 0) size2_diapers,
+	COALESCE(SUM(CASE WHEN i.product_id = 5 THEN i.amount ELSE 0 END), 0) size3_diapers,
+	COALESCE(SUM(CASE WHEN i.product_id = 6 THEN i.amount ELSE 0 END), 0) size4_diapers,
+	COALESCE(SUM(CASE WHEN i.product_id = 7 THEN i.amount ELSE 0 END), 0) size5_diapers,
+	COALESCE(SUM(CASE WHEN i.product_id = 8 THEN i.amount ELSE 0 END), 0) size6_diapers,
+	COALESCE(SUM(CASE WHEN i.product_id = 9 THEN i.amount ELSE 0 END), 0) size7_diapers,
+	COALESCE(SUM(CASE WHEN i.product_id = 16 THEN i.amount ELSE 0 END), 0) other_diapers,
+	COALESCE(SUM(CASE WHEN i.product_id = 10 THEN i.amount ELSE 0 END), 0) `2t-3t_pullups_boy`,
+	COALESCE(SUM(CASE WHEN i.product_id = 11 THEN i.amount ELSE 0 END), 0) `3t-4t_pullups_boy`,
+	COALESCE(SUM(CASE WHEN i.product_id = 12 THEN i.amount ELSE 0 END), 0) `4t-5t_pullups_boy`,
+	COALESCE(SUM(CASE WHEN i.product_id = 13 THEN i.amount ELSE 0 END), 0) `2t-3t_pullups_girl`,
+	COALESCE(SUM(CASE WHEN i.product_id = 14 THEN i.amount ELSE 0 END), 0) `3t-4t_pullups_girl`,
+	COALESCE(SUM(CASE WHEN i.product_id = 15 THEN i.amount ELSE 0 END), 0) `4t-5t_pullups_girl`,
+	COALESCE(SUM(CASE WHEN i.product_id = 25 THEN i.amount ELSE 0 END), 0) `regular_Pads`,
+	COALESCE(SUM(CASE WHEN i.product_id = 26 THEN i.amount ELSE 0 END), 0) `overnight_pads`,
+	COALESCE(SUM(CASE WHEN i.product_id = 27 THEN i.amount ELSE 0 END), 0) `tampons`,
+	COALESCE(SUM(CASE WHEN i.product_id = 28 THEN i.amount ELSE 0 END), 0) `teen_regular_pads`,
+	COALESCE(SUM(CASE WHEN i.product_id = 29 THEN i.amount ELSE 0 END), 0) `teen_overnight_pads`,
+	COALESCE(SUM(CASE WHEN i.product_id = 30 THEN i.amount ELSE 0 END), 0) `post_partum_pads`,
+	COALESCE(SUM(CASE WHEN i.product_id = 31 THEN i.amount ELSE 0 END), 0) `perineal_cold_packs`
+FROM inventory_adjustment a
+JOIN inventory i ON i.inventory_adjustment_id = a.id
+JOIN product p on p.id = i.product_id
+	
+WHERE a.adjustment_type = {$adjustment_type}
+AND adjustment_datetime BETWEEN ? AND ?
+EOQUERY;
+
 		$query = <<<EOQUERY
 SELECT
 	adjustment_datetime,
 	adjustment_note,
 	COALESCE(SUM(CASE WHEN (i.product_id < 10 OR i.product_id = 16) THEN i.amount ELSE 0 END), 0) total_diapers,
 	COALESCE(SUM(CASE WHEN i.product_id BETWEEN 10 AND 15 THEN i.amount ELSE 0 END), 0) total_pullups,
-	COALESCE(SUM(CASE WHEN i.product_id BETWEEN 25 AND 31 THEN i.amount ELSE 0 END), 0) total_period,
+	COALESCE(SUM(CASE WHEN i.product_id BETWEEN 17 AND 32 THEN i.amount ELSE 0 END), 0) total_period,
 	COALESCE(SUM(i.amount), 0) total_donated,
 	COALESCE(SUM(CASE WHEN i.product_id = 1 THEN i.amount ELSE 0 END), 0) preemie_diapers,
 	COALESCE(SUM(CASE WHEN i.product_id = 2 THEN i.amount ELSE 0 END), 0) newborn_diapers,
@@ -44,7 +82,12 @@ GROUP BY a.id
 ORDER BY adjustment_datetime ASC
 EOQUERY;
 
-		return DB::select($query, [ $this->start->format('Y-m-d 00:00:00'), $this->end->format('Y-m-d 23:59:59') ]);
+		// return DB::select($query, [ $this->start->format('Y-m-d 00:00:00'), $this->end->format('Y-m-d 23:59:59') ]);
+		return [
+			'Aggregate' => DB::select($aggregate_query, [ $this->start->format('Y-m-d 00:00:00'), $this->end->format('Y-m-d 23:59:59') ]),
+			'Detail' => DB::select($query, [ $this->start->format('Y-m-d 00:00:00'), $this->end->format('Y-m-d 23:59:59') ]),
+		];
+
 	}
 
 	public function getTempFilename() {
@@ -149,10 +192,11 @@ EOQUERY;
 			'pullup_sizes' => $pullup_sizes,
 			'genders' => ['boy', 'girl'],
 		]);
+		
 	}
 
 	protected function getViewName() {
 		return 'diaper-drive-report';
 	}
-
+	
 }

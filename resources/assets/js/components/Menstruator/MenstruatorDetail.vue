@@ -28,8 +28,10 @@
 									</label>
 								</th>
 								<td>
-									<p v-if=" ! editing">{{ Child.dob | formatDate("M/D/YYYY") }} ({{ Child.age_str }})</p>
-									<input v-else type="date" v-model="editedChild.dob" id="dob" class="form-control">
+									<p v-if="! editing"><span v-if="Child.dob">{{ Child.dob | formatDate("M/D/YYYY") }} ({{ Child.age_str }})</span></p>
+									<span v-else
+										class=""><input  type="date" v-model="editedChild.dob" id="dob" class="form-control">
+									</span>
 								</td>
 							</tr>
 						</table>
@@ -297,7 +299,7 @@
 					class="btn btn-block btn-alt bg-white btn-danger mt1 mb4"
 					@click="archiveChild">
 					<i class="fa fa-trash-o"></i>
-					Archive
+					Active
 				</button>
 
 				<button
@@ -690,7 +692,7 @@ export default {
 				if (response.data.success) {
 					this.$toast.success({
 						title: "Success",
-						message: "Child has been archived.",
+						message: "Child has been activated.",
 					});
 					this.$emit('delete', this.Child);
 					this.close();
@@ -699,13 +701,13 @@ export default {
 
 				this.$toast.success({
 					title: "Error",
-					message: "Could not archive child.",
+					message: "Could not active child.",
 				});
 			})
 			.catch( (err) => {
 				this.$toast.success({
 					title: "Error",
-					message: "Could not archive child, an unexpected error occurred.",
+					message: "Could not active child, an unexpected error occurred.",
 				});
 			});
 		},

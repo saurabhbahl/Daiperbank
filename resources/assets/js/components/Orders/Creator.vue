@@ -38,7 +38,7 @@
 
 					<div v-if=" ! Order.child.length">
 						<p class="tc f2 wtl pa4">
-							There are no children on this order, yet.
+							There are no people on this order yet.
 							<br>
 							<br>
 							<button class="btn btn-primary"

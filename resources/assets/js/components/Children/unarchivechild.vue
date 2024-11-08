@@ -325,7 +325,7 @@
 					class="btn btn-block btn-alt bg-white btn-danger mt1 mb4"
 					@click="unarchiveChild">
 					<i class="fa fa-trash-o"></i>
-					Unarchive
+					Inactive
 				</button>
 
 
@@ -355,7 +355,7 @@ export default {
 
 	props: {
 		orders: {
-			required: true,
+			// required: true,
 			type: Array,
 		},
 	},
@@ -662,7 +662,7 @@ export default {
 				if (response.data.success) {
 					this.$toast.success({
 						title: "Success",
-						message: "Child has been unarchived.",
+						message: "Child has been Inactive.",
 					});
 					this.$emit('delete', this.Child);
 					this.close();
@@ -671,13 +671,13 @@ export default {
 
 				this.$toast.success({
 					title: "Error",
-					message: "Could not unarchive child.",
+					message: "Could not Inactive child.",
 				});
 			})
 			.catch( (err) => {
 				this.$toast.success({
 					title: "Error",
-					message: "Could not archive child, an unexpected error occurred.",
+					message: "Could not Active child, an unexpected error occurred.",
 				});
 			});
 		},

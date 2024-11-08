@@ -35,11 +35,11 @@ export default {
 		'component': require('./Donations.vue'),
 	},
 
-	'sizes': {
-		'id': 'sizes',
-		'name': 'Sizes Distributed',
-		'component': require('./OrganizationOverview.vue'),
-	},
+	// 'sizes': {
+	// 	'id': 'sizes',
+	// 	'name': 'Sizes Distributed',
+	// 	'component': require('./OrganizationOverview.vue'),
+	// },
 
 	'inventory': {
 		'id': 'inventory',

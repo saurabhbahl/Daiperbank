@@ -12,13 +12,13 @@
 		<div class="fg-no bg-washed-blue">
 			<ul class="nav nav-tabs ph3 pt3">
 				<li class="dropdown bg-white active clickable:important"><a href="#" data-toggle="dropdown" class="dropdown-toggle clickable:important" aria-expanded="false">
-						Archive <span class="caret"></span></a>
+						Active <span class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<li><a href="{{route('family.index')}}">
-								Archive </a></li>
+								Active </a></li>
 						<li>
 							<a href="{{ route('family.unarchive') }}">
-								Unarchive
+								Inactive
 							</a>
 						</li>
 					</ul>

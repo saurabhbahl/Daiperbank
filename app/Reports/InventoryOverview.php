@@ -29,13 +29,11 @@ SELECT * FROM (
 		COALESCE(SUM( IF(product_id = 13, CASE WHEN i.txn_type = 'CREDIT' THEN amount ELSE (-1 * CAST(amount AS SIGNED)) END, 0) ), 0) `2t-3t_pullups_girl`,
 		COALESCE(SUM( IF(product_id = 14, CASE WHEN i.txn_type = 'CREDIT' THEN amount ELSE (-1 * CAST(amount AS SIGNED)) END, 0) ), 0) `3t-4t_pullups_girl`,
 		COALESCE(SUM( IF(product_id = 15, CASE WHEN i.txn_type = 'CREDIT' THEN amount ELSE (-1 * CAST(amount AS SIGNED)) END, 0) ), 0) `4t-5t_pullups_girl`,
-		COALESCE(SUM( IF(product_id = 25, CASE WHEN i.txn_type = 'CREDIT' THEN amount ELSE (-1 * CAST(amount AS SIGNED)) END, 0) ), 0) `regular_Pads`,
-		COALESCE(SUM( IF(product_id = 26, CASE WHEN i.txn_type = 'CREDIT' THEN amount ELSE (-1 * CAST(amount AS SIGNED)) END, 0) ), 0) `overnight_pads`,
-		COALESCE(SUM( IF(product_id = 27, CASE WHEN i.txn_type = 'CREDIT' THEN amount ELSE (-1 * CAST(amount AS SIGNED)) END, 0) ), 0) `tampons`,
-		COALESCE(SUM( IF(product_id = 28, CASE WHEN i.txn_type = 'CREDIT' THEN amount ELSE (-1 * CAST(amount AS SIGNED)) END, 0) ), 0) `teen_regular_pads`,
-		COALESCE(SUM( IF(product_id = 29, CASE WHEN i.txn_type = 'CREDIT' THEN amount ELSE (-1 * CAST(amount AS SIGNED)) END, 0) ), 0) `teen_overnight_pads`,
-		COALESCE(SUM( IF(product_id = 30, CASE WHEN i.txn_type = 'CREDIT' THEN amount ELSE (-1 * CAST(amount AS SIGNED)) END, 0) ), 0) `post_partum_pads`,
-		COALESCE(SUM( IF(product_id = 31, CASE WHEN i.txn_type = 'CREDIT' THEN amount ELSE (-1 * CAST(amount AS SIGNED)) END, 0) ), 0) `perineal_cold_packs`
+		COALESCE(SUM( IF(product_id = 17, CASE WHEN i.txn_type = 'CREDIT' THEN amount ELSE (-1 * CAST(amount AS SIGNED)) END, 0) ), 0) `pads_only_packet`,
+		COALESCE(SUM( IF(product_id = 18, CASE WHEN i.txn_type = 'CREDIT' THEN amount ELSE (-1 * CAST(amount AS SIGNED)) END, 0) ), 0) `tampons_and_pads_packet`,
+		COALESCE(SUM( IF(product_id = 19, CASE WHEN i.txn_type = 'CREDIT' THEN amount ELSE (-1 * CAST(amount AS SIGNED)) END, 0) ), 0) `postpartum_packet`,
+		COALESCE(SUM( IF(product_id = 20, CASE WHEN i.txn_type = 'CREDIT' THEN amount ELSE (-1 * CAST(amount AS SIGNED)) END, 0) ), 0) `teen_packet`,
+		COALESCE(SUM( IF(product_id = 32, CASE WHEN i.txn_type = 'CREDIT' THEN amount ELSE (-1 * CAST(amount AS SIGNED)) END, 0) ), 0) `my_first_period_packet`
 	FROM inventory_adjustment a
 	JOIN inventory i ON i.inventory_adjustment_id = a.id
 	JOIN product p on p.id = i.product_id
@@ -64,13 +62,11 @@ SELECT * FROM (
 		COALESCE(SUM( IF(product_id = 13, CASE WHEN i.txn_type = 'CREDIT' THEN amount ELSE (-1 * CAST(amount AS SIGNED)) END, 0) ), 0) `2t-3t_pullups_girl`,
 		COALESCE(SUM( IF(product_id = 14, CASE WHEN i.txn_type = 'CREDIT' THEN amount ELSE (-1 * CAST(amount AS SIGNED)) END, 0) ), 0) `3t-4t_pullups_girl`,
 		COALESCE(SUM( IF(product_id = 15, CASE WHEN i.txn_type = 'CREDIT' THEN amount ELSE (-1 * CAST(amount AS SIGNED)) END, 0) ), 0) `4t-5t_pullups_girl`,
-		COALESCE(SUM( IF(product_id = 25, CASE WHEN i.txn_type = 'CREDIT' THEN amount ELSE (-1 * CAST(amount AS SIGNED)) END, 0) ), 0) `regular_Pads`,
-		COALESCE(SUM( IF(product_id = 26, CASE WHEN i.txn_type = 'CREDIT' THEN amount ELSE (-1 * CAST(amount AS SIGNED)) END, 0) ), 0) `overnight_pads`,
-		COALESCE(SUM( IF(product_id = 27, CASE WHEN i.txn_type = 'CREDIT' THEN amount ELSE (-1 * CAST(amount AS SIGNED)) END, 0) ), 0) `tampons`,
-		COALESCE(SUM( IF(product_id = 28, CASE WHEN i.txn_type = 'CREDIT' THEN amount ELSE (-1 * CAST(amount AS SIGNED)) END, 0) ), 0) `teen_regular_pads`,
-		COALESCE(SUM( IF(product_id = 29, CASE WHEN i.txn_type = 'CREDIT' THEN amount ELSE (-1 * CAST(amount AS SIGNED)) END, 0) ), 0) `teen_overnight_pads`,
-		COALESCE(SUM( IF(product_id = 30, CASE WHEN i.txn_type = 'CREDIT' THEN amount ELSE (-1 * CAST(amount AS SIGNED)) END, 0) ), 0) `post_partum_pads`,
-		COALESCE(SUM( IF(product_id = 31, CASE WHEN i.txn_type = 'CREDIT' THEN amount ELSE (-1 * CAST(amount AS SIGNED)) END, 0) ), 0) `perineal_cold_packs`
+		COALESCE(SUM( IF(product_id = 17, CASE WHEN i.txn_type = 'CREDIT' THEN amount ELSE (-1 * CAST(amount AS SIGNED)) END, 0) ), 0) `pads_only_packet`,
+		COALESCE(SUM( IF(product_id = 18, CASE WHEN i.txn_type = 'CREDIT' THEN amount ELSE (-1 * CAST(amount AS SIGNED)) END, 0) ), 0) `tampons_and_pads_packet`,
+		COALESCE(SUM( IF(product_id = 19, CASE WHEN i.txn_type = 'CREDIT' THEN amount ELSE (-1 * CAST(amount AS SIGNED)) END, 0) ), 0) `postpartum_packet`,
+		COALESCE(SUM( IF(product_id = 20, CASE WHEN i.txn_type = 'CREDIT' THEN amount ELSE (-1 * CAST(amount AS SIGNED)) END, 0) ), 0) `teen_packet`,
+		COALESCE(SUM( IF(product_id = 32, CASE WHEN i.txn_type = 'CREDIT' THEN amount ELSE (-1 * CAST(amount AS SIGNED)) END, 0) ), 0) `my_first_period_packet`
 	FROM inventory_adjustment a
 	JOIN inventory i ON i.inventory_adjustment_id = a.id
 	JOIN product p on p.id = i.product_id
@@ -81,7 +77,14 @@ EOQUERY;
 
 		$start_date = $this->getStartDate();
 		$end_date = $this->getEndDate();
-
+		// dd($start_date);
+		// dd($end_date);
+		// dd(DB::select($query, [
+		// 	$start_date->format('Y-m-d'),
+		// 	$start_date->format('Y-m-d 23:59:59'),
+		// 	$end_date->format('Y-m-d'),
+		// 	$end_date->format('Y-m-d 23:59:59'),
+		// ]));
 		return DB::select($query, [
 			$start_date->format('Y-m-d'),
 			$start_date->format('Y-m-d 23:59:59'),
@@ -146,6 +149,11 @@ EOQUERY;
 			['2t-3t Pullups Girl On-hand'],
 			['3t-4t Pullups Girl On-hand'],
 			['4t-5t Pullups Girl On-hand'],
+			['Pads Only Packet'],
+			['Tampons and Pads Packet'],
+			['Postpartum Packet'],
+			['Teen Packet'],
+			['My First Period Packet'],
 		];
 
 		foreach ($stats as $line) {
@@ -168,6 +176,11 @@ EOQUERY;
 				$line['2t-3t_pullups_girl'],
 				$line['3t-4t_pullups_girl'],
 				$line['4t-5t_pullups_girl'],
+				$line['pads_only_packet'],
+				$line['tampons_and_pads_packet'],
+				$line['postpartum_packet'],
+				$line['teen_packet'],
+				$line['my_first_period_packet'],
 			];
 
 			foreach ($line_data as $idx => $value) {
@@ -213,10 +226,19 @@ EOQUERY;
 			'4t-5t' => '4T-5T',
 		];
 
+		$periods_sizes = [
+			'pads_only_packet' => 'Pads Only Packet',
+			'tampons_and_pads_packet' => 'Tampons and Pads Packet',
+			'postpartum_packet' => 'Postpartum Packet',
+			'teen_packet' => 'Teen Packet',
+			'my_first_period_packet' => 'My First Period Packet',
+		];
+
 		return array_merge(parent::getViewData(), [
 			'diaper_sizes' => $diaper_sizes,
 			'pullup_sizes' => $pullup_sizes,
 			'genders' => ['boy', 'girl'],
+			'periods_sizes' => $periods_sizes,
 		]);
 	}
 
