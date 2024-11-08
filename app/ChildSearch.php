@@ -123,14 +123,14 @@ class ChildSearch
 		return DB::table('child as c')
 			->select(['c.*'])
 			->join('guardian as g', 'g.id', '=', 'c.guardian_id')
-			->join('zipcode as z', 'z.zip', '=', 'c.zip')
+			// ->join('zipcode as z', 'z.zip', '=', 'c.zip')
 			->orderBy('c.name', 'ASC')
 			->groupBy('c.id')
 			->groupBy('c.uniq_id')
 			->groupBy('c.name')
-			->groupBy('c.gender')
-			->groupBy('c.dob')
-			->groupBy('c.zip')
+			// ->groupBy('c.gender')
+			// ->groupBy('c.dob')
+			// ->groupBy('c.zip')
 			->groupBy('c.created_at')
 			->groupBy('c.updated_at')
 			->groupBy('c.deleted_at')
@@ -180,7 +180,6 @@ class ChildSearch
 		if (!$this->withTrashed) {
 			$this->Query->whereNull('c.deleted_at');
 		}
-
 		return $this;
 	}
 	protected function buildQueryMen()

@@ -10,9 +10,6 @@
 			:value="selectedId"
 			@selected="updateSelectedGuardian"
 		></GuardianSelect>
-		<p v-if="initialErrors && !editingGuardian && initialErrors['Child.guardian_id'][0]" class="validation-error">
-			{{ initialErrors['Child.guardian_id'][0] }} 
-		</p>
 
 		<label for="guardian_name" v-if="editingGuardian || creatingGuardian">
 			Unique Family Identifier <span class="required">*</span>
@@ -24,19 +21,15 @@
 			@change="updateGuardian"
 			@keyup="updateGuardian"
 		>
-		<!-- {{initialErrors}} -->
-		<p v-if="initialErrors && editingGuardian &&  initialErrors['Child.guardian_id'][0]" class="validation-error">
-			{{initialErrors['Child.guardian_id'][0] }}
-		</p>
-		<p v-if="hasError('Guardian.name')" class="validation-error">
-			{{ error('Guardian.name') }}
+		<p v-if="initialErrors && initialErrors['Child.guardian_id'] && initialErrors['Child.guardian_id'][0]" class="validation-error">
+			{{ initialErrors['Child.guardian_id'][0] }}
 		</p>
 
-	<!-- {{initialErrors}} -->
+
 		<div class="flex justify-between mt3">
 			<div class="w-50 pr2">
 				<label for="guardian_relationship">Relationship to Child:
-					<!-- <span class="required" v-if="editingGuardian">*</span> -->
+					<span class="required">*</span>
 				</label>
 				<select
 					id="guardian_relationship"
@@ -47,13 +40,13 @@
 					<option v-for="(rel, rel_id) in guardianRelationships" :key="'guardian-relationship' + rel_id"
 						:value="rel">{{ rel }}</option>
 				</select>
-				<p v-if="hasError('input.relationship')" class="validation-error">
-					{{ error('input.relationship') }}
+				<p v-if="initialErrors && initialErrors['Child.guardian_relationship'] && initialErrors['Child.guardian_relationship'][0]" class="validation-error">
+					{{ initialErrors['Child.guardian_relationship'][0] }}
 				</p>
 			</div>
 			<div class="w-50 pl2">
 				<label for="guardian_military_status">Military Status:
-					<!-- <span class="required">*</span> -->
+					<span class="required">*</span>
 				</label>
 				<select
 					:disabled="!editingGuardian && !creatingGuardian"
@@ -65,10 +58,11 @@
 					<option v-for="(military, mil_id) in militaryStatuses"
 						:key="'military-relationship' + mil_id"
 						:value="military">{{ military }}</option>
-				</select>
-				<p v-if="hasError('input.military_status')" class="validation-error">
-					{{ error('input.military_status') }}
+				</select> 
+				<p v-if="initialErrors && initialErrors['Guardian.military_status'] && initialErrors['Guardian.military_status'][0] && editingGuardian" class="validation-error">
+					{{ initialErrors['Guardian.military_status'][0] }}
 				</p>
+				
 			</div>
 		</div>
 
@@ -148,8 +142,8 @@ export default {
 
 	watch: {
 		initialErrors(errors) {
+			// console.log('errors testtt');
 			// console.log(errors);
-			console.log(errors);
 			this.errors = errors;
 		}
 	},
@@ -185,10 +179,11 @@ export default {
 
 			if (this.editingGuardian || this.creatingGuardian) {
 				if (this.input.military_status) {
+					// console.log('inner-',this.input.military_status);
 					return this.input.military_status;
 				}
 			}
-
+			// console.log('outer-',this.input.military_status);
 			return this.SelectedGuardian? this.SelectedGuardian.military_status : null;
 		},
 
@@ -237,6 +232,9 @@ export default {
 		},
 
 		updateGuardian() {
+			// console.log('update guardian test');
+			// console.log('guardianMilitaryStatus', this.guardianMilitaryStatus);
+			// console.log('update guardian',this.editingGuardian);
 			let guardian_id = this.selectedId;
 
 			if (this.creatingGuardian) {
@@ -264,9 +262,10 @@ export default {
 			} else {
 				this.editingGuardian = !this.editingGuardian;
 			}
-
 			if (this.editingGuardian) {
 				this.$emit('editGuardian', this.selectedId);
+
+				// console.log(this.SelectedGuardian.name, 'aaaaaaa');
 
 				if (this.SelectedGuardian && this.SelectedGuardian.name) {
 					this.input.name = this.SelectedGuardian.name;
@@ -290,6 +289,7 @@ export default {
 		},
 
 		toggleCreate(toggle) {
+			// console.log('yyyyyyyyyyyyyy');
 			if (undefined !== toggle) {
 				this.creatingGuardian = toggle;
 			} else {
@@ -297,6 +297,7 @@ export default {
 			}
 
 			if (this.creatingGuardian) {
+				// console.log('aaaaaaaaaa');
 				this.toggleEdit(false);
 				this.$emit('creatingGuardian');
 

@@ -17,7 +17,7 @@ Inventory Overview
 						<th>Qty On-hand</th>
 					</tr>
 				</thead>
-
+				
 				<? foreach ($diaper_sizes as $sz_key => $sz_label): ?>
 					<tr>
 						<th scope="row" class="tr"><?= $sz_label; ?></th>
@@ -27,6 +27,119 @@ Inventory Overview
 			</table>
 
 			<h3 class="f4 mt0">Pull-up Inventory</h3>
+			<? foreach($genders as $gender): ?>
+				<table class="table table-bordered table-striped">
+					<thead>
+						<tr>
+							<th colspan="2">
+								<i class="fa fa-<?= $gender == 'boy'? 'male' : 'female'; ?>"></i>
+								<?= ucwords($gender); ?> Pull-ups
+							</th>
+						</tr>
+
+						<tr>
+							<th class="w-25 tr">Size</th>
+							<th>Qty On-hand</th>
+						</tr>
+					</thead>
+
+					<? foreach ($pullup_sizes as $sz_key => $sz_label): ?>
+						<tr>
+							<th scope="row" class="tr"><?= $sz_label; ?></th>
+							<td><?= number_format($stats->start->{"{$sz_key}_pullups_{$gender}"}, 0); ?></td>
+						</tr>
+					<? endforeach; ?>
+				</table>
+			<? endforeach; ?>
+
+			<h4 class="f4 mt0">Period Product Inventory</h4>
+			<table class="table table-bordered table-striped">
+				<thead>
+					<tr>
+						<th class="w-25 tr">Size</th>
+						<th>Qty On-hand</th>
+					</tr>
+				</thead>
+				<tbody>
+					<? foreach ($periods_sizes as $sz_key => $sz_label): ?>
+					<tr>
+						<th scope="row" class="tr"><?= $sz_label; ?></th>
+						<td><?= number_format($stats->start->{"{$sz_key}"}, 0); ?></td>
+						</tr>
+					<? endforeach; ?>
+					<!-- <tr>
+						<th scope="row" class="tr">Regular Pads</th>
+						<td><//?= number_format($stats->start->regular_Pads, 0); ?></td>
+					</tr>
+					<tr>
+						<th scope="row" class="tr">Overnight Pads</th>
+						<td><//?= number_format($stats->start->overnight_pads, 0); ?></td>
+					</tr>
+					<tr>
+						<th scope="row" class="tr">Tampons</th>
+						<td><//?= number_format($stats->start->tampons, 0); ?></td>
+					</tr>
+					<tr>
+						<th scope="row" class="tr">Teen Regular Pads</th>
+						<td><//?= number_format($stats->start->teen_regular_pads, 0); ?></td>
+					</tr>
+					<tr>
+						<th scope="row" class="tr">Teen Overnight Pads</th>
+						<td><//?= number_format($stats->start->teen_overnight_pads, 0); ?></td>
+					</tr>
+					<tr>
+						<th scope="row" class="tr">Post Partum Pads</th>
+						<td><//?= number_format($stats->start->post_partum_pads, 0); ?></td>
+					</tr>
+					<tr>
+						<th scope="row" class="tr">Perineal Cold Packs</th>
+						<td><//?= number_format($stats->start->perineal_cold_packs, 0); ?></td>
+					</tr> -->
+					<tr>
+						<th scope="row" class="tr">Pads Only Packet</th>
+						<td><?= number_format($stats->start->pads_only_packet, 0); ?></td>
+					</tr>
+					<tr>
+						<th scope="row" class="tr">Tampons and Pads Packet</th>
+						<td><?= number_format($stats->start->tampons_and_pads_packet, 0); ?></td>
+					</tr>
+					<tr>
+						<th scope="row" class="tr">Postpartum Packet</th>
+						<td><?= number_format($stats->start->postpartum_packet, 0); ?></td>
+					</tr>
+					<tr>
+						<th scope="row" class="tr">Teen Packet</th>
+						<td><?= number_format($stats->start->teen_packet, 0); ?></td>
+					</tr>
+					<tr>
+						<th scope="row" class="tr">My First Period Packet</th>
+						<td><?= number_format($stats->start->my_first_period_packet, 0); ?></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<div class="w-50 fs-no fg-no pr">
+			<h3 class="f3 ma0 tc pa0"><?= carbon($stats->end->report_date)->format('M jS, Y'); ?></h3>
+
+			<h4 class="f4 mt0">Diapers</h4>
+			<table class="table table-bordered table-striped">
+				<thead>
+					<tr>
+						<th class="w-25 tr">Size</th>
+						<th>Qty On-hand</th>
+					</tr>
+				</thead>
+
+				<? foreach ($diaper_sizes as $sz_key => $sz_label): ?>
+					<tr>
+						<th scope="row" class="tr"><?= $sz_label; ?></th>
+						<td><?= number_format($stats->end->{"{$sz_key}_diapers"}, 0); ?></td>
+					</tr>
+				<? endforeach; ?>
+			</table>
+
+			<h3 class="f4 mt0">Pull-up Details</h3>
 			<? //foreach($genders as $gender): ?>
 				<table class="table table-bordered table-striped">
 					<thead>
@@ -56,93 +169,6 @@ Inventory Overview
 				</table>
 			<? //endforeach; ?>
 
-			<h4 class="f4 mt0">Period Product Inventory</h4>
-			<table class="table table-bordered table-striped">
-				<thead>
-					<tr>
-						<th class="w-25 tr">Size</th>
-						<th>Qty On-hand</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<th scope="row" class="tr">Regular Pads</th>
-						<td><?= number_format($stats->start->regular_Pads, 0); ?></td>
-					</tr>
-					<tr>
-						<th scope="row" class="tr">Overnight Pads</th>
-						<td><?= number_format($stats->start->overnight_pads, 0); ?></td>
-					</tr>
-					<tr>
-						<th scope="row" class="tr">Tampons</th>
-						<td><?= number_format($stats->start->tampons, 0); ?></td>
-					</tr>
-					<tr>
-						<th scope="row" class="tr">Teen Regular Pads</th>
-						<td><?= number_format($stats->start->teen_regular_pads, 0); ?></td>
-					</tr>
-					<tr>
-						<th scope="row" class="tr">Teen Overnight Pads</th>
-						<td><?= number_format($stats->start->teen_overnight_pads, 0); ?></td>
-					</tr>
-					<tr>
-						<th scope="row" class="tr">Post Partum Pads</th>
-						<td><?= number_format($stats->start->post_partum_pads, 0); ?></td>
-					</tr>
-					<tr>
-						<th scope="row" class="tr">Perineal Cold Packs</th>
-						<td><?= number_format($stats->start->perineal_cold_packs, 0); ?></td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-
-		<div class="w-50 fs-no fg-no pr">
-			<h3 class="f3 ma0 tc pa0"><?= carbon($stats->end->report_date)->format('M jS, Y'); ?></h3>
-
-			<h4 class="f4 mt0">Diapers</h4>
-			<table class="table table-bordered table-striped">
-				<thead>
-					<tr>
-						<th class="w-25 tr">Size</th>
-						<th>Qty On-hand</th>
-					</tr>
-				</thead>
-
-				<? foreach ($diaper_sizes as $sz_key => $sz_label): ?>
-					<tr>
-						<th scope="row" class="tr"><?= $sz_label; ?></th>
-						<td><?= number_format($stats->end->{"{$sz_key}_diapers"}, 0); ?></td>
-					</tr>
-				<? endforeach; ?>
-			</table>
-
-			<h3 class="f4 mt0">Pull-up Details</h3>
-			<? foreach($genders as $gender): ?>
-				<table class="table table-bordered table-striped">
-					<thead>
-						<tr>
-							<th colspan="2">
-								<i class="fa fa-<?= $gender == 'boy'? 'male' : 'female'; ?>"></i>
-								<?= ucwords($gender); ?> Pull-ups
-							</th>
-						</tr>
-
-						<tr>
-							<th class="w-25 tr">Size</th>
-							<th>Qty On-hand</th>
-						</tr>
-					</thead>
-
-					<? foreach ($pullup_sizes as $sz_key => $sz_label): ?>
-						<tr>
-							<th scope="row" class="tr"><?= $sz_label; ?></th>
-							<td><?= number_format($stats->end->{"{$sz_key}_pullups_{$gender}"}, 0); ?></td>
-						</tr>
-					<? endforeach; ?>
-				</table>
-			<? endforeach; ?>
-
 			<h4 class="f4 mt0">Period Product Details</h4>
 			<table class="table table-bordered table-striped">
 				<thead>
@@ -152,33 +178,59 @@ Inventory Overview
 					</tr>
 				</thead>
 				<tbody>
+					<? foreach ($periods_sizes as $sz_key => $sz_label): ?>
 					<tr>
+						<th scope="row" class="tr"><?= $sz_label; ?></th>
+						<td><?= number_format($stats->end->{"{$sz_key}"}, 0); ?></td>
+						</tr>
+					<? endforeach; ?>
+					<!-- <tr>
 						<th scope="row" class="tr">Regular Pads</th>
-						<td><?= number_format($stats->start->regular_Pads, 0); ?></td>
+						<td><//?= number_format($stats->start->regular_Pads, 0); ?></td>
 					</tr>
 					<tr>
 						<th scope="row" class="tr">Overnight Pads</th>
-						<td><?= number_format($stats->start->overnight_pads, 0); ?></td>
+						<td><//?= number_format($stats->start->overnight_pads, 0); ?></td>
 					</tr>
 					<tr>
 						<th scope="row" class="tr">Tampons</th>
-						<td><?= number_format($stats->start->tampons, 0); ?></td>
+						<td><//?= number_format($stats->start->tampons, 0); ?></td>
 					</tr>
 					<tr>
 						<th scope="row" class="tr">Teen Regular Pads</th>
-						<td><?= number_format($stats->start->teen_regular_pads, 0); ?></td>
+						<td><//?= number_format($stats->start->teen_regular_pads, 0); ?></td>
 					</tr>
 					<tr>
 						<th scope="row" class="tr">Teen Overnight Pads</th>
-						<td><?= number_format($stats->start->teen_overnight_pads, 0); ?></td>
+						<td><//?= number_format($stats->start->teen_overnight_pads, 0); ?></td>
 					</tr>
 					<tr>
 						<th scope="row" class="tr">Post Partum Pads</th>
-						<td><?= number_format($stats->start->post_partum_pads, 0); ?></td>
+						<td><//?= number_format($stats->start->post_partum_pads, 0); ?></td>
 					</tr>
 					<tr>
 						<th scope="row" class="tr">Perineal Cold Packs</th>
-						<td><?= number_format($stats->start->perineal_cold_packs, 0); ?></td>
+						<td><//?= number_format($stats->start->perineal_cold_packs, 0); ?></td>
+					</tr> -->
+					<tr>
+						<th scope="row" class="tr">Pads Only Packet</th>
+						<td><?= number_format($stats->end->pads_only_packet, 0); ?></td>
+					</tr>
+					<tr>
+						<th scope="row" class="tr">Tampons and Pads Packet</th>
+						<td><?= number_format($stats->end->tampons_and_pads_packet, 0); ?></td>
+					</tr>
+					<tr>
+						<th scope="row" class="tr">Postpartum Packet</th>
+						<td><?= number_format($stats->end->postpartum_packet, 0); ?></td>
+					</tr>
+					<tr>
+						<th scope="row" class="tr">Teen Packet</th>
+						<td><?= number_format($stats->end->teen_packet, 0); ?></td>
+					</tr>
+					<tr>
+						<th scope="row" class="tr">My First Period Packet</th>
+						<td><?= number_format($stats->end->my_first_period_packet, 0); ?></td>
 					</tr>
 				</tbody>
 			</table>

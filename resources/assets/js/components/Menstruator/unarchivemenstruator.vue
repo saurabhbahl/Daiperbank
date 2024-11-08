@@ -291,7 +291,7 @@
 					class="btn btn-block btn-alt bg-white btn-danger mt1 mb4"
 					@click="unarchiveChild">
 					<i class="fa fa-trash-o"></i>
-					Unarchive
+					Inactive
 				</button>
 
 
@@ -534,7 +534,7 @@ export default {
 				if (response.data.success) {
 					this.$toast.success({
 						title: "Success",
-						message: "Menstruator has been unarchived.",
+						message: "Menstruator has been Inactive.",
 					});
 					this.$emit('delete', this.Child);
 					this.close();
@@ -543,13 +543,13 @@ export default {
 
 				this.$toast.success({
 					title: "Error",
-					message: "Could not unarchive Menstruator.",
+					message: "Could not Inactive Menstruator.",
 				});
 			})
 			.catch( (err) => {
 				this.$toast.success({
 					title: "Error",
-					message: "Could not archive child, an unexpected error occurred.",
+					message: "Could not Active child, an unexpected error occurred.",
 				});
 			});
 		},

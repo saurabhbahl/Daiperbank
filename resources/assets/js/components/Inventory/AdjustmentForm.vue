@@ -175,7 +175,7 @@ export default {
 
 			note_visible: this.initialValues.note && this.initialValues.note.length || false,
 			errors: this.initialErrors,
-			excludedIds: [17, 18, 19, 20],
+			includedIds: [17, 18, 19, 20, 32],
 		};
 	},
 
@@ -212,7 +212,7 @@ export default {
 		getCategoryProducts(category_id) {
 			let products = this.productCategories.map( (category) => {
 				if(category_id == 3 && category.id == 3){
-					return category.product.filter( item => !this.excludedIds.includes(item.id) );
+					return category.product.filter( item => this.includedIds.includes(item.id) );
 				}
 				else{
 					return category_id && category.id == category_id? category.product : [];

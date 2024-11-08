@@ -13,7 +13,7 @@ SELECT
 	COUNT(DISTINCT a.id) purchase,
 	COALESCE(SUM(CASE WHEN (i.product_id < 10 OR i.product_id = 16) THEN i.amount ELSE 0 END), 0) total_diapers,
 	COALESCE(SUM(CASE WHEN i.product_id BETWEEN 10 AND 15 THEN i.amount ELSE 0 END), 0) total_pullups,
-	COALESCE(SUM(CASE WHEN i.product_id BETWEEN 25 AND 31 THEN i.amount ELSE 0 END), 0) total_periods,
+	COALESCE(SUM(CASE WHEN i.product_id BETWEEN 17 AND 32 THEN i.amount ELSE 0 END), 0) total_periods,
 	COALESCE(SUM(i.amount), 0) total_donated,
 	COALESCE(SUM(CASE WHEN i.product_id = 1 THEN i.amount ELSE 0 END), 0) preemie_diapers,
 	COALESCE(SUM(CASE WHEN i.product_id = 2 THEN i.amount ELSE 0 END), 0) newborn_diapers,
@@ -31,13 +31,18 @@ SELECT
 	COALESCE(SUM(CASE WHEN i.product_id = 13 THEN i.amount ELSE 0 END), 0) `2t-3t_pullups_girl`,
 	COALESCE(SUM(CASE WHEN i.product_id = 14 THEN i.amount ELSE 0 END), 0) `3t-4t_pullups_girl`,
 	COALESCE(SUM(CASE WHEN i.product_id = 15 THEN i.amount ELSE 0 END), 0) `4t-5t_pullups_girl`,
+	COALESCE(SUM(CASE WHEN i.product_id = 17 THEN i.amount ELSE 0 END), 0) `pads_only_packet`,
+	COALESCE(SUM(CASE WHEN i.product_id = 18 THEN i.amount ELSE 0 END), 0) `tampons_and_pads_packet`,
+	COALESCE(SUM(CASE WHEN i.product_id = 19 THEN i.amount ELSE 0 END), 0) `postpartum_packet`,
+	COALESCE(SUM(CASE WHEN i.product_id = 20 THEN i.amount ELSE 0 END), 0) `teen_packet`,
 	COALESCE(SUM(CASE WHEN i.product_id = 25 THEN i.amount ELSE 0 END), 0) `regular_Pads`,
 	COALESCE(SUM(CASE WHEN i.product_id = 26 THEN i.amount ELSE 0 END), 0) `overnight_pads`,
 	COALESCE(SUM(CASE WHEN i.product_id = 27 THEN i.amount ELSE 0 END), 0) `tampons`,
 	COALESCE(SUM(CASE WHEN i.product_id = 28 THEN i.amount ELSE 0 END), 0) `teen_regular_pads`,
 	COALESCE(SUM(CASE WHEN i.product_id = 29 THEN i.amount ELSE 0 END), 0) `teen_overnight_pads`,
 	COALESCE(SUM(CASE WHEN i.product_id = 30 THEN i.amount ELSE 0 END), 0) `post_partum_pads`,
-	COALESCE(SUM(CASE WHEN i.product_id = 31 THEN i.amount ELSE 0 END), 0) `perineal_cold_packs`
+	COALESCE(SUM(CASE WHEN i.product_id = 31 THEN i.amount ELSE 0 END), 0) `perineal_cold_packs`,
+	COALESCE(SUM(CASE WHEN i.product_id = 32 THEN i.amount ELSE 0 END), 0) `my_first_period_packet`
 FROM inventory_adjustment a
 JOIN inventory i ON i.inventory_adjustment_id = a.id
 JOIN product p on p.id = i.product_id
@@ -52,7 +57,7 @@ SELECT
 	adjustment_note,
 	COALESCE(SUM(CASE WHEN (i.product_id < 10 OR i.product_id = 16) THEN i.amount ELSE 0 END), 0) total_diapers,
 	COALESCE(SUM(CASE WHEN i.product_id BETWEEN 10 AND 15 THEN i.amount ELSE 0 END), 0) total_pullups,
-	COALESCE(SUM(CASE WHEN i.product_id BETWEEN 25 AND 31 THEN i.amount ELSE 0 END), 0) total_periods,
+	COALESCE(SUM(CASE WHEN i.product_id BETWEEN 17 AND 32 THEN i.amount ELSE 0 END), 0) total_periods,
 	COALESCE(SUM(i.amount), 0) total_donated,
 	COALESCE(SUM(CASE WHEN i.product_id = 1 THEN i.amount ELSE 0 END), 0) preemie_diapers,
 	COALESCE(SUM(CASE WHEN i.product_id = 2 THEN i.amount ELSE 0 END), 0) newborn_diapers,

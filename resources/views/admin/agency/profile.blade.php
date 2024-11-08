@@ -17,6 +17,8 @@
                                         <th>Agency Name</th>
                                         <th>Agency Username</th>
                                         <th>Agency ID Prefix</th>
+                                        <th>Contact Name</th>
+                                        <th>Contact</th>
                                         <th>Address</th>
                                         <th>City</th>
                                         <th>State</th>
@@ -28,9 +30,16 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>{{ $agency->name }}</td>
+                                    <td>{{ $agency->name }}</td>
+                                        <td>{{ $agency->User->username }}</td>
+                                        <!-- @foreach ($agency->User as $User)
+                                            <td>{{ $User }}</td>
+                                        @endforeach -->
                                         <td>{{ $agency->id_prefix }}</td>
-                                        <td>{{ $agency->id_prefix }}</td>
+                                        @foreach ($agency->contact as $contact)
+                                            <td>{{ $contact->name }}</td>
+                                            <td>{{ $contact->phone }}</td>
+                                        @endforeach
                                         <td>
                                             {{ $agency->address }}
                                             {{ $agency->address_2 }}

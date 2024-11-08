@@ -200,6 +200,8 @@
 					<!-- {{ Child.guardian.military_status }} -->
 				</p>
 			</div>
+			<p v-if="errors" class="validation-error">
+		</p>
 			<GuardianEditor v-if="editing"
 				:initialGuardians="Guardians"
 				:selectedId="editedChild.guardian_id || Child.guardian_id"
@@ -333,7 +335,7 @@
 					class="btn btn-block btn-alt bg-white btn-danger mt1 mb4"
 					@click="archiveChild">
 					<i class="fa fa-trash-o"></i>
-					Archive
+					Active
 				</button>
 
 				<button
@@ -576,7 +578,7 @@ export default {
 			if(this.editedChild.dob=='Invalid date'){
 				this.editedChild.dob=null;
 			}
-			console.log(this.editedChild.dob+' test');
+			// console.log(this.editedChild.dob+' test');
 			let postData = {
 				Child: this.editedChild,
 			};
@@ -585,7 +587,7 @@ export default {
 				postData.update_guardian = true;
 				postData.Guardian = this.newGuardian;
 			}
-
+			console.log(postData.Guardian, 'postData.Guardian');
 			axios.post(this.resourceUrl, postData)
 			.then( (response) => {
 				if (response.data.success) {
@@ -613,7 +615,6 @@ export default {
 						title: "Error",
 						message: response.data.message,
 					});
-
 					this.displayErrors(response.data.data.errors || {});
 					return;
 				}
@@ -683,7 +684,7 @@ export default {
 				.catch(error => {
 					let response = error.response;
 					if (response.status == 422) {
-						console.log('testtt---'+response.data.data.errors);
+						// console.log('testtt---'+response.data.data.errors);
 						return {
 							success: false,
 							message: response.data.message,
@@ -728,7 +729,7 @@ export default {
 				if (response.data.success) {
 					this.$toast.success({
 						title: "Success",
-						message: "Child has been archived.",
+						message: "Child has been Activated.",
 					});
 					this.$emit('delete', this.Child);
 					this.close();
@@ -737,13 +738,13 @@ export default {
 
 				this.$toast.success({
 					title: "Error",
-					message: "Could not archive child.",
+					message: "Could not active child.",
 				});
 			})
 			.catch( (err) => {
 				this.$toast.success({
 					title: "Error",
-					message: "Could not archive child, an unexpected error occurred.",
+					message: "Could not active child, an unexpected error occurred.",
 				});
 			});
 		},
@@ -776,7 +777,7 @@ export default {
 
 			editedChild.weight_lb = Math.floor( this.Child.weight / 16 );
 			editedChild.weight_oz = this.Child.weight % 16;
-			console.log(editedChild.dob);
+			// console.log(editedChild.dob);
 			editedChild.dob = moment(this.Child.dob).format('YYYY-MM-DD');
 
 			this.$set(this, 'editedChild', editedChild);
@@ -803,6 +804,8 @@ export default {
 		},
 
 		updateGuardian(guardian_id, Guardian) {
+			// console.log('Guardian=',Guardian);
+			// return;
 			this.editedChild.guardian_relationship = Guardian.relationship;
 			this.editingGuardian = Guardian.editing;
 			this.creatingGuardian = Guardian.creating;
@@ -811,9 +814,11 @@ export default {
 				this.newGuardian = {
 					id: Guardian.id,
 					name: Guardian.name,
+					relationship: Guardian.relationship,
 					military_status: Guardian.military_status,
 				};
 			}
+			// console.log('this.newGuardian==',this.newGuardian);
 		},
 
 		clearEditableData() {

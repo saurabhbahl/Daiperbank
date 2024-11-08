@@ -40,14 +40,15 @@ class UpdateController extends Controller {
 
 			$saved = DB::transaction(function () use ($data, $Agency, $is_creating) {
 				$agency_data = array_get($data, 'agency');
-				$agency_fields = ['name', 'address', 'address_2', 'city', 'state', 'zip'];
+				$agency_fields = ['name', 'id_prefix', 'address', 'address_2', 'city', 'state', 'zip'];
 
 				// do not allow the agency prefix to be modified once it has been set.
-				if ( ! $Agency || ! $Agency->id_prefix) {
-					$agency_fields [] = 'id_prefix';
-				}
+				// if ( ! $Agency || ! $Agency->id_prefix) {
+				// 	$agency_fields [] = 'id_prefix';
+				// }
 
 				$agency_data = array_only($agency_data, $agency_fields);
+
 
 				if ($is_creating) {
 					$Agency = Agency::create($agency_data);

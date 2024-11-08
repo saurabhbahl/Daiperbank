@@ -37,6 +37,7 @@ class ViewController extends BaseController {
 	}
 
 	public function post(Request $Request, Child $Child) {
+		// dd($Request);
 		if ($Child->exists) {
 			if (Gate::denies('update', $Child)) {
 				return $this->deny();
@@ -71,7 +72,7 @@ class ViewController extends BaseController {
 					'guardian_relationship',
 					'is_menstruator',
 				]);
-
+				// var_dump($child_data);
 				// had to add this line because we were getting this error on save:
 				/**
 	             * [2018-02-10 15:19:11] local.ERROR: InvalidArgumentException: Unexpected data found.
@@ -139,6 +140,7 @@ class ViewController extends BaseController {
 		} catch (ValidationException $e) {
 			Log::error("Child could not be saved", [ 'POST' => $Request->all(), 'Child' => $Child->toArray(), 'errors' => $e->validator->errors()->toArray() ]);
 
+
 			return response()->json([
 				'success' => false,
 				'message' => 'Could not save child, an unexpected error occurred.',
@@ -177,10 +179,10 @@ class ViewController extends BaseController {
 			'Child.status_potty_train' => ['boolean', 'nullable'],
 			'Child.status_wic' => ['boolean', 'nullable'],
 			'Child.guardian_id' => ['required_unless:update_guardian,true'],
-
+			'Child.guardian_relationship' => ['required', 'string'],
+			// 'Child.military_status' => ['required_if:update_guardian,true', 'string'],
 			'Guardian.name' => ['required_if:update_guardian,true', 'string', 'unique_family_identifier:' . ($Child->guardian_id) . ',' . Auth()->User()->Agency->id, ],
-			'Guardian.relationship' => ['nullable,true'],
-			'Guardian.military_status' => ['nullable', 'string'],
+			'Guardian.military_status' => ['required_if:update_guardian,true', 'string'],
 		];
 	}
 
@@ -205,11 +207,12 @@ class ViewController extends BaseController {
 			'Child.status_wic.required' => 'WIC status is required.',
 			'Child.guardian_id.required_unless' => 'You must select a parent/guardian for this child.',
 			'Child.guardian_relationship.required' => 'Guardian relationship is required.',
+			// 'Child.military_status.required' => 'Military Status is required.',
 
 			'Guardian.name.required_if' => 'This field is required',
 			'Guardian.name.unique_family_identifier' => 'This unique family identifier has already been assigned to another family.',
-			// 'Guardian.relationship.required_if' => 'This field is required',
-			// 'Guardian.military_status.required_if' => 'This field is required.',
+			// 'Guardian.relationship.required' => 'This field is required',
+			'Guardian.military_status.required_if' => 'This field is required.',
 		];
 	}
 

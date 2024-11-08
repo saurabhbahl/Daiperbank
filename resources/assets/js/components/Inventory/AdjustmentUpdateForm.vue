@@ -107,11 +107,11 @@
 						<!-- <option v-for="diaper in getCategoryProducts(product.product_category_id)"
 								:value="diaper.id">
 								{{ diaper.name }}
+						</option> -->
+						 <option v-for="diaper in getUniqueCategoryProducts(product.product_category_id)" :value="diaper.id">
+							{{ diaper.name.replace(/Boy|Girl/g, '') }}
 						</option>
-					</select> -->
-					<option v-for="diaper in getUniqueCategoryProducts(product.product_category_id)" :value="diaper.id">
-						{{ diaper.name.replace(/Boy|Girl/g, '') }}
-					</option>
+					</select>
 				</div>
 
 				<div class="w-20 ph3">
@@ -185,7 +185,7 @@ export default {
 
 			note_visible: this.initialData[0].adjustment_note && this.initialData[0].adjustment_note.length || false,
 			errors: this.initialErrors,
-			excludedIds: [17, 18, 19, 20],
+			includedIds: [17, 18, 19, 20, 32],
 			Data: {
 				inventory : this.initialData[0],
 				adjustment_type : this.initialData[0].adjustment_type,
@@ -236,7 +236,7 @@ export default {
 		getCategoryProducts(category_id) {
 			let products = this.productCategories.map( (category) => {
 				if(category_id == 3 && category.id == 3){
-					return category.product.filter( item => !this.excludedIds.includes(item.id) );
+					return category.product.filter( item => this.includedIds.includes(item.id) );
 				}
 				else{
 					return category_id && category.id == category_id? category.product : [];
