@@ -9,8 +9,27 @@ Diaper Drive Report
 @stop
 
 @section('content')
-
+	<h3 class="f3 mt0 pa0">Donations Overview</h3>
 	<table class="table table-bordered table-striped">
+		<tr>
+			<th scope="row" class="w-50 tr">Donations</th>
+			<td><?= number_format($stats['Aggregate'][0]->donations, 0); ?></td>
+		</tr>
+		<tr>
+			<th scope="row" class="tr">Total Diapers</th>
+			<td><?= number_format($stats['Aggregate'][0]->total_diapers, 0); ?></td>
+		</tr>
+		<tr>
+			<th scope="row" class="tr">Total Pull-ups</th>
+			<td><?= number_format($stats['Aggregate'][0]->total_pullups, 0); ?></td>
+		</tr>
+		<tr>
+			<th scope="row" class="tr">Total Period Products</th>
+			<td><?= number_format($stats['Aggregate'][0]->total_period_products, 0); ?></td>
+		</tr>
+	</table>
+	<table class="table table-bordered table-striped">
+		
 		<thead>
 			<tr>
 				<th rowspan="2">
@@ -23,7 +42,7 @@ Diaper Drive Report
 			</tr>
 		</thead>
 
-		<? foreach ($stats as $drive):?>
+		<? foreach ($stats['Detail'] as $drive):?>
 			<tr>
 				<th scope="row">
 					<p><?= carbon($drive->adjustment_datetime)->format('M j, Y'); ?></p>
