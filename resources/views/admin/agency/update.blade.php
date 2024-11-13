@@ -382,10 +382,14 @@
 
 									<p class="ml3">
 										<span class="b">DOB:</span>
-										<?= $Child->dob->format('m-d-Y'); ?> (<?= $Child->age_str; ?>)
+										<? if($Child->dob): ?>
+											<?= $Child->dob->format('m-d-Y'); ?> ?> (<?= $Child->age_str; ?>)
+										<? endif;	?>
 										<br>
 										<span class="b">County:</span>
-										<?= $Child->Location->first()->county ?? 'N/A'; ?>
+										<? if($Child->Location): ?>
+											<?= $Child->Location->first()->county ?? 'N/A'; ?>
+										<? endif;	?>
 									</p>
 								</div>
 							</div>
