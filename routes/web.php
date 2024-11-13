@@ -59,7 +59,7 @@ Route::group(['middleware' => ['auth']], function () {
 
 		// Agency Profile
 		Route::group(['prefix' => 'profile'], function () {
-			Route::name('agency.profile.index')->get('/')->uses('Agency\ProfileController@index');
+			Route::name('agency.profile.index')->get('/')->uses('Agency\ProfileController@get');
 		});
 
 		// Partner Agreement
