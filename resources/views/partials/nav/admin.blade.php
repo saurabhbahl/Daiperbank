@@ -42,7 +42,7 @@
         <li>
             <a href="<?= route('admin.additionalresource.create') ?>">
                 <i class="fa fa-file"></i>
-                Addiotional Resources
+                Additional Resources
             </a>
         </li>
     </ul>

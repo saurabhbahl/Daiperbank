@@ -65,15 +65,16 @@ class AgencySearch {
 			$search_query = "%{$this->search}%";
 			$this->Query->where(function ($Query) use ($search_query) {
 				$Query->where('a.id', 'like', $search_query)
+					// $Query->where('a.name', 'like', $search_query)
 					->orWhere('a.name', 'like', $search_query)
-					->orWhere('a.id_prefix', 'like', $search_query)
-					->orWhere('u.username', 'like', $search_query)
-					->orWhere('child.name', 'like', $search_query)
-					->orWhere('child.uniq_id', 'like', $search_query)
-					->orWhere('contact.name', 'like', $search_query)
-					->orWhere('contact.phone', 'like', $search_query)
-					->orWhere('contact.email', 'like', $search_query)
-					->orWhere('g.name', 'like', $search_query);
+					->orWhere('a.id_prefix', 'like', $search_query);
+				// ->orWhere('u.username', 'like', $search_query)
+				// ->orWhere('child.name', 'like', $search_query)
+				// ->orWhere('child.uniq_id', 'like', $search_query)
+				// ->orWhere('contact.name', 'like', $search_query)
+				// ->orWhere('contact.phone', 'like', $search_query)
+				// ->orWhere('contact.email', 'like', $search_query)
+				// ->orWhere('g.name', 'like', $search_query);
 			});
 		}
 	    if ($this->status) {

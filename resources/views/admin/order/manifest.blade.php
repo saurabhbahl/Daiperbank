@@ -37,7 +37,7 @@ tr { page-break-inside: avoid }
 			<tr>
 				<th width="20%">Order Number</th>
 				<th width="20%">Agency</th>
-				<th width="10%">Children</th>
+				<th width="10%">Individual</th>
 				<th width="10%">Packed On</th>
 				<th width="15%">Packed By</th>
 				<th width="10%">Pickup At</th>
