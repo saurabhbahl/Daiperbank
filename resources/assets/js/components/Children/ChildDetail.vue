@@ -197,7 +197,7 @@
 
 				<p class="flex-auto tr">
 					<span class="b">Military Status:</span>
-					<!-- {{ Child.guardian.military_status }} -->
+					{{ Child.guardian.military_status }}
 				</p>
 			</div>
 			<p v-if="errors" class="validation-error">
