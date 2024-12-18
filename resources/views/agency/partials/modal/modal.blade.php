@@ -8,7 +8,9 @@
                 </button>
             </div>
             <div class="modal-body">
+            @if($notification && isset($notification->notification_information))
                 <p>{!! $notification->notification_information !!}</p>
+            @endif
             </div>
         </div>
     </div>
