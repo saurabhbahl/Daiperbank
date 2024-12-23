@@ -57,7 +57,7 @@
                     </div>
                 </div>
 
-                <div class="col-xs-2 pb flex flex-column justify-start oy-auto">
+                <div class="col-xs-2 pb flex flex-column justify-start oy-auto hide-on-print">
                     <div class="fs-no fg-no pv4 bb b--black-20">
                         <button class="btn btn-block btn-success" onclick="window.print()">Print Agency Info</button>
                     </div>

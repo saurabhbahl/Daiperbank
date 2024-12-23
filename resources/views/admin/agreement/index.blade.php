@@ -23,7 +23,7 @@
                 </tr>
                 @foreach ($agreements as $agreement)
                     <tr>
-                        <td>{{ $agreement->file }}</td>
+                    <td><a href="{{ '/uploads/' . $resource->file }}" download>{{ $resource->file }}</a></td>
                         <td>{{ $agreement->name }}</td>
                         <td>{{ $agreement->created_at }}</td>
                         <td>{{ $agreement->updated_at }}</td>

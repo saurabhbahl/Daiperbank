@@ -24,7 +24,7 @@
                 </tr>
                 @foreach ($resources as $resource)
                     <tr>
-                        <td>{{ $resource->file }}</td>
+                    <td><a href="{{ '/uploads/' . $resource->file }}" download>{{ $resource->file }}</a></td>
                         <td>{{ $resource->created_at }}</td>
                         <td>{{ $resource->updated_at }}</td>
                         <td>
