@@ -46,13 +46,13 @@
                                         </div>
                                         <div class="checkboxField">
                                             <label>
-                                                <input type="checkbox" class="notificationCheckbox" />
-                                                Disable
+                                            <input type="checkbox" class="notificationCheckbox" name="disable" {{ !empty($lastRecord->disable) ? ($lastRecord->disable ? 'checked' : '') : '' }} />
+                                            Disable
                                             </label>
                                             <p>If the above button is checked then users will not get information.</p>
                                         </div>
                                     </div>
-
+                                    <input type="hidden" name="id" value='{{ !empty($lastRecord->id) ? $lastRecord->id : "" }}'>
                                     <button type="submit" class="btn btn-primary saveNotificationBtn">Save</button>
                                 </form>
                             </div>
@@ -70,7 +70,7 @@
 @stop
 
 @section('js')
-    <script>
+    <!-- <script>
         $(document).ready(function() {
 
             if ("checked" in localStorage) {
@@ -121,5 +121,5 @@
         }
 
         $(document).ready(onReady);
-    </script>
+    </script> -->
 @endsection

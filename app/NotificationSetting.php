@@ -10,6 +10,11 @@ class NotificationSetting extends Model
     protected $table = "notification_settings";
 
     protected $fillable = [
-        'notification_information'
+        'notification_information',
+        'disable'
+    ];
+
+    protected $casts = [
+        'disable' => 'boolean',
     ];
 }

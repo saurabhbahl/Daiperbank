@@ -15,8 +15,23 @@ class SettingController extends Controller
 
     public function store(Request $request){
         $formData = $request->all();
+        
+        // Check if 'disable' is present in the form data
+        if (isset($formData['disable']) && $formData['disable'] === 'on') {
+            $formData['disable'] = true;
+        } else {
+            // If 'disable' is not set, or it's unchecked, set it to false
+            $formData['disable'] = false;
+        }
+
+        if(isset($formData['id'])){
+            $notification = NotificationSetting::findorFail($formData['id']);
+            $notification->update($formData);
+        }
+        else{  
+            NotificationSetting::create($formData);
+        }
         // dd($formData);
-        NotificationSetting::create($formData);
       
         return redirect()->back()->with('success', 'Notification created successfully.');
 

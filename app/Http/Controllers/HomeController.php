@@ -25,7 +25,10 @@ class HomeController extends Controller {
 	protected function agency_home() {
 		$Orders = Auth()->User()->Agency->Order()->orderBy('updated_at', 'DESC')->take(5)->get();
 		$notification = NotificationSetting::latest()->first();
-        // dd($notification);
+
+		if($notification['disable']){
+			$notification = null;
+		}
 
 		return view('agency.home', [
 			'Orders' => $Orders,
