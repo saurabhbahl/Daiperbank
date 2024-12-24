@@ -281,10 +281,10 @@
 							</span>
 						</p>
 						<p class="fs-no fg tr" v-if="Order.order.order_status == 'fulfilled'">
-							{{ Order.order.updated_at | formatDate("MMM D, YYYY") }}
+							{{ Order.order.updated_at | formatDate("MM,DD,YYYY") }}
 						</p>
 						<p class="fs-no fg tr" v-else>
-							{{ Order.order.created_at | formatDate("MMM D, YYYY") }}
+							{{ Order.order.created_at | formatDate("MM,DD,YYYY") }}
 						</p>
 					</div>
 				</div>

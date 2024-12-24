@@ -223,7 +223,7 @@
 					</div>
 				</div>
 				<div v-else-if="child_id">
-					<p class="tc i muted mt">This child doesn't have any siblings.</p>
+					<p class="tc i muted mt">This menstruator doesn't have any siblings.</p>
 				</div>
 
 				<p v-if="child_id"
@@ -256,7 +256,7 @@
 					</div>
 				</div>
 				<div v-else-if="child_id">
-					<p class="tc i muted mt">This child has received any diapers yet.</p>
+					<p class="tc i muted mt">This menstruator has received any diapers yet.</p>
 				</div>
 			</div>
 		</div>
@@ -299,7 +299,7 @@
 					class="btn btn-block btn-alt bg-white btn-danger mt1 mb4"
 					@click="archiveChild">
 					<i class="fa fa-trash-o"></i>
-					Active
+					Inactive
 				</button>
 
 				<button
@@ -494,7 +494,7 @@ export default {
 			.catch(function(err) {
 				this.$toast.warning({
 					title: "Warning",
-					message: "Could not load all of this child's info. Please try again. If problem persists, please refresh the page.",
+					message: "Could not load all of this menstruator's info. Please try again. If problem persists, please refresh the page.",
 				});
 			});
 		},
@@ -508,14 +508,14 @@ export default {
 				else {
 					this.$toast.warning({
 						title: "Warning",
-						message: "Could not load all of this child's info. Please try again. If problem persists, please refresh the page.",
+						message: "Could not load all of this menstruator's info. Please try again. If problem persists, please refresh the page.",
 					});
 				}
 			})
 			.catch((err) => {
 				this.$toast.warning({
 					title: "Warning",
-					message: "Could not load all of this child's info. Please try again. If problem persists, please refresh the page.",
+					message: "Could not load all of this menstruator's info. Please try again. If problem persists, please refresh the page.",
 				});
 			});
 		},
@@ -556,7 +556,7 @@ export default {
 				if (response.data.success) {
 					this.$toast.success({
 						title: "Success",
-						message: "Child has been saved successfully",
+						message: "menstruator has been added successfully",
 					});
 
 					this.childLoaded(response.data.data);
@@ -568,7 +568,7 @@ export default {
 
 				this.$toast.error({
 					title: "Error",
-					message: "Could not save child, an unexpected error occurred.",
+					message: "Could not save menstruator, an unexpected error occurred.",
 				});
 			})
 			.catch(error => {
@@ -585,7 +585,7 @@ export default {
 
 				this.$toast.error({
 					title: "Error",
-					message: "Could not save child, an unexpected error occurred.",
+					message: "Could not added menstruator, an unexpected error occurred.",
 				});
 			});
 		},
@@ -611,7 +611,7 @@ export default {
 				if (status.success) {
 					this.$toast.success({
 						title: "Success",
-						message: `Child added to order successfully!`,
+						message: `menstruator added to order successfully!`,
 					});
 
 					if (action == 'finished') { // user is finished adding children to the order, so we take them to the order
@@ -673,13 +673,13 @@ export default {
 
 				return {
 					success: false,
-					message: "Could not add child to order.",
+					message: "Could not add menstruator to order.",
 				}
 			})
 			.catch(err => {
 				return {
 					success: false,
-					message: "Could not add child, an unexpected error occurred.",
+					message: "Could not add menstruator, an unexpected error occurred.",
 				};
 			});
 		},
@@ -692,7 +692,7 @@ export default {
 				if (response.data.success) {
 					this.$toast.success({
 						title: "Success",
-						message: "Child has been activated.",
+						message: "menstruator has been activated.",
 					});
 					this.$emit('delete', this.Child);
 					this.close();
@@ -701,13 +701,13 @@ export default {
 
 				this.$toast.success({
 					title: "Error",
-					message: "Could not active child.",
+					message: "Could not active menstruator.",
 				});
 			})
 			.catch( (err) => {
 				this.$toast.success({
 					title: "Error",
-					message: "Could not active child, an unexpected error occurred.",
+					message: "Could not active menstruator, an unexpected error occurred.",
 				});
 			});
 		},

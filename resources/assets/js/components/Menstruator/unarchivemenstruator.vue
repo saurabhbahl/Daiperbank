@@ -28,7 +28,11 @@
 									</label>
 								</th>
 								<td>
-									<p v-if=" ! editing">{{ Child.dob | formatDate("M/D/YYYY") }} ({{ Child.age_str }})</p>
+									  <p v-if="!editing">
+										<span v-if="Child.dob">
+										{{ Child.dob }} ({{ Child.age_str }})
+										</span>
+									</p>
 									<input v-else type="date" v-model="editedChild.dob" id="dob" class="form-control">
 								</td>
 							</tr>
@@ -249,7 +253,7 @@
 							</span>
 						</p>
 						<p class="fs-no fg tr">
-							{{ Order.order.created_at | formatDate("MMM D, YYYY") }}
+							{{ Order.order.created_at }}
 						</p>
 					</div>
 				</div>
@@ -288,10 +292,9 @@
 			<div v-if="editing">
 				<button
 					v-if="child_id"
-					class="btn btn-block btn-alt bg-white btn-danger mt1 mb4"
+					class="btn btn-block btn-alt bg-white btn-success mt1 mb4"
 					@click="unarchiveChild">
-					<i class="fa fa-trash-o"></i>
-					Inactive
+					Active
 				</button>
 
 

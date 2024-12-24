@@ -593,7 +593,7 @@ export default {
 				if (response.data.success) {
 					this.$toast.success({
 						title: "Success",
-						message: "Child has been saved successfully",
+						message: "Child has been added successfully",
 					});
 
 					this.childLoaded(response.data.data);
@@ -605,7 +605,7 @@ export default {
 
 				this.$toast.error({
 					title: "Error",
-					message: "Could not save child, an unexpected error occurred.",
+					message: "Could not added child, an unexpected error occurred.",
 				});
 			})
 			.catch(error => {
@@ -621,7 +621,7 @@ export default {
 
 				this.$toast.error({
 					title: "Error",
-					message: "Could not save child, an unexpected error occurred.",
+					message: "Could not added child, an unexpected error occurred.",
 				});
 			});
 		},
