@@ -68,6 +68,11 @@
                                             required="required"
                                             accept=".pdf,.csv,.xml,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" />
                                         <strong>Allowed Only PDF, CSV, XML, DOCX</strong>
+                                        @if ($errors->has('file'))
+                                            <div class="text-danger">
+                                                <strong>{{ $errors->first('file') }}</strong>
+                                            </div>
+                                        @endif
                                     </div>
                                     <div class="pb">
                                         <label for="agency/partner" class="b">Agency/Partner: <span class="required">*</span>

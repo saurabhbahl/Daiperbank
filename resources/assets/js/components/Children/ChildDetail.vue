@@ -335,7 +335,7 @@
 					class="btn btn-block btn-alt bg-white btn-danger mt1 mb4"
 					@click="archiveChild">
 					<i class="fa fa-trash-o"></i>
-					Active
+					Inactive
 				</button>
 
 				<button
@@ -729,7 +729,7 @@ export default {
 				if (response.data.success) {
 					this.$toast.success({
 						title: "Success",
-						message: "Child has been Activated.",
+						message: "Child has been Inactive.",
 					});
 					this.$emit('delete', this.Child);
 					this.close();

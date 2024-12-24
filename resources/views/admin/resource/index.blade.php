@@ -69,6 +69,11 @@
                                             required="required"
                                             accept=".pdf,.csv,.xml,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" />
                                         <strong>Allowed Only PDF, CSV, XML, DOCX</strong>
+                                        @if ($errors->has('file'))
+                                            <div class="text-danger">
+                                                <strong>{{ $errors->first('file') }}</strong>
+                                            </div>
+                                        @endif
                                     </div>
                                     <button type="submit" class="btn btn-lg btn-block btn-success"><i
                                             class="fa fa-download"></i>

@@ -37,28 +37,24 @@
                             <div class="modal-body">
                                 <form method="POST" action="{{ route('admin.settings.index') }}">
                                     {{ csrf_field() }}
-                                    <div class="form-group fieldWithCheckbox">
-                                        <div class="inputField">
+                                    <div class="form-group">
+                                        <div>
                                             <label for="notification_information">Add Information to Display </label>
                                             <textarea name="notification_information" id="notificationInput" class="form-control"
                                                 value="{{ !empty($lastRecord->notification_information) ? $lastRecord->notification_information : '' }}"
                                                 placeholder="Add information to display for agencies..." required>{{ !empty($lastRecord->notification_information) ? $lastRecord->notification_information : '' }}</textarea>
                                         </div>
-                                        <div class="checkboxField">
-                                            <label>
+                                        <div>
+                                            <label class="pt4">
                                             <input type="checkbox" class="notificationCheckbox" name="disable" {{ !empty($lastRecord->disable) ? ($lastRecord->disable ? 'checked' : '') : '' }} />
                                             Disable
                                             </label>
-                                            <p>If the above button is checked then users will not get information.</p>
+                                            <p><b>Note: </b>If the above button is checked then users will not get information.</p>
                                         </div>
                                     </div>
                                     <input type="hidden" name="id" value='{{ !empty($lastRecord->id) ? $lastRecord->id : "" }}'>
                                     <button type="submit" class="btn btn-primary saveNotificationBtn">Save</button>
                                 </form>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="submit" class="btn btn-secondary" data-dismiss="modal"
-                                    id="closeBtn">Close</button>
                             </div>
                         </div>
                     </div>

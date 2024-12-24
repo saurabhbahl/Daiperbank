@@ -16,7 +16,7 @@ class ResourceController extends Controller
     public function create(Request $request)
     {
         $this->validate($request, [
-           'file' => 'required'  
+           'file' => 'required|file|mimes:pdf,doc,docx,csv,xml|max:10240'
         ]);
   
         $file = $request->file('file');
@@ -50,7 +50,7 @@ class ResourceController extends Controller
     {
         $resource=Resource::find($id);
         $this->validate($request, [
-            'file' => 'required'  
+            'file' => 'required|file|mimes:pdf,doc,docx,csv,xml|max:10240', 
          ]);
 
         $destination = 'uploads/'.$resource->file;

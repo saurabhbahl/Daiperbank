@@ -322,10 +322,9 @@
 			<div v-if="editing">
 				<button
 					v-if="child_id"
-					class="btn btn-block btn-alt bg-white btn-danger mt1 mb4"
+					class="btn btn-block btn-alt bg-white btn-success mt1 mb4"
 					@click="unarchiveChild">
-					<i class="fa fa-trash-o"></i>
-					Inactive
+					Active
 				</button>
 
 
@@ -662,7 +661,7 @@ export default {
 				if (response.data.success) {
 					this.$toast.success({
 						title: "Success",
-						message: "Child has been Inactive.",
+						message: "Child has been Actived.",
 					});
 					this.$emit('delete', this.Child);
 					this.close();

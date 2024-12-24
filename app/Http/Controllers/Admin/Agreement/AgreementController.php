@@ -32,7 +32,7 @@ class AgreementController extends Controller
 
      public function create(Request $request){
           $this->validate($request, [
-               'file' => 'required' ,
+               'file' => 'required|file|mimes:pdf,doc,docx,csv,xml|max:10240',
                'agency_id' => 'required' ,
           ]);
 
@@ -83,7 +83,7 @@ class AgreementController extends Controller
     {
         $agreement=Agreement::find($id);
         $this->validate($request, [
-            'file' => 'required'  
+           'file' => 'required|file|mimes:pdf,doc,docx,csv,xml|max:10240', 
          ]);
 
         $destination = 'uploads/agreements'.$agreement->file;

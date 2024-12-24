@@ -15,23 +15,30 @@ class additionalresources extends Controller
     
     public function create(Request $request)
     {
+        // Validate that a file is uploaded and check the file extension
         $this->validate($request, [
-           'file' => 'required'  
+            'file' => 'required|file|mimes:pdf,doc,docx,csv,xml|max:10240'  // max:10MB (adjust as needed)
         ]);
-  
-        $file = $request->file('file');
-        // dd($file);
 
+        $file = $request->file('file');
+
+        // Generate a new name for the file using a random string and original extension
         $new_name = rand() . '.' . $file->getClientOriginalExtension();
+
+        // Move the file to the public 'uploads' directory
         $file->move(public_path('uploads'), $new_name);
+
+        // Store file data in the database
         $form_data = array(
             'file' => $new_name
         );
 
+        // Store the file info in the database (replace `ar::create()` with your model)
         ar::create($form_data);
 
         return redirect()->back()->with('success', 'Resource uploaded successfully.');
     }
+
 
     public function show(ar $resource)
     {
@@ -50,7 +57,7 @@ class additionalresources extends Controller
     {
         $resource=ar::find($id);
         $this->validate($request, [
-            'file' => 'required'  
+            'file' => 'required|file|mimes:pdf,doc,docx,csv,xml|max:10240', 
          ]);
 
         $destination = 'uploads/'.$resource->file;
