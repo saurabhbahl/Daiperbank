@@ -10,9 +10,9 @@ return [
         'template' => 'Avery.18160.Child.Label.Form.pdf',
     ],
 
-    'wkhtmltopdf' => [
-        'bin' => env('WKHTMLTOPDF_BIN', '/usr/bin/wkhtmltopdf'),
-    ],
+    // 'wkhtmltopdf' => [
+    //     'bin' => env('WKHTMLTOPDF_BIN', '/usr/bin/wkhtmltopdf'),
+    // ],
 
     'storage_folder' => 'pdf',
 
