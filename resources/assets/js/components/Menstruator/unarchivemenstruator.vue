@@ -28,9 +28,9 @@
 									</label>
 								</th>
 								<td>
-									  <p v-if="!editing">
+									<p v-if="!editing">
 										<span v-if="Child.dob">
-										{{ Child.dob }} ({{ Child.age_str }})
+										{{  Child.dob | formatDate("M/D/YYYY") }} ({{ Child.age_str }})
 										</span>
 									</p>
 									<input v-else type="date" v-model="editedChild.dob" id="dob" class="form-control">
