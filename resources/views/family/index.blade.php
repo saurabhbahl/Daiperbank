@@ -32,7 +32,7 @@
 
 					<p class="w-25">
 						<i class="fa" :class="{ 'fa-female': Child.gender === 'f', 'fa-male': Child.gender === 'm'}"></i>
-						<span class="b">@{{ Child.name }}</span>z
+						<span class="b">@{{ Child.name }}</span>
 						<br>
 						<span v-show="Child.uniq_id" class="f4 i muted">#@{{ Child.uniq_id }}</span>
 					</p>
