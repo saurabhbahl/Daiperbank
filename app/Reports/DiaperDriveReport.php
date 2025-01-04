@@ -173,8 +173,8 @@ EOQUERY;
 
 	protected function getViewData() {
 		$diaper_sizes = [
-			'preemie' => 'P',
-			'newborn' => 'NB',
+			'preemie' => 'Preemie',
+			'newborn' => 'Newborn',
 		];
 		foreach (range(1, 7) as $sz) {
 			$diaper_sizes["size{$sz}"] = "Size {$sz}";
