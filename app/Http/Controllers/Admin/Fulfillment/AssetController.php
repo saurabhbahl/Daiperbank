@@ -8,10 +8,10 @@ use Illuminate\Http\Request;
 class AssetController extends BaseController {
 	public function batch_download_all(Request $Request, Fulfillment $Batch) {
 		$AssetArchive = $Batch->createAssetArchive();
-
 		if ($AssetArchive) {
 			return response()->download($AssetArchive->zipPath(), $AssetArchive->downloadFilename());
 		}
+		dd($AssetArchive);
 
 		return view('admin.fulfillment.asset-download');
 	}
