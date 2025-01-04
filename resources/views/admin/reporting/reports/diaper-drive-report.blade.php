@@ -28,6 +28,60 @@ Diaper Drive Report
 			<td><?= number_format($stats['Aggregate'][0]->total_period_products, 0); ?></td>
 		</tr>
 	</table>
+
+	<div class="flex justify-between">
+		<div class="w-50 fs-no fg-no pr">
+			<h3 class="f3 pa0">Diaper Details</h3>
+			<table class="table table-bordered table-striped">
+				<thead>
+					<tr>
+						<th class="w-25 tr">Size</th>
+						<th>Qty Donated</th>
+					</tr>
+				</thead>
+
+				<? foreach ($diaper_sizes as $sz_key => $sz_label): ?>
+					<tr>
+						<th scope="row" class="tr"><?= $sz_label; ?></th>
+						<td><?= number_format($stats['Aggregate'][0]->{"{$sz_key}_diapers"}, 0); ?></td>
+					</tr>
+				<? endforeach; ?>
+			</table>
+		</div>
+
+		<div class="w-50 fs-no fg-no pl">
+			<h3 class="f3 pa0">Pull-up Details</h3>
+			<? //foreach($genders as $gender): ?>
+				<table class="table table-bordered table-striped">
+					<thead>
+						<tr>
+							<th colspan="2">
+								Pull-ups
+							</th>
+						</tr>
+
+						<tr>
+							<th class="w-25 tr">Size</th>
+							<th>Qty Donated</th>
+						</tr>
+					</thead>
+
+					<? foreach ($pullup_sizes as $sz_key => $sz_label): ?>
+						<tr>
+							<th scope="row" class="tr"><?= $sz_label; ?></th>
+							<td><?php
+								$pullups_boy = isset($stats['Aggregate'][0]->{"{$sz_key}_pullups_boy"}) ? $stats['Aggregate'][0]->{"{$sz_key}_pullups_boy"} : 0;
+								$pullups_girl = isset($stats['Aggregate'][0]->{"{$sz_key}_pullups_girl"}) ? $stats['Aggregate'][0]->{"{$sz_key}_pullups_girl"} : 0;
+								echo $pullups_boy+$pullups_girl;
+								?>
+							</td>
+						</tr>
+					<? endforeach; ?>
+				</table>
+			<? //endforeach; ?>
+		</div>
+	</div>
+
 	<table class="table table-bordered table-striped">
 		
 		<thead>
