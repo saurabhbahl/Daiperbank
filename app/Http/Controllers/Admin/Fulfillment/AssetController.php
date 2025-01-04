@@ -11,7 +11,6 @@ class AssetController extends BaseController {
 		if ($AssetArchive) {
 			return response()->download($AssetArchive->zipPath(), $AssetArchive->downloadFilename());
 		}
-		dd($AssetArchive);
 
 		return view('admin.fulfillment.asset-download');
 	}
