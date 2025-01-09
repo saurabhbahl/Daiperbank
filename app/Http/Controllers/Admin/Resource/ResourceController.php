@@ -20,9 +20,10 @@ class ResourceController extends Controller
         ]);
   
         $file = $request->file('file');
-        // dd($file);
 
-        $new_name = rand() . '.' . $file->getClientOriginalExtension();
+        $file_name = $file->getClientOriginalName();
+        $new_name = pathinfo($file_name, PATHINFO_FILENAME);
+
         $file->move(public_path('uploads'), $new_name);
         $form_data = array(
             'file' => $new_name
@@ -58,7 +59,8 @@ class ResourceController extends Controller
              File::delete($destination);
         }
         $file = $request->file('file');
-        $new_name = rand() . '.' . $file->getClientOriginalExtension();
+        $file_name = $file->getClientOriginalName();
+        $new_name = pathinfo($file_name, PATHINFO_FILENAME);
         $file->move(public_path('uploads'), $new_name);
          $form_data = array(
              'file' => $new_name

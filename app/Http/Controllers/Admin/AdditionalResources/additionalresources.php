@@ -23,7 +23,8 @@ class additionalresources extends Controller
         $file = $request->file('file');
 
         // Generate a new name for the file using a random string and original extension
-        $new_name = rand() . '.' . $file->getClientOriginalExtension();
+        $file_name = $file->getClientOriginalName();
+        $new_name = pathinfo($file_name, PATHINFO_FILENAME);
 
         // Move the file to the public 'uploads' directory
         $file->move(public_path('uploads'), $new_name);
@@ -65,7 +66,8 @@ class additionalresources extends Controller
              File::delete($destination);
         }
         $file = $request->file('file');
-        $new_name = rand() . '.' . $file->getClientOriginalExtension();
+        $file_name = $file->getClientOriginalName();
+        $new_name = pathinfo($file_name, PATHINFO_FILENAME);
         $file->move(public_path('uploads'), $new_name);
          $form_data = array(
              'file' => $new_name

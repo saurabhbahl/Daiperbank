@@ -39,7 +39,8 @@ class AgreementController extends Controller
             $file = $request->file('file');
             // dd($file);
     
-            $new_name = rand() . '.' . $file->getClientOriginalExtension();
+            $file_name = $file->getClientOriginalName();
+            $new_name = pathinfo($file_name, PATHINFO_FILENAME);
             $file->move(public_path('uploads/agreements'), $new_name);
             $form_data = array(
                 'file' => $new_name,
@@ -68,9 +69,16 @@ class AgreementController extends Controller
             return $output;
             
         }
-     $agreements = DB::table('agency')
-        ->join('agreements', 'agency.id', '=', 'agreements.agency_id')
-        ->select('agency.name', 'agreements.id','agreements.file','agreements.created_at','agreements.updated_at')->get();
+        $agreements = Agreement::with(['agency' => function ($query) {
+            $query->select([
+                'id',
+                'name'
+            ]);
+        }])->get();
+    //  $agreements = DB::table('agency')
+    //     ->join('agreements', 'agency.id', '=', 'agreements.agency_id')
+    //     ->select('agency.name', 'agreements.id','agreements.file','agreements.created_at','agreements.updated_at')->get();
+        // dd(response()->json($agreements[0]->agency->name));
         return view('admin.agreement.index',compact('agreements'));
     }
     public function edit($id)
@@ -91,7 +99,8 @@ class AgreementController extends Controller
              File::delete($destination);
         }
         $file = $request->file('file');
-        $new_name = rand() . '.' . $file->getClientOriginalExtension();
+        $file_name = $file->getClientOriginalName();
+        $new_name = pathinfo($file_name, PATHINFO_FILENAME);
         $file->move(public_path('uploads'), $new_name);
          $form_data = array(
              'file' => $new_name

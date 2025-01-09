@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
     <div class="breadcrumbs">
         <p class="crumb">Partner Agreements</p>
     </div>
@@ -23,8 +22,8 @@
                 </tr>
                 @foreach ($agreements as $agreement)
                     <tr>
-                    <td><a href="{{ '/uploads/' . $resource->file }}" download>{{ $resource->file }}</a></td>
-                        <td>{{ $agreement->name }}</td>
+                    <td><a href="{{ '/uploads/agreements/' . $agreement->file }}" download>{{ $agreement->file }}</a></td>
+                        <td>{{ $agreement->agency->name }}</td>
                         <td>{{ $agreement->created_at }}</td>
                         <td>{{ $agreement->updated_at }}</td>
                         <td>
